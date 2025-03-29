@@ -9,6 +9,12 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "types": ["node"],
     "noImplicitAny": false,
     "noUnusedParameters": false,
     "skipLibCheck": true,

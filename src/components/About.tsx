@@ -11,21 +11,21 @@ const About = () => {
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="flex-1">
               <p className="text-lg leading-relaxed mb-6">
-                Soy un desarrollador en constante aprendizaje, con interés en desarrollo de aplicaciones web y móviles, inteligencia artificial, ciberseguridad y tecnología blockchain. En este portafolio encontrarás desde prácticas básicas hasta proyectos más avanzados, reflejando mi evolución en este duro pero bonito camino.
+                Soy un desarrollador en constante aprendizaje, con interés en aplicaciones web y móviles, backend, inteligencia artificial, ciberseguridad y tecnología blockchain. En este portafolio encontrarás proyectos reales, personales y académicos que reflejan mi evolución: código preparado para producción, un TFG nacido de prácticas profesionales y muchas horas de aprendizaje autodidacta.
               </p>
               <h3 className="text-xl font-bold mb-4">Intereses</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="flex items-center gap-2">
                   <Code className="text-secondary h-5 w-5" />
-                  <span>Desarrollo Web/Móvil</span>
+                  <span>Web &amp; Backend</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Laptop className="text-secondary h-5 w-5" />
-                  <span>Ciberseguridad</span>
+                  <span>Mobile multiplataforma</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Book className="text-secondary h-5 w-5" />
-                  <span>IA &amp; Blockchain</span>
+                  <span>IA, ciberseguridad &amp; blockchain</span>
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 mt-4">

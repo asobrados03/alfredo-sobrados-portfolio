@@ -17,7 +17,7 @@ const Hero = () => {
           ¡Hola! 👋 Soy <span className="text-gradient">Alfredo Sobrados</span>
         </h1>
         <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
-          Apasionado por la programación, la tecnología y el desarrollo de software. Esto es una recopilación de proyectos y prácticas académicas y extraacadémicas que reflejan mi progreso, aprendizajes y habilidades en diversas tecnologías. 🚀
+          Desarrollador full-stack con experiencia en mobile, backend y web. Construyo software bien estructurado: desde APIs REST con arquitectura hexagonal hasta apps multiplataforma con Kotlin Multiplatform. 🚀
         </p>
         <Button 
           onClick={scrollToProjects} 

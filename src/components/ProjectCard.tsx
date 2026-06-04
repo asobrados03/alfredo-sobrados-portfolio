@@ -1,7 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ExternalLink, FileText, Github } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/GitHubIcon";
+import { ExternalLink, FileText } from "lucide-react";
 
 type ProjectLinkType = "github" | "document" | "external";
 
@@ -70,7 +71,7 @@ const getLinkIcon = (link: ProjectLink) => {
   }
 
   if (link.type === "github" || link.url.includes("github.com")) {
-    return Github;
+    return GitHubIcon;
   }
 
   return ExternalLink;

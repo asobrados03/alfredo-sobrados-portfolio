@@ -1,6 +1,7 @@
-
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GitHubIcon } from "@/components/icons/GitHubIcon";
+import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 
 const Header = () => {
   return (
@@ -18,7 +19,7 @@ const Header = () => {
           aria-label="GitHub"
         >
           <Button variant="ghost" size="icon">
-            <Github className="h-5 w-5" />
+            <GitHubIcon className="h-5 w-5" />
           </Button>
         </a>
         <a 
@@ -28,7 +29,7 @@ const Header = () => {
           aria-label="LinkedIn"
         >
           <Button variant="ghost" size="icon">
-            <Linkedin className="h-5 w-5" />
+            <LinkedInIcon className="h-5 w-5" />
           </Button>
         </a>
         <a 

@@ -1,5 +1,6 @@
-
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/GitHubIcon";
+import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -41,7 +42,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Github className="h-4 w-4 text-gray-400" />
+                  <GitHubIcon className="h-4 w-4 text-gray-400" />
                   <a
                     href="https://github.com/asobrados03"
                     target="_blank"
@@ -52,7 +53,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Linkedin className="h-4 w-4 text-gray-400" />
+                  <LinkedInIcon className="h-4 w-4 text-gray-400" />
                   <a
                     href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez/"
                     target="_blank"

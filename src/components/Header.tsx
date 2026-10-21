@@ -5,13 +5,13 @@ import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 
 const Header = () => {
   return (
-    <header className="py-6 px-4 md:px-8 flex justify-between items-center">
+    <header className="flex items-center justify-between border-b border-slate-800/70 px-4 py-6 md:px-8">
       <div>
         <p className="text-2xl font-bold">
           <span className="text-gradient">Alfredo Sobrados González</span>
         </p>
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 text-slate-300">
         <Button asChild variant="ghost" size="icon">
           <a href="https://github.com/asobrados03" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
             <GitHubIcon className="h-5 w-5" aria-hidden="true" />

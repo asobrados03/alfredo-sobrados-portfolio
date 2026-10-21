@@ -9,7 +9,11 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="relative min-h-screen overflow-hidden bg-[#0B0F17] text-slate-100 selection:bg-cyan-400 selection:text-slate-950">
+      <div aria-hidden="true" className="cyber-grid pointer-events-none absolute inset-0" />
+      <div aria-hidden="true" className="pointer-events-none absolute -top-56 left-1/2 h-[38rem] w-[38rem] -translate-x-1/2 rounded-full bg-gradient-to-tr from-cyan-500/20 to-violet-600/20 blur-[120px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute top-[38%] -right-48 h-[30rem] w-[30rem] rounded-full bg-violet-600/10 blur-[100px]" />
+      <div className="relative z-10 flex min-h-screen flex-col">
       <a
         href="#main-content"
         className="sr-only absolute left-4 top-4 z-50 rounded-md bg-primary px-4 py-2 text-primary-foreground focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
@@ -36,6 +40,7 @@ const Index = () => {
         <Contact />
       </main>
       <Footer />
+      </div>
     </div>
   );
 };

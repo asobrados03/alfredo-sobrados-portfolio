@@ -16,22 +16,24 @@ const Hero = () => {
   return (
     <section
       aria-labelledby="hero-title"
-      className="min-h-[80vh] flex flex-col items-center justify-center px-4 py-20 text-center"
+      className="relative isolate flex min-h-[80vh] flex-col items-center justify-center overflow-hidden px-4 py-20 text-center"
     >
-      <div className="animate-fade-in motion-reduce:animate-none motion-reduce:opacity-100 opacity-0" style={{ animationDelay: "0.2s" }}>
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-secondary">
+      <div aria-hidden="true" className="pointer-events-none absolute -left-32 top-16 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-violet-500/15 blur-3xl" />
+      <div className="relative z-10 animate-fade-in opacity-0 motion-reduce:animate-none motion-reduce:opacity-100" style={{ animationDelay: "0.2s" }}>
+        <p className="mb-4 font-mono text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">
           Alfredo Sobrados González
         </p>
-        <h1 id="hero-title" className="mb-4 text-4xl font-bold md:text-6xl">
+        <h1 id="hero-title" className="mb-4 text-4xl font-bold text-slate-100 md:text-6xl">
           Ingeniero Informático · <span className="text-gradient">Backend, Mobile y Full-stack</span>
         </h1>
-        <p className="mx-auto mb-8 max-w-3xl text-xl opacity-90 md:text-2xl">
+        <p className="mx-auto mb-8 max-w-3xl text-xl text-slate-400 md:text-2xl">
           Diseño APIs robustas con Java/Spring y Node.js, y aplicaciones multiplataforma con Kotlin
           Multiplatform. Busco aportar en equipos de producto con foco en calidad, arquitectura y
           experiencia de usuario.
         </p>
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
-          <Button onClick={scrollToProjects} className="group" size="lg" aria-label="Ver proyectos destacados">
+          <Button onClick={scrollToProjects} className="group bg-gradient-to-r from-cyan-500 to-blue-600 font-semibold text-slate-950 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]" size="lg" aria-label="Ver proyectos destacados">
             Ver proyectos destacados
             <ArrowDown className="ml-2 h-4 w-4 motion-safe:group-hover:animate-bounce" aria-hidden="true" />
           </Button>

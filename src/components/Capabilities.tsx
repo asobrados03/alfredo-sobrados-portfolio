@@ -22,21 +22,22 @@ const capabilities = [
 ];
 
 const Capabilities = () => (
-  <section id="capabilities" className="px-4 py-20 md:px-8" aria-labelledby="capabilities-title">
+  <section id="capabilities" className="section-divider px-4 py-20 md:px-8" aria-labelledby="capabilities-title">
     <div className="mx-auto max-w-7xl">
-      <h2 id="capabilities-title" className="mb-2 text-center text-3xl font-bold md:text-4xl">
+      <p className="mb-3 text-center font-mono text-xs font-semibold uppercase tracking-[0.24em] text-violet-400">&lt; expertise /&gt;</p>
+      <h2 id="capabilities-title" className="mb-2 text-center text-3xl font-bold text-slate-100 md:text-4xl">
         Qué aporto
       </h2>
-      <p className="mx-auto mb-12 max-w-2xl text-center text-muted-foreground">
+      <p className="mx-auto mb-12 max-w-2xl text-center text-slate-400">
         Capacidades técnicas orientadas a construir producto fiable, mantenible y centrado en las personas.
       </p>
       <div className="grid gap-6 md:grid-cols-3">
         {capabilities.map(({ title, description, technologies, icon: Icon }) => (
-          <article key={title} className="rounded-xl border bg-card p-6 shadow-sm">
-            <Icon className="mb-5 h-8 w-8 text-secondary" aria-hidden="true" />
-            <h3 className="text-xl font-semibold">{title}</h3>
-            <p className="mt-2 text-muted-foreground">{description}</p>
-            <p className="mt-4 text-sm font-medium text-foreground">{technologies}</p>
+          <article key={title} className="rounded-xl border border-slate-800/80 bg-slate-900/60 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)]">
+            <Icon className="mb-5 h-8 w-8 text-cyan-400" aria-hidden="true" />
+            <h3 className="text-xl font-semibold text-slate-100">{title}</h3>
+            <p className="mt-2 text-slate-400">{description}</p>
+            <p className="mt-4 font-mono text-sm font-medium text-slate-300">{technologies}</p>
           </article>
         ))}
       </div>

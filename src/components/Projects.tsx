@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
 import ProjectCard, { Project } from "./ProjectCard";
+import { GitHubIcon } from "@/components/icons/GitHubIcon";
 
 const projectsData: Project[] = [
   {
@@ -119,6 +119,77 @@ const projectsData: Project[] = [
         title: "Implementé",
         content:
           "Integración completa de servicios externos, validación de formularios robusta, arquitectura serverless escalable y sistema de notificaciones automáticas end-to-end.",
+      },
+    ],
+  },
+  {
+    id: 10,
+    title: "Banana Bank — experiencia de hackathon",
+    description:
+      "Caso de estudio desarrollado durante un reto técnico de T·dots sobre una aplicación bancaria ficticia con asistente de IA. Analiza operaciones sensibles y plantea mejoras de seguridad, recuperación ante fallos y trazabilidad de las respuestas del agente.",
+    impact:
+      "Caso de estudio de banca con IA centrado en transferencias seguras, idempotencia y evidencia verificable.",
+    highlights: [
+      "Transferencias en dos pasos con confirmación explícita.",
+      "Prevención de pagos duplicados mediante idempotencia.",
+      "Comparación de políticas con fuentes y fechas visibles.",
+    ],
+    technologies: ["TypeScript", "React", "Next.js", "SQLite", "Node.js", "OpenAI API", "Testing"],
+    links: [
+      {
+        label: "Ver código",
+        url: "https://github.com/asobrados03/banana-bank-hackathon-case-study",
+        type: "github",
+      },
+      {
+        label: "Ver demo",
+        url: "https://github.com/asobrados03/banana-bank-hackathon-case-study/blob/main/demo.mp4",
+        type: "external",
+      },
+      {
+        label: "Documentación",
+        url: "https://github.com/asobrados03/banana-bank-hackathon-case-study/blob/main/documentacion-previa-hackathon.pdf",
+        type: "document",
+      },
+    ],
+    details: [
+      {
+        title: "Características destacadas",
+        items: [
+          "Protección frente a clics repetidos durante operaciones en curso.",
+          "Corrección del flujo de conversaciones nuevas al alternar historial y conversaciones vacías.",
+          "Pruebas de invariantes de negocio y escenarios de fallo simulados.",
+        ],
+      },
+      {
+        title: "Qué aprendí",
+        content:
+          "Diseñar operaciones sensibles combinando confirmación explícita, idempotencia, recuperación ante fallos y fuentes de evidencia visibles.",
+      },
+    ],
+  },
+  {
+    id: 11,
+    title: "Energy Deficit",
+    description:
+      "Herramienta CLI en Python que calcula la energía adicional necesaria para cubrir la demanda eléctrica española cuando la generación eólica es la única fuente disponible.",
+    impact:
+      "CLI auditable que alinea demanda eléctrica y datos eólicos de ESIOS/REE en intervalos de cinco minutos.",
+    highlights: [
+      "Reconstrucción trazable de huecos mediante interpolación lineal.",
+      "Manejo explícito del cambio horario CET/CEST en UTC.",
+      "Exportación de resultados auditables por intervalo, hora y día.",
+    ],
+    technologies: ["Python 3.11+", "ESIOS/REE API", "CSV", "argparse", "zoneinfo", "unittest"],
+    githubUrl: "https://github.com/asobrados03/energy-deficit",
+    details: [
+      {
+        title: "Características destacadas",
+        items: [
+          "Conversión consistente entre energía y potencia media para calcular el déficit de cada intervalo.",
+          "Arquitectura modular que separa dominio, E/S, cliente ESIOS y CLI.",
+          "Suite de pruebas unitarias e integración sin dependencia de red.",
+        ],
       },
     ],
   },
@@ -302,18 +373,24 @@ const Projects = ({ id, title, description, variant }: ProjectsProps) => {
   const compact = variant === "more";
 
   return (
-    <section id={id} className="bg-gray-50 px-4 py-20 md:px-8">
+    <section id={id} className="section-divider px-4 py-20 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="mb-2 text-center text-3xl font-bold md:text-4xl">{title}</h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-3xl mx-auto">
+        <p className="mb-3 text-center font-mono text-xs font-semibold uppercase tracking-[0.24em] text-cyan-400">&lt; portfolio /&gt;</p>
+        <h2 className="mb-2 text-center text-3xl font-bold text-slate-100 md:text-4xl">{title}</h2>
+        <p className="mx-auto mb-12 max-w-3xl text-center text-slate-400">
           {description}
         </p>
         {compact ? (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {projects.map((project) => (
-              <article key={project.id} className="rounded-lg border bg-background p-5 shadow-sm">
-                <h3 className="text-lg font-semibold">{project.title}</h3>
-                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+            {projects.map((project) => {
+              const repositoryUrl = project.githubUrl ?? project.links?.find(
+                (link) => link.type === "github" || link.url.includes("github.com"),
+              )?.url;
+
+              return (
+              <article key={project.id} className="rounded-xl border border-slate-800/80 bg-slate-900/60 p-5 text-slate-100 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)]">
+                <h3 className="text-lg font-semibold text-slate-100">{project.title}</h3>
+                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-slate-400">
                   {project.description}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -321,20 +398,21 @@ const Projects = ({ id, title, description, variant }: ProjectsProps) => {
                     <Badge key={tech} variant="secondary">{tech}</Badge>
                   ))}
                 </div>
-                {project.githubUrl && (
+                {repositoryUrl && (
                   <Button asChild variant="link" className="mt-3 h-auto px-0">
                     <a
-                      href={project.githubUrl}
+                      href={repositoryUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Ver ${project.title} en GitHub`}
                     >
-                      Ver repositorio <Github className="ml-2 h-4 w-4" aria-hidden="true" />
+                      Ver repositorio <GitHubIcon className="ml-2 h-4 w-4" aria-hidden="true" />
                     </a>
                   </Button>
                 )}
               </article>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">

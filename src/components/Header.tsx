@@ -7,39 +7,26 @@ const Header = () => {
   return (
     <header className="py-6 px-4 md:px-8 flex justify-between items-center">
       <div>
-        <h1 className="text-2xl font-bold">
-          <span className="text-gradient">Alfredo Sobrados</span>
-        </h1>
+        <p className="text-2xl font-bold">
+          <span className="text-gradient">Alfredo Sobrados González</span>
+        </p>
       </div>
       <div className="flex items-center gap-4">
-        <a 
-          href="https://github.com/asobrados03" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          aria-label="GitHub"
-        >
-          <Button variant="ghost" size="icon">
-            <GitHubIcon className="h-5 w-5" />
-          </Button>
-        </a>
-        <a 
-          href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          aria-label="LinkedIn"
-        >
-          <Button variant="ghost" size="icon">
-            <LinkedInIcon className="h-5 w-5" />
-          </Button>
-        </a>
-        <a 
-          href="mailto:alfredo.sobrados.gonzalez@gmail.com" 
-          aria-label="Email"
-        >
-          <Button variant="ghost" size="icon">
-            <Mail className="h-5 w-5" />
-          </Button>
-        </a>
+        <Button asChild variant="ghost" size="icon">
+          <a href="https://github.com/asobrados03" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <GitHubIcon className="h-5 w-5" aria-hidden="true" />
+          </a>
+        </Button>
+        <Button asChild variant="ghost" size="icon">
+          <a href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <LinkedInIcon className="h-5 w-5" aria-hidden="true" />
+          </a>
+        </Button>
+        <Button asChild variant="ghost" size="icon">
+          <a href="mailto:alfredo.sobrados.gonzalez@gmail.com" aria-label="Enviar correo electrónico a Alfredo Sobrados">
+            <Mail className="h-5 w-5" aria-hidden="true" />
+          </a>
+        </Button>
       </div>
     </header>
   );

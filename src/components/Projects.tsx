@@ -1,3 +1,6 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Github } from "lucide-react";
 import ProjectCard, { Project } from "./ProjectCard";
 
 const projectsData: Project[] = [
@@ -6,6 +9,13 @@ const projectsData: Project[] = [
     title: "Human Perform Platform",
     description:
       "Plataforma completa para la gestión integral de un centro deportivo, desarrollada como proyecto real durante mis prácticas en Fransdata Tech Ventures y posteriormente ampliada y finalizada como Trabajo Final de Grado. El sistema combina una app móvil multiplataforma y una API REST segura que centraliza la lógica de negocio y el acceso a datos.",
+    impact:
+      "App multiplataforma y API REST para un centro deportivo, nacida en prácticas reales y convertida en TFG.",
+    highlights: [
+      "Más del 70 % de código compartido entre Android e iOS.",
+      "Autenticación JWT y persistencia cifrada de sesión.",
+      "API REST desacoplada con Clean Architecture.",
+    ],
     technologies: [
       "Kotlin Multiplatform",
       "Jetpack Compose",
@@ -19,17 +29,17 @@ const projectsData: Project[] = [
     ],
     links: [
       {
-        label: "Mobile App",
+        label: "Código app",
         url: "https://github.com/asobrados03/HumanPerformApp",
         type: "github",
       },
       {
-        label: "REST API",
+        label: "Código API",
         url: "https://github.com/asobrados03/api_rest_human_app",
         type: "github",
       },
       {
-        label: "TFG",
+        label: "Leer TFG",
         url: "https://uvadoc.uva.es/handle/10324/84418",
         type: "document",
       },
@@ -67,6 +77,13 @@ const projectsData: Project[] = [
     title: "Landing Page: Geotecnia y Servicios",
     description:
       "Landing page profesional para una empresa de ingeniería geotécnica con sistema completo de generación de leads. Presenta servicios como estudios geotécnicos, sondeos y ensayos, e integra un formulario de contacto con flujo automatizado de notificaciones por email y almacenamiento de datos.",
+    impact:
+      "Landing de captación de leads con backend serverless y un flujo de contacto protegido frente a spam.",
+    highlights: [
+      "Validación de formularios compartida con Zod.",
+      "Protección anti-spam con reCAPTCHA v3 y honeypot.",
+      "Persistencia en Supabase y emails con Resend.",
+    ],
     technologies: [
       "React 18",
       "TypeScript",
@@ -129,6 +146,13 @@ const projectsData: Project[] = [
     title: "HotelManagementAPI",
     description:
       "API RESTful para gestionar un hotel, permitiendo administrar clientes, habitaciones, reservas, pagos y administradores. Implementa autenticación con JWT y sigue una arquitectura limpia para separar lógica de negocio, infraestructura y adaptadores.",
+    impact:
+      "API de gestión hotelera construida con Java y Spring Boot, con seguridad y pruebas automatizadas.",
+    highlights: [
+      "Autenticación y autorización con JWT.",
+      "Arquitectura hexagonal y JDBC sin ORM.",
+      "Pruebas con JUnit, Mockito y Testcontainers.",
+    ],
     technologies: [
       "Java 21+",
       "Spring Boot",
@@ -261,20 +285,64 @@ const projectsData: Project[] = [
   },
 ];
 
-const Projects = () => {
+interface ProjectsProps {
+  id: string;
+  title: string;
+  description: string;
+  variant: "featured" | "more";
+}
+
+const featuredProjectIds = [1, 4, 2];
+
+const Projects = ({ id, title, description, variant }: ProjectsProps) => {
+  const projects =
+    variant === "featured"
+      ? featuredProjectIds.map((id) => projectsData.find((project) => project.id === id)!)
+      : projectsData.filter((project) => !featuredProjectIds.includes(project.id));
+  const compact = variant === "more";
+
   return (
-    <section id="projects" className="py-20 px-4 md:px-8 bg-gray-50">
+    <section id={id} className="bg-gray-50 px-4 py-20 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center">📂 Índice de Proyectos</h2>
+        <h2 className="mb-2 text-center text-3xl font-bold md:text-4xl">{title}</h2>
         <p className="text-center text-muted-foreground mb-12 max-w-3xl mx-auto">
-          Proyectos reales, personales y académicos que muestran mi evolución como desarrollador
-          full-stack: mobile, backend, web, arquitectura, seguridad y despliegue.
+          {description}
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {projectsData.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </div>
+        {compact ? (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {projects.map((project) => (
+              <article key={project.id} className="rounded-lg border bg-background p-5 shadow-sm">
+                <h3 className="text-lg font-semibold">{project.title}</h3>
+                <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                  {project.description}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.technologies.slice(0, 4).map((tech) => (
+                    <Badge key={tech} variant="secondary">{tech}</Badge>
+                  ))}
+                </div>
+                {project.githubUrl && (
+                  <Button asChild variant="link" className="mt-3 h-auto px-0">
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Ver ${project.title} en GitHub`}
+                    >
+                      Ver repositorio <Github className="ml-2 h-4 w-4" aria-hidden="true" />
+                    </a>
+                  </Button>
+                )}
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+            {projects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

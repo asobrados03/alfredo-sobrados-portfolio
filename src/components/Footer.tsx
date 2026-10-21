@@ -27,13 +27,18 @@ const Footer = () => {
                     Sobre mí
                   </a>
                 </li>
+                <li>
+                  <a href="#contact" className="text-gray-400 hover:text-white transition-colors">
+                    Contacto
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-2">Contacto</h3>
               <ul className="space-y-1">
                 <li className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-gray-400" />
+                  <Mail className="h-4 w-4 text-gray-400" aria-hidden="true" />
                   <a
                     href="mailto:alfredo.sobrados.gonzalez@gmail.com"
                     className="text-gray-400 hover:text-white transition-colors"
@@ -42,7 +47,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <GitHubIcon className="h-4 w-4 text-gray-400" />
+                  <GitHubIcon className="h-4 w-4 text-gray-400" aria-hidden="true" />
                   <a
                     href="https://github.com/asobrados03"
                     target="_blank"
@@ -53,7 +58,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <LinkedInIcon className="h-4 w-4 text-gray-400" />
+                  <LinkedInIcon className="h-4 w-4 text-gray-400" aria-hidden="true" />
                   <a
                     href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez/"
                     target="_blank"

@@ -22,6 +22,8 @@ export interface Project {
   id: number;
   title: string;
   description: string;
+  impact?: string;
+  highlights?: string[];
   technologies: string[];
   githubUrl?: string;
   links?: ProjectLink[];
@@ -44,25 +46,7 @@ const getProjectLinks = (project: Project): ProjectLink[] => {
     return [];
   }
 
-  return [{ label: "Ver en GitHub", url: project.githubUrl, type: "github" }];
-};
-
-const getProjectDetails = (project: Project): ProjectDetail[] => {
-  if (project.details?.length) {
-    return project.details;
-  }
-
-  const details: ProjectDetail[] = [];
-
-  if (project.objectives) {
-    details.push({ title: "Objetivo", content: project.objectives });
-  }
-
-  if (project.keyPoints?.length) {
-    details.push({ title: "Puntos clave", items: project.keyPoints });
-  }
-
-  return details;
+  return [{ label: "Ver código", url: project.githubUrl, type: "github" }];
 };
 
 const getLinkIcon = (link: ProjectLink) => {
@@ -80,47 +64,48 @@ const getLinkIcon = (link: ProjectLink) => {
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
   const animationDelay = `${0.1 + index * 0.08}s`;
   const projectLinks = getProjectLinks(project);
-  const projectDetails = getProjectDetails(project);
+  const visibleTechnologies = project.technologies.slice(0, 5);
+  const highlights = project.highlights?.slice(0, 3);
 
   return (
     <Card
-      className="animate-fade-in opacity-0 h-full flex flex-col border-gray-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      className="animate-fade-in motion-reduce:animate-none motion-reduce:opacity-100 h-full flex flex-col border-gray-100 opacity-0 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
       style={{ animationDelay }}
     >
-      <CardHeader className="space-y-4">
+      <CardHeader className="space-y-3">
         <CardTitle className="text-xl leading-tight">{project.title}</CardTitle>
-        <div className="flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <Badge key={tech} variant="secondary" className="bg-secondary/15 text-secondary-foreground/90">
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          {project.impact ?? project.description}
+        </p>
+        <div className="flex flex-wrap gap-2" aria-label="Tecnologías principales">
+          {visibleTechnologies.map((tech) => (
+            <Badge key={tech} variant="secondary">
               {tech}
             </Badge>
           ))}
         </div>
       </CardHeader>
-      <CardContent className="flex-grow space-y-4">
-        <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
-        {projectDetails.map((section) => (
-          <section key={section.title} className="space-y-2">
-            <h4 className="font-medium text-sm">{section.title}:</h4>
-            {section.content && (
-              <p className="text-muted-foreground text-sm leading-relaxed">{section.content}</p>
-            )}
-            {section.items && section.items.length > 0 && (
-              <ul className="list-disc pl-5 text-muted-foreground text-sm leading-relaxed space-y-1">
-                {section.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            )}
+      <CardContent className="flex-grow">
+        {highlights && highlights.length > 0 && (
+          <section aria-label={`Logros técnicos de ${project.title}`}>
+            <h4 className="mb-2 text-sm font-semibold">Logros técnicos</h4>
+            <ul className="space-y-2 text-sm leading-relaxed text-muted-foreground">
+              {highlights.map((highlight) => (
+                <li key={highlight} className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary" aria-hidden="true" />
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
           </section>
-        ))}
+        )}
       </CardContent>
       {projectLinks.length > 0 && (
         <CardFooter
           className={
             projectLinks.length === 1
               ? "p-6 pt-0"
-              : "grid grid-cols-1 gap-2 p-6 pt-0 sm:grid-cols-2"
+              : "grid grid-cols-1 gap-2 p-6 pt-0 sm:grid-cols-3"
           }
         >
           {projectLinks.map((link) => {
@@ -134,7 +119,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                   rel="noopener noreferrer"
                   aria-label={`${link.label}: ${project.title}`}
                 >
-                  <LinkIcon className="h-4 w-4" />
+                  <LinkIcon className="h-4 w-4" aria-hidden="true" />
                   <span className="truncate">{link.label}</span>
                 </a>
               </Button>

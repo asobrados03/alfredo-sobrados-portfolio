@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Fondo oscuro con bordes redondeados -->
+  <rect width="32" height="32" rx="6" fill="#090d16" />
+  <!-- Acento de código o iniciales 'AS' / '<>' en color cian brillante -->
+  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#22d3ee" font-family="monospace" font-weight="bold" font-size="15">>_</text>
+</svg>

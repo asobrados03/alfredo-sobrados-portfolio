@@ -4,19 +4,19 @@ const capabilities = [
   {
     title: "Backend",
     description: "APIs REST seguras, modelado de datos y lógica de negocio mantenible.",
-    technologies: "Java · Spring Boot · Node.js",
+    technologies: "Java · Spring Boot · Node.js · Express.js",
     icon: Blocks,
   },
   {
     title: "Mobile",
     description: "Experiencias multiplataforma con lógica compartida y UI nativa.",
-    technologies: "Kotlin Multiplatform · Jetpack Compose",
+    technologies: "KMM · Jetpack Compose · SwiftUI",
     icon: Smartphone,
   },
   {
     title: "Calidad",
     description: "Software preparado para evolucionar, probar y desplegar con confianza.",
-    technologies: "Arquitectura Hexagonal · Tests",
+    technologies: "Arquitectura Software · Tests · CI/CD · DevOps ",
     icon: ShieldCheck,
   },
 ];

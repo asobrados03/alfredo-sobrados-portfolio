@@ -1,81 +1,99 @@
-import { Mail } from "lucide-react";
+import { Download, Mail } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/GitHubIcon";
 import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 
+const navigationItems = [
+  { href: "#projects", label: "Proyectos" },
+  { href: "#capabilities", label: "Habilidades" },
+  { href: "#about", label: "Sobre mí" },
+  { href: "#more-projects", label: "Más proyectos" },
+  { href: "#contact", label: "Contacto" },
+];
+
+const socialLinks = [
+  { href: "https://github.com/asobrados03", label: "GitHub", icon: GitHubIcon },
+  {
+    href: "https://www.linkedin.com/in/alfredo-sobrados-gonzalez/",
+    label: "LinkedIn",
+    icon: LinkedInIcon,
+  },
+];
+
 const Footer = () => {
   const year = new Date().getFullYear();
-  
+
   return (
-    <footer className="border-t border-slate-800/80 bg-slate-950/60 px-4 py-12 text-white backdrop-blur-md md:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0">
-            <h2 className="text-xl font-bold">Alfredo Sobrados</h2>
-            <p className="mt-2 text-slate-300">Desarrollador de Software</p>
+    <footer className="border-t border-slate-800/80 bg-slate-950/80 px-4 py-12 backdrop-blur-md md:px-8">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 gap-8 pb-10 md:grid-cols-3">
+          <div>
+            <a
+              href="#main-content"
+              className="text-xl font-bold text-slate-100 transition-colors hover:text-cyan-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            >
+              Alfredo Sobrados González
+            </a>
+            <p className="mt-3 max-w-sm leading-relaxed text-slate-400">
+              Ingeniero Informático especializado en backend, desarrollo móvil y producto full-stack.
+            </p>
+            <a
+              href="/cv-alfredo-sobrados-gonzalez.pdf"
+              download="CV-Alfredo-Sobrados-Gonzalez.pdf"
+              className="mt-5 inline-flex items-center gap-2 rounded-md border border-slate-700 px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:border-cyan-400/60 hover:bg-cyan-400/10 hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            >
+              Descargar CV <Download className="h-4 w-4" aria-hidden="true" />
+            </a>
           </div>
-          <div className="flex flex-col md:flex-row gap-6 md:gap-12">
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Enlaces</h3>
-              <ul className="space-y-1">
-                <li>
-                  <a href="#projects" className="text-slate-300 transition-colors hover:text-white">
-                    Proyectos
-                  </a>
-                </li>
-                <li>
-                  <a href="#about" className="text-slate-300 transition-colors hover:text-white">
-                    Sobre mí
-                  </a>
-                </li>
-                <li>
-                  <a href="#contact" className="text-slate-300 transition-colors hover:text-white">
-                    Contacto
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Contacto</h3>
-              <ul className="space-y-1">
-                <li className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-slate-300" aria-hidden="true" />
+
+          <nav aria-label="Navegación del pie de página">
+            <h2 className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-400">
+              Explorar
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm">
+              {navigationItems.map(({ href, label }) => (
+                <li key={href}>
                   <a
-                    href="mailto:alfredo.sobrados.gonzalez@gmail.com"
-                    className="text-slate-300 transition-colors hover:text-white"
+                    href={href}
+                    className="text-slate-400 transition-colors hover:text-cyan-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                   >
-                    Email
+                    {label}
                   </a>
                 </li>
-                <li className="flex items-center gap-2">
-                  <GitHubIcon className="h-4 w-4 text-slate-300" aria-hidden="true" />
-                  <a
-                    href="https://github.com/asobrados03"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-slate-300 transition-colors hover:text-white"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <LinkedInIcon className="h-4 w-4 text-slate-300" aria-hidden="true" />
-                  <a
-                    href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-slate-300 transition-colors hover:text-white"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-              </ul>
+              ))}
+            </ul>
+          </nav>
+
+          <div>
+            <h2 className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-400">
+              Contacto
+            </h2>
+            <a
+              href="mailto:alfredo.sobrados.gonzalez@gmail.com"
+              className="mt-4 flex w-fit items-center gap-2 text-sm text-slate-400 transition-colors hover:text-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            >
+              <Mail className="h-4 w-4 text-cyan-400" aria-hidden="true" />
+              Email
+            </a>
+            <div className="mt-4 flex gap-2">
+              {socialLinks.map(({ href, label, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-800/60 text-slate-300 transition-colors hover:border-cyan-400/60 hover:bg-cyan-400/10 hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                >
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
-        <div className="mt-8 border-t border-slate-700 pt-8 text-center md:text-left">
-          <p className="text-slate-300">
-            &copy; {year} Alfredo Sobrados. Todos los derechos reservados.
-          </p>
+
+        <div className="flex flex-col items-center justify-between gap-2 border-t border-slate-800/40 py-6 text-xs text-slate-500 md:flex-row">
+          <p>© {year} Alfredo Sobrados González. Todos los derechos reservados.</p>
+          <p>Diseñado y desarrollado con React, TypeScript y Tailwind CSS.</p>
         </div>
       </div>
     </footer>

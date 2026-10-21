@@ -22,11 +22,14 @@ const Hero = () => {
       <div aria-hidden="true" className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-violet-500/15 blur-3xl" />
       <div className="relative z-10 animate-fade-in opacity-0 motion-reduce:animate-none motion-reduce:opacity-100" style={{ animationDelay: "0.2s" }}>
         <p className="mb-4 font-mono text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">
-          Alfredo Sobrados González
+          &lt; software engineer /&gt;
         </p>
         <h1 id="hero-title" className="mb-4 text-4xl font-bold text-slate-100 md:text-6xl">
-          Ingeniero Informático · <span className="text-gradient">Backend, Mobile y Full-stack</span>
+          Alfredo Sobrados González
         </h1>
+        <p className="mb-4 text-xl font-semibold text-slate-200 md:text-2xl">
+          Ingeniero Informático · <span className="text-gradient">Backend, Mobile y Full-stack</span>
+        </p>
         <p className="mx-auto mb-8 max-w-3xl text-xl text-slate-400 md:text-2xl">
           Diseño APIs robustas con Java/Spring y Node.js, y aplicaciones multiplataforma con Kotlin
           Multiplatform. Busco aportar en equipos de producto con foco en calidad, arquitectura y

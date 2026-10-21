@@ -1,70 +1,67 @@
-# Welcome to your Lovable project
+# Portfolio de Alfredo Sobrados González
 
-## Project info
+Portfolio personal de **Alfredo Sobrados González**, ingeniero informático orientado al desarrollo **backend, móvil y full-stack**. Este sitio reúne una selección de proyectos, tecnologías y áreas de especialización, y sirve como punto de contacto profesional.
 
-**URL**: https://lovable.dev/projects/0ece8f58-05cf-44c7-89bf-6dc962025ab1
+## Qué encontrarás
 
-## How can I edit this code?
+- Una presentación profesional con foco en diseño de APIs, calidad de software y arquitectura.
+- Proyectos destacados con su contexto, decisiones técnicas, tecnologías y enlaces al código o documentación.
+- Experiencia en desarrollo móvil multiplataforma, backend y aplicaciones web.
+- Enlaces de contacto, LinkedIn, GitHub y currículum descargable.
 
-There are several ways of editing your application.
+Entre los proyectos incluidos destacan:
 
-**Use Lovable**
+- **Human Perform Platform**: aplicación móvil multiplataforma y API REST para la gestión de un centro deportivo, con Kotlin Multiplatform, Node.js, MariaDB, JWT y arquitectura limpia.
+- **HotelManagementAPI**: API REST para gestión hotelera con Java, Spring Boot, seguridad JWT, JDBC, Docker y pruebas automatizadas.
+- **Landing Page: Geotecnia y Servicios**: web de captación de leads con React, TypeScript, Vercel, Supabase, Resend y protección anti-spam.
+- **Banana Bank** y **Energy Deficit**: casos prácticos centrados, respectivamente, en operaciones bancarias seguras asistidas por IA y análisis auditable de datos energéticos.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0ece8f58-05cf-44c7-89bf-6dc962025ab1) and start prompting.
+## Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- React 18 y TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui y Radix UI
+- Lucide React
+- ESLint
 
-**Use your preferred IDE**
+## Desarrollo local
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Requisitos: Node.js con Corepack habilitado y `pnpm`.
 
-The only requirement is having Node.js installed with Corepack enabled - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Enable Corepack and install the necessary dependencies.
+```bash
+git clone <URL_DEL_REPOSITORIO>
+cd alfredo-sobrados-portfolio
 corepack enable
 pnpm install
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 pnpm dev
 ```
 
-**Edit a file directly in GitHub**
+La aplicación estará disponible en la dirección que muestre Vite, normalmente `http://localhost:5173`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Comandos disponibles
 
-**Use GitHub Codespaces**
+```bash
+pnpm dev       # inicia el entorno de desarrollo
+pnpm build     # genera la versión de producción en dist/
+pnpm preview   # sirve localmente la compilación de producción
+pnpm lint      # analiza el código con ESLint
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Estructura principal
 
-## What technologies are used for this project?
+```text
+src/
+├── components/    # secciones y componentes reutilizables de la interfaz
+├── pages/         # composición de las páginas
+├── lib/           # utilidades compartidas
+├── App.tsx        # punto de entrada de la aplicación
+└── index.css      # estilos globales
+public/            # iconos, manifiesto web y CV descargable
+```
 
-This project is built with .
+## Contacto
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/0ece8f58-05cf-44c7-89bf-6dc962025ab1) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+- Email: [alfredo.sobrados.gonzalez@gmail.com](mailto:alfredo.sobrados.gonzalez@gmail.com)
+- LinkedIn: [alfredo-sobrados-gonzalez](https://www.linkedin.com/in/alfredo-sobrados-gonzalez/)
+- GitHub: [@asobrados03](https://github.com/asobrados03)

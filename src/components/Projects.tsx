@@ -97,7 +97,18 @@ const projectsData: Project[] = [
       "Resend",
       "reCAPTCHA v3",
     ],
-    githubUrl: "https://github.com/asobrados03/geotecnia-servicios-landing",
+    links: [
+      {
+        label: "Ver código",
+        url: "https://github.com/asobrados03/geotecnia-servicios-landing",
+        type: "github",
+      },
+      {
+        label: "Visitar sitio web",
+        url: "https://www.geotecniayservicios.es/",
+        type: "external",
+      },
+    ],
     details: [
       {
         title: "Características destacadas",

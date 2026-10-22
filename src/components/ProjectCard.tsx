@@ -69,7 +69,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
   return (
     <Card
-      className="group animate-fade-in motion-reduce:animate-none motion-reduce:opacity-100 relative flex h-full flex-col overflow-hidden border-slate-800/80 bg-slate-900/60 text-slate-100 opacity-0 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]"
+      className="group animate-fade-in motion-reduce:animate-none motion-reduce:opacity-100 relative flex min-w-0 h-full flex-col overflow-hidden border-slate-800/80 bg-slate-900/60 text-slate-100 opacity-0 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]"
       style={{ animationDelay }}
     >
       <CardHeader className="space-y-3">

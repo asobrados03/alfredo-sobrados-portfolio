@@ -16,7 +16,7 @@ const Hero = () => {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate flex min-h-[80vh] flex-col items-center justify-center overflow-hidden px-4 py-20 text-center"
+      className="relative isolate flex min-h-[calc(100svh-4.5rem)] flex-col items-center justify-center overflow-hidden px-4 py-16 text-center sm:min-h-[80vh] sm:py-20"
     >
       <div aria-hidden="true" className="pointer-events-none absolute -left-32 top-16 h-72 w-72 rounded-full bg-cyan-500/15 blur-3xl" />
       <div aria-hidden="true" className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-violet-500/15 blur-3xl" />
@@ -24,13 +24,13 @@ const Hero = () => {
         <p className="mb-4 font-mono text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">
           &lt; software engineer /&gt;
         </p>
-        <h1 id="hero-title" className="mb-4 text-4xl font-bold text-slate-100 md:text-6xl">
+        <h1 id="hero-title" className="mb-4 text-3xl font-bold leading-tight text-slate-100 sm:text-4xl md:text-6xl">
           Alfredo Sobrados González
         </h1>
-        <p className="mb-4 text-xl font-semibold text-slate-200 md:text-2xl">
+        <p className="mb-4 text-lg font-semibold text-slate-200 sm:text-xl md:text-2xl">
           Ingeniero Informático · <span className="text-gradient">Backend, Mobile y Full-stack</span>
         </p>
-        <p className="mx-auto mb-8 max-w-3xl text-xl text-slate-400 md:text-2xl">
+        <p className="mx-auto mb-8 max-w-3xl text-base leading-relaxed text-slate-400 sm:text-xl md:text-2xl">
           Diseño APIs robustas con Java/Spring y Node.js, y aplicaciones multiplataforma con Kotlin
           Multiplatform. Busco aportar en equipos de producto con foco en calidad, arquitectura y
           experiencia de usuario.

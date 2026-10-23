@@ -2,6 +2,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import ProjectCard, { Project } from "./ProjectCard";
 import { GitHubIcon } from "@/components/icons/GitHubIcon";
+import ProjectDetailsDialog from "./ProjectDetailsDialog";
+import { hasMoreInfo } from "@/lib/projectTypes";
 
 const projectsData: Project[] = [
   {
@@ -148,19 +150,9 @@ const projectsData: Project[] = [
     technologies: ["TypeScript", "React", "Next.js", "SQLite", "Node.js", "OpenAI API", "Testing"],
     links: [
       {
-        label: "Ver código",
+        label: "Ver repositorio",
         url: "https://github.com/asobrados03/banana-bank-hackathon-case-study",
         type: "github",
-      },
-      {
-        label: "Ver demo",
-        url: "https://github.com/asobrados03/banana-bank-hackathon-case-study/blob/main/demo.mp4",
-        type: "external",
-      },
-      {
-        label: "Documentación",
-        url: "https://github.com/asobrados03/banana-bank-hackathon-case-study/blob/main/documentacion-previa-hackathon.pdf",
-        type: "document",
       },
     ],
     details: [
@@ -254,7 +246,7 @@ const projectsData: Project[] = [
       {
         title: "Motivación",
         content:
-          "El proyecto nació como ejercicio de la comunidad Skool DeHaroHub. Tras la desaparición de la comunidad, lo desarrollé y publiqué por mi cuenta para reforzar diseño de APIs RESTful, manejo de bases de datos con JDBC y buenas prácticas de arquitectura.",
+          "El proyecto nació como ejercicio de la comunidad de Skool DeHaroHub. Tras la desaparición de la comunidad, lo desarrollé y publiqué por mi cuenta para reforzar diseño de APIs RESTful, manejo de bases de datos con JDBC y buenas prácticas de arquitectura.",
       },
       {
         title: "Características destacadas",
@@ -409,18 +401,27 @@ const Projects = ({ id, title, description, variant }: ProjectsProps) => {
                     <Badge key={tech} variant="secondary">{tech}</Badge>
                   ))}
                 </div>
-                {repositoryUrl && (
-                  <Button asChild variant="link" className="mt-3 h-auto px-0">
-                    <a
-                      href={repositoryUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Ver ${project.title} en GitHub`}
-                    >
-                      Ver repositorio <GitHubIcon className="ml-2 h-4 w-4" aria-hidden="true" />
-                    </a>
-                  </Button>
-                )}
+                <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1">
+                  {hasMoreInfo(project) && (
+                      <ProjectDetailsDialog project={project}>
+                        <Button variant="link" className="h-auto min-h-11 px-0 text-cyan-400">
+                          Ver detalles
+                        </Button>
+                      </ProjectDetailsDialog>
+                  )}
+                  {repositoryUrl && (
+                      <Button asChild variant="link" className="h-auto min-h-11 px-0">
+                        <a
+                            href={repositoryUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Ver ${project.title} en GitHub`}
+                        >
+                          Ver repositorio <GitHubIcon className="ml-2 h-4 w-4" aria-hidden="true" />
+                        </a>
+                      </Button>
+                  )}
+                </div>
               </article>
               );
             })}

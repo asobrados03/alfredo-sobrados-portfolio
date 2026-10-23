@@ -1,71 +1,31 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { GitHubIcon } from "@/components/icons/GitHubIcon";
-import { ExternalLink, FileText } from "lucide-react";
+import ProjectDetailsDialog from "./ProjectDetailsDialog";
+import {
+  CARD_MAX_HIGHLIGHTS,
+  CARD_MAX_TECHNOLOGIES,
+  getLinkIcon,
+  getProjectLinks,
+  hasMoreInfo,
+  type Project,
+} from "@/lib/projectTypes";
 
-type ProjectLinkType = "github" | "document" | "external";
-
-export interface ProjectLink {
-  label: string;
-  url: string;
-  type?: ProjectLinkType;
-}
-
-export interface ProjectDetail {
-  title: string;
-  content?: string;
-  items?: string[];
-}
-
-export interface Project {
-  id: number;
-  title: string;
-  description: string;
-  impact?: string;
-  highlights?: string[];
-  technologies: string[];
-  githubUrl?: string;
-  links?: ProjectLink[];
-  objectives?: string;
-  keyPoints?: string[];
-  details?: ProjectDetail[];
-}
+// Se reexportan para no romper imports existentes (`import ProjectCard, { Project } from "./ProjectCard"`).
+export type { Project, ProjectDetail, ProjectLink } from "@/lib/projectTypes";
 
 interface ProjectCardProps {
   project: Project;
   index: number;
 }
 
-const getProjectLinks = (project: Project): ProjectLink[] => {
-  if (project.links?.length) {
-    return project.links;
-  }
-
-  if (!project.githubUrl) {
-    return [];
-  }
-
-  return [{ label: "Ver código", url: project.githubUrl, type: "github" }];
-};
-
-const getLinkIcon = (link: ProjectLink) => {
-  if (link.type === "document") {
-    return FileText;
-  }
-
-  if (link.type === "github" || link.url.includes("github.com")) {
-    return GitHubIcon;
-  }
-
-  return ExternalLink;
-};
-
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
   const animationDelay = `${0.1 + index * 0.08}s`;
   const projectLinks = getProjectLinks(project);
-  const visibleTechnologies = project.technologies.slice(0, 5);
-  const highlights = project.highlights?.slice(0, 3);
+  const visibleTechnologies = project.technologies.slice(0, CARD_MAX_TECHNOLOGIES);
+  const hiddenTechnologies = project.technologies.length - visibleTechnologies.length;
+  const highlights = project.highlights?.slice(0, CARD_MAX_HIGHLIGHTS);
+  const showDetails = hasMoreInfo(project);
 
   // Gestión limpia y adaptativa de la rejilla de botones según la cantidad de enlaces
   const getFooterGridClass = (length: number) => {
@@ -97,6 +57,11 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                   {tech}
                 </Badge>
             ))}
+            {hiddenTechnologies > 0 && (
+                <Badge variant="outline" aria-label={`${hiddenTechnologies} tecnologías más`}>
+                  +{hiddenTechnologies}
+                </Badge>
+            )}
           </div>
         </CardHeader>
         <CardContent className="flex-grow">
@@ -114,6 +79,20 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
               </section>
           )}
         </CardContent>
+        {showDetails && (
+            <div className="px-6 pb-4">
+              <ProjectDetailsDialog project={project}>
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    className="-ml-3 min-h-11 text-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-300"
+                    aria-label={`Ver detalles de ${project.title}`}
+                >
+                  Ver detalles
+                </Button>
+              </ProjectDetailsDialog>
+            </div>
+        )}
         {projectLinks.length > 0 && (
             <CardFooter className={getFooterGridClass(projectLinks.length)}>
               {projectLinks.map((link) => {

@@ -1,4 +1,4 @@
-import { ArrowRight, Bot, Code, Laptop, ShieldCheck } from "lucide-react";
+import {ArrowRight, Bot, Code, ShieldCheck, Smartphone} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const About = () => {
@@ -13,27 +13,30 @@ const About = () => {
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="flex-1">
                 <p className="mb-6 text-lg leading-relaxed text-slate-300">
-                  Ingeniero Informático especializado en backend y diseño de APIs. Transformo necesidades de producto en
-                  software mantenible, con una base sólida de arquitectura, calidad y experiencia de usuario. Mi experiencia
-                  en full-stack y móvil multiplataforma me permite entender el producto de extremo a extremo.
+                  Ingeniero Informático especializado en backend y diseño de APIs. Construyo servicios con Java, Kotlin
+                  y Spring Boot, con arquitectura hexagonal, autenticación JWT y pruebas automatizadas. Tengo
+                  experiencia full-stack: he llevado un producto de extremo a extremo, con app móvil multiplataforma
+                  (más del 70 % de código compartido entre Android e iOS) y su API REST, en un proyecto real. Trabajo
+                  con herramientas de IA para acelerar el desarrollo, y reviso y valido cada cambio con pruebas y
+                  criterio de arquitectura.
                 </p>
                 <h3 className="mb-4 text-lg font-mono uppercase tracking-wider text-violet-400">&gt; Áreas de enfoque</h3>
                 <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
                   <div className="flex items-center gap-2.5 rounded-xl border border-slate-800/60 bg-slate-950/40 p-3.5">
                     <Code className="h-5 w-5 text-cyan-400 shrink-0" aria-hidden="true" />
-                    <span className="text-sm font-medium text-slate-200">Backend &amp; APIs</span>
+                    <span className="text-sm font-medium text-slate-200">Backend y APIs REST</span>
                   </div>
                   <div className="flex items-center gap-2.5 rounded-xl border border-slate-800/60 bg-slate-950/40 p-3.5">
-                    <Laptop className="h-5 w-5 text-cyan-400 shrink-0" aria-hidden="true" />
-                    <span className="text-sm font-medium text-slate-200">Full-stack y móvil</span>
+                    <Smartphone className="h-5 w-5 text-cyan-400 shrink-0" aria-hidden="true" />
+                    <span className="text-sm font-medium text-slate-200">Móvil multiplataforma (KMP)</span>
                   </div>
                   <div className="flex items-center gap-2.5 rounded-xl border border-slate-800/60 bg-slate-950/40 p-3.5">
                     <ShieldCheck className="h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
-                    <span className="text-sm font-medium text-slate-200">Arquitectura y calidad</span>
+                    <span className="text-sm font-medium text-slate-200">Arquitectura limpia y testing</span>
                   </div>
                   <div className="flex items-center gap-2.5 rounded-xl border border-slate-800/60 bg-slate-950/40 p-3.5">
                     <Bot className="h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
-                    <span className="text-sm font-medium text-slate-200">IA aplicada e ingeniería asistida</span>
+                    <span className="text-sm font-medium text-slate-200">Ingeniería asistida por IA</span>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 mt-6">

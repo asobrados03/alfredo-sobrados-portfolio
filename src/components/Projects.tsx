@@ -78,7 +78,7 @@ const projectsData: Project[] = [
     id: 2,
     title: "Landing Page: Geotecnia y Servicios",
     description:
-      "Landing page profesional para una empresa de ingeniería geotécnica con sistema completo de generación de leads. Presenta servicios como estudios geotécnicos, sondeos y ensayos, e integra un formulario de contacto con flujo automatizado de notificaciones por email y almacenamiento de datos.",
+      "Landing page profesional para un geólogo autónomo especializado en servicios geotécnicos con sistema completo de generación de leads. Presenta servicios como estudios geotécnicos, sondeos y ensayos, e integra un formulario de contacto con flujo automatizado de notificaciones por email y almacenamiento de datos.",
     impact:
       "Landing de captación de leads con backend serverless y un flujo de contacto protegido frente a spam.",
     highlights: [

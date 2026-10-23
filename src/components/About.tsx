@@ -17,8 +17,8 @@ const About = () => {
                   y Spring Boot, con arquitectura hexagonal, autenticación JWT y pruebas automatizadas. Tengo
                   experiencia full-stack: he llevado un producto de extremo a extremo, con app móvil multiplataforma
                   (más del 70 % de código compartido entre Android e iOS) y su API REST, en un proyecto real. Trabajo
-                  con herramientas de IA para acelerar el desarrollo, y reviso y valido cada cambio con pruebas y
-                  criterio de arquitectura.
+                  con herramientas de IA como apoyo en código, pruebas y documentación, pero las decisiones de diseño
+                  y la revisión del resultado son siempre mías.
                 </p>
                 <h3 className="mb-4 text-lg font-mono uppercase tracking-wider text-violet-400">&gt; Áreas de enfoque</h3>
                 <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">

@@ -4,9 +4,9 @@ import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 
 const navigationItems = [
   { href: "#projects", label: "Proyectos" },
-  { href: "#capabilities", label: "Habilidades" },
+  { href: "#capabilities", label: "Especialidades" },
   { href: "#about", label: "Sobre mí" },
-  { href: "#more-projects", label: "Más proyectos" },
+  { href: "#more-projects", label: "Proyectos y prácticas" },
   { href: "#contact", label: "Contacto" },
 ];
 
@@ -34,7 +34,7 @@ const Footer = () => {
               Alfredo Sobrados González
             </a>
             <p className="mt-3 max-w-sm leading-relaxed text-slate-400">
-              Ingeniero Informático especializado en backend, desarrollo móvil y producto full-stack.
+              Backend Engineer centrado en APIs seguras, arquitectura de software y código mantenible.
             </p>
             <a
               href="/cv-alfredo-sobrados-gonzalez.pdf"

@@ -5,10 +5,10 @@ import { GitHubIcon } from "@/components/icons/GitHubIcon";
 import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 
 const navigationItems = [
-  { href: "#projects", label: "Proyectos" },
-  { href: "#capabilities", label: "Habilidades" },
+  { href: "#projects", label: "Proyectos destacados" },
+  { href: "#capabilities", label: "Especialidades" },
   { href: "#about", label: "Sobre mí" },
-  { href: "#more-projects", label: "Más proyectos" },
+  { href: "#more-projects", label: "Otros proyectos y prácticas" },
   { href: "#contact", label: "Contacto" },
 ];
 
@@ -17,8 +17,8 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-800/70 bg-[#0B0F17]/90 px-4 py-3 shadow-lg shadow-slate-950/20 backdrop-blur-md md:px-8">
-      <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-3 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
-        <a href="#main-content" className="min-w-0 text-base font-bold leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0F17] sm:text-xl lg:justify-self-start lg:text-2xl">
+      <div className="relative mx-auto flex w-full items-center justify-between gap-3 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+        <a href="#main-content" className="min-w-0 text-base font-bold leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0F17] sm:text-xl lg:mr-4 lg:justify-self-start lg:whitespace-normal lg:text-2xl xl:mr-8 xl:whitespace-nowrap">
           <span className="text-gradient">Alfredo Sobrados González</span>
         </a>
 

@@ -10,13 +10,18 @@ const projectsData: Project[] = [
     id: 1,
     title: "Human Perform Platform",
     description:
-      "Plataforma completa para la gestión integral de un centro deportivo, desarrollada como proyecto real durante mis prácticas en Fransdata Tech Ventures y posteriormente ampliada y finalizada como Trabajo Final de Grado. El sistema combina una app móvil multiplataforma y una API REST segura que centraliza la lógica de negocio y el acceso a datos.",
+      "Aplicación multiplataforma para un centro deportivo, desarrollada durante mis prácticas y ampliada como Trabajo Fin de Grado. Incluye aplicaciones para Android e iOS y una API REST propia.",
     impact:
-      "App multiplataforma y API REST para un centro deportivo, nacida en prácticas reales y convertida en TFG.",
+      "Aplicación multiplataforma para un centro deportivo, con API REST propia y más del 70 % del código compartido entre Android e iOS.",
+    featuredMetric: {
+      value: "+70%",
+      label: "de código compartido entre Android e iOS",
+    },
+    showHighlightsInDialog: false,
     highlights: [
-      "Más del 70 % de código compartido entre Android e iOS.",
-      "Autenticación JWT y persistencia cifrada de sesión.",
-      "API REST desacoplada con Clean Architecture.",
+      "Más del 70% de código compartido entre Android e iOS.",
+      "Sesión autenticada con JWT y credenciales almacenadas de forma cifrada.",
+      "API REST independiente con responsabilidades separadas por capas.",
     ],
     technologies: [
       "Kotlin Multiplatform",
@@ -28,6 +33,24 @@ const projectsData: Project[] = [
       "JWT",
       "Clean Architecture",
       "Arquitectura Hexagonal",
+    ],
+    technologyGroups: [
+      {
+        title: "Aplicación móvil",
+        technologies: ["Kotlin Multiplatform", "Jetpack Compose", "SwiftUI"],
+      },
+      {
+        title: "Backend",
+        technologies: ["Node.js", "Express.js"],
+      },
+      {
+        title: "Datos y seguridad",
+        technologies: ["MariaDB", "JWT"],
+      },
+      {
+        title: "Arquitectura",
+        technologies: ["Clean Architecture", "Principios hexagonales"],
+      },
     ],
     links: [
       {
@@ -48,28 +71,39 @@ const projectsData: Project[] = [
     ],
     details: [
       {
-        title: "Objetivo",
+        title: "El reto",
         content:
-          "Diseñar e implementar una solución software multiplataforma real en producción, reutilizando más del 70% del código entre Android e iOS y separando claramente frontend y backend mediante arquitectura desacoplada.",
+          "Compartir la lógica necesaria entre Android e iOS sin renunciar a interfaces específicas para cada plataforma y mantener, al mismo tiempo, una API REST independiente para los datos y la lógica del servidor.",
       },
       {
-        title: "Características destacadas",
+        title: "Implementación: aplicación móvil",
         items: [
-          "Registro e inicio de sesión seguro con JWT.",
-          "Persistencia cifrada de sesión y credenciales.",
-          "Gestión avanzada de perfiles con subida y edición de imágenes.",
-          "Sistema de entrenadores y profesionales favoritos.",
-          "Backend REST desacoplado con autenticación robusta.",
-          "Interfaz moderna responsive con Material Design 3 y soporte dark mode.",
+          "La lógica de negocio y el networking se comparten en el módulo KMP.",
+          "Las interfaces se adaptan a cada plataforma con Jetpack Compose y SwiftUI.",
+          "Perfiles con edición y subida de imágenes, reservas, favoritos y operaciones de cuenta.",
+          "Material Design 3 en Android y modo oscuro.",
         ],
       },
       {
-        title: "Qué aprendí",
+        title: "Implementación: backend y seguridad",
         items: [
-          "Desarrollo full-stack móvil y backend en entorno real.",
-          "Diseño de APIs REST seguras y escalables con Node.js.",
-          "Integración KMM compartiendo lógica entre Android e iOS.",
-          "Aplicación práctica de Clean Architecture y principios hexagonales.",
+          "API REST independiente organizada en rutas, controladores, servicios y repositorios.",
+          "Autenticación con access token, refresh token y middleware de autorización.",
+          "Persistencia en MariaDB y gestión de archivos para fotos y documentos.",
+          "Tokens y datos de usuario persistidos de forma cifrada en el cliente.",
+        ],
+      },
+      {
+        title: "Decisiones de arquitectura",
+        content:
+          "Kotlin Multiplatform concentra la lógica compartida y deja la presentación en cada plataforma. En la API, rutas y controladores gestionan HTTP, los servicios encapsulan las reglas de negocio y los repositorios aíslan la persistencia y las integraciones. Esta separación reduce el acoplamiento y permite evolucionar cada capa con mayor independencia.",
+      },
+      {
+        title: "Qué demuestra este proyecto",
+        items: [
+          "Diseño de APIs REST con autenticación y reglas de negocio no triviales.",
+          "Aplicación práctica de arquitectura por capas y código compartido entre plataformas.",
+          "Capacidad para conectar cliente, backend, persistencia y seguridad en una solución mantenible.",
         ],
       },
     ],
@@ -78,13 +112,14 @@ const projectsData: Project[] = [
     id: 2,
     title: "Landing Page: Geotecnia y Servicios",
     description:
-      "Landing page profesional para un geólogo autónomo especializado en servicios geotécnicos con sistema completo de generación de leads. Presenta servicios como estudios geotécnicos, sondeos y ensayos, e integra un formulario de contacto con flujo automatizado de notificaciones por email y almacenamiento de datos.",
+      "Landing page profesional para presentar servicios geotécnicos, con un formulario de contacto conectado a validación, protección anti-spam, notificaciones por correo y archivo de solicitudes.",
     impact:
-      "Landing de captación de leads con backend serverless y un flujo de contacto protegido frente a spam.",
+      "Web de servicios con formulario de contacto, validación de datos, protección anti-spam y envío automatizado de notificaciones.",
     highlights: [
-      "Validación de formularios compartida con Zod.",
-      "Protección anti-spam con reCAPTCHA v3 y honeypot.",
-      "Persistencia en Supabase y emails con Resend.",
+      "Validación compartida: el mismo esquema Zod se ejecuta en cliente y servidor.",
+      "Anti-spam en dos capas: honeypot en el formulario y reCAPTCHA v3 en la función serverless.",
+      "Notificación fiable: Resend envía un aviso interno y una respuesta automática al contacto.",
+      "Archivo secundario: Supabase guarda la solicitud sin bloquear la respuesta si la base de datos falla.",
     ],
     technologies: [
       "React 18",
@@ -93,11 +128,28 @@ const projectsData: Project[] = [
       "Tailwind CSS",
       "shadcn/ui",
       "Zod",
-      "React Hook Form",
       "Vercel",
       "Supabase",
       "Resend",
       "reCAPTCHA v3",
+    ],
+    technologyGroups: [
+      {
+        title: "Frontend",
+        technologies: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui"],
+      },
+      {
+        title: "Formularios y validación",
+        technologies: ["Zod"],
+      },
+      {
+        title: "Backend y servicios",
+        technologies: ["Vercel Functions", "Supabase", "Resend", "reCAPTCHA v3"],
+      },
+      {
+        title: "Pruebas",
+        technologies: ["Vitest"],
+      },
     ],
     links: [
       {
@@ -113,25 +165,30 @@ const projectsData: Project[] = [
     ],
     details: [
       {
-        title: "Características destacadas",
+        title: "Flujo de contacto",
         items: [
-          "Arquitectura Jamstack con frontend estático y backend serverless separados.",
-          "Sistema anti-spam multicapa con reCAPTCHA v3 invisible y campo honeypot oculto.",
-          "Validación consistente usando esquemas Zod compartidos entre cliente y servidor.",
-          "Flujo automatizado de validación, verificación captcha, persistencia y envío de emails.",
-          "Optimización de rendimiento con lazy loading de imágenes, code splitting y CDN de Vercel.",
-          "Manejo robusto de errores con feedback inmediato y logging detallado.",
+          "1. El usuario completa nombre, email, empresa opcional y mensaje.",
+          "2. El cliente descarta los envíos que rellenan el honeypot y valida los datos con Zod.",
+          "3. La función POST /api/contact vuelve a validar la entrada y verifica el token reCAPTCHA v3.",
+          "4. Resend envía el aviso interno y la confirmación automática al contacto.",
+          "5. Tras el envío de correos, la solicitud se archiva en Supabase de forma no bloqueante.",
+          "6. El formulario muestra un mensaje de éxito o el error devuelto por el servidor.",
         ],
       },
       {
-        title: "API REST documentada",
+        title: "Implementación y decisiones técnicas",
         content:
-          "Endpoint POST /api/contact con validación de entrada, verificación reCAPTCHA, persistencia en Supabase y envío de correos transaccionales. Incluye pruebas unitarias completas con Vitest.",
+          "La landing separa la interfaz del endpoint serverless de Vercel. Zod mantiene las mismas reglas de formato y longitud en cliente y servidor; el honeypot filtra automatizaciones sencillas antes de hacer la petición y reCAPTCHA aporta una segunda comprobación en backend.",
       },
       {
-        title: "Implementé",
+        title: "Servicios y tratamiento de errores",
         content:
-          "Integración completa de servicios externos, validación de formularios robusta, arquitectura serverless escalable y sistema de notificaciones automáticas end-to-end.",
+          "El endpoint devuelve errores diferenciados para método no permitido, datos inválidos, reCAPTCHA no configurado o fallido y problemas de Resend. Si Supabase no está configurado, expira o falla la inserción, registra el problema y conserva la respuesta correcta cuando los correos ya se han enviado.",
+      },
+      {
+        title: "Pruebas y frontend",
+        content:
+          "Vitest cubre métodos no permitidos, validación, reCAPTCHA, errores de Resend y el archivado best-effort en Supabase. En el frontend, la carga diferida de imágenes y la división de código se mantienen como optimizaciones de presentación documentadas por el proyecto.",
       },
     ],
   },
@@ -139,15 +196,33 @@ const projectsData: Project[] = [
     id: 10,
     title: "Banana Bank — experiencia de hackathon",
     description:
-      "Caso de estudio desarrollado durante un reto técnico de T·dots sobre una aplicación bancaria ficticia con asistente de IA. Analiza operaciones sensibles y plantea mejoras de seguridad, recuperación ante fallos y trazabilidad de las respuestas del agente.",
+      "Caso de estudio personal sobre una aplicación bancaria ficticia con asistente de IA. Diseña transferencias sensibles con confirmación explícita, reintentos controlados y evidencia visible.",
     impact:
-      "Caso de estudio de banca con IA centrado en transferencias seguras, idempotencia y evidencia verificable.",
+      "Caso de estudio de banca con IA centrado en transferencias confirmables, idempotencia y trazabilidad.",
     highlights: [
-      "Transferencias en dos pasos con confirmación explícita.",
-      "Prevención de pagos duplicados mediante idempotencia.",
-      "Comparación de políticas con fuentes y fechas visibles.",
+      "Propuesta revisable antes de ejecutar una transferencia.",
+      "Referencia reutilizable para tratar reintentos y respuestas ambiguas.",
+      "Políticas comparadas con fuentes y fechas visibles.",
     ],
     technologies: ["TypeScript", "React", "Next.js", "SQLite", "Node.js", "OpenAI API", "Testing"],
+    technologyGroups: [
+      {
+        title: "Frontend",
+        technologies: ["TypeScript", "React", "Next.js"],
+      },
+      {
+        title: "Backend y persistencia",
+        technologies: ["Node.js", "SQLite"],
+      },
+      {
+        title: "IA",
+        technologies: ["OpenAI API"],
+      },
+      {
+        title: "Calidad",
+        technologies: ["Testing"],
+      },
+    ],
     links: [
       {
         label: "Ver repositorio",
@@ -157,17 +232,41 @@ const projectsData: Project[] = [
     ],
     details: [
       {
-        title: "Características destacadas",
+        title: "Contexto",
+        content:
+          "Proyecto personal desarrollado durante un reto técnico de T·dots sobre una aplicación bancaria ficticia con asistente de IA, datos de prueba y un simulador de banca. Es un caso de estudio: no representa un sistema bancario de producción ni redistribuye el código de la aplicación base.",
+      },
+      {
+        title: "Transferencias sensibles",
         items: [
-          "Protección frente a clics repetidos durante operaciones en curso.",
-          "Corrección del flujo de conversaciones nuevas al alternar historial y conversaciones vacías.",
-          "Pruebas de invariantes de negocio y escenarios de fallo simulados.",
+          "La primera acción crea una propuesta con origen, destinatario, importe y concepto para revisión.",
+          "La transferencia solo se ejecuta después de confirmar esa propuesta de forma explícita.",
+          "Cada propuesta caduca a los 15 minutos y no puede consumirse dos veces.",
         ],
       },
       {
-        title: "Qué aprendí",
+        title: "Idempotencia y recuperación",
         content:
-          "Diseñar operaciones sensibles combinando confirmación explícita, idempotencia, recuperación ante fallos y fuentes de evidencia visibles.",
+          "Los reintentos reutilizan la misma referencia bancaria para que una respuesta ambigua o perdida no se trate como una operación nueva. La interfaz bloquea clics repetidos durante el procesamiento y el caso de estudio valida el comportamiento con escenarios de fallo del simulador; la garantía descrita se limita a ese flujo y entorno simulado.",
+      },
+      {
+        title: "Políticas con evidencia",
+        content:
+          "Para preguntas sobre cambios de condiciones, el flujo identifica el producto, selecciona de forma determinista las versiones vigentes e históricas y conserva sus fuentes y fechas. Así, la respuesta del asistente permite distinguir qué información está vigente y de dónde procede.",
+      },
+      {
+        title: "Fiabilidad de la interfaz",
+        content:
+          "Al volver desde el historial a una conversación nueva, el estado se reinicia correctamente y solo se aceptan colecciones de mensajes válidas, evitando tratar una conversación vacía como un historial recuperado.",
+      },
+      {
+        title: "Qué demuestra este proyecto",
+        items: [
+          "Diseño de flujos de aprobación para operaciones sensibles.",
+          "Tratamiento de reintentos, expiración y estados ambiguos en un simulador.",
+          "Integración de IA con fuentes y fechas visibles en lugar de respuestas sin procedencia.",
+          "Validación de invariantes de negocio y escenarios de fallo mediante pruebas automatizadas.",
+        ],
       },
     ],
   },
@@ -177,22 +276,67 @@ const projectsData: Project[] = [
     description:
       "Herramienta CLI en Python que calcula la energía adicional necesaria para cubrir la demanda eléctrica española cuando la generación eólica es la única fuente disponible.",
     impact:
-      "CLI auditable que alinea demanda eléctrica y datos eólicos de ESIOS/REE en intervalos de cinco minutos.",
+      "Herramienta CLI que calcula en MWh la energía adicional de cada intervalo cuando la eólica es la única generación disponible.",
     highlights: [
       "Reconstrucción trazable de huecos mediante interpolación lineal.",
       "Manejo explícito del cambio horario CET/CEST en UTC.",
       "Exportación de resultados auditables por intervalo, hora y día.",
     ],
     technologies: ["Python 3.11+", "ESIOS/REE API", "CSV", "argparse", "zoneinfo", "unittest"],
+    technologyGroups: [
+      {
+        title: "Lenguaje",
+        technologies: ["Python 3.11+"],
+      },
+      {
+        title: "Datos",
+        technologies: ["ESIOS/REE API", "CSV"],
+      },
+      {
+        title: "CLI y tiempo",
+        technologies: ["argparse", "zoneinfo"],
+      },
+      {
+        title: "Pruebas",
+        technologies: ["unittest"],
+      },
+    ],
     githubUrl: "https://github.com/asobrados03/energy-deficit",
+    showHighlightsInDialog: false,
     details: [
       {
-        title: "Características destacadas",
+        title: "Modelo de cálculo",
+        content:
+          "La demanda de entrada representa energía consumida en kWh durante cada intervalo de cinco minutos. La API de ESIOS/REE aporta la potencia eólica media en MW para esos mismos intervalos; se convierte a MWh con MW × 5 / 60 y la demanda con kWh / 1000. El resultado es max(demanda - eólica, 0): energía adicional bajo el supuesto de que solo existe generación eólica, no una evaluación completa del sistema eléctrico.",
+      },
+      {
+        title: "Datos ausentes y trazabilidad",
+        content:
+          "La herramienta completa celdas vacías o marcas de cinco minutos ausentes situadas entre datos válidos mediante interpolación lineal. Guarda la serie resultante en demanda_preparada.csv y marca cada valor estimado con is_interpolated=true; no presenta esas reconstrucciones como mediciones originales.",
+      },
+      {
+        title: "Tiempo y cambio horario",
+        content:
+          "Las marcas de demanda se leen en Europe/Madrid, se validan y se normalizan a UTC antes de alinear las series y agregarlas. La rejilla local excluye explícitamente las horas inexistentes del cambio CET/CEST mediante una conversión de ida y vuelta; después, UTC proporciona una línea temporal continua para validar intervalos de cinco minutos. Las salidas horarias reflejan por ello las horas reales del rango.",
+      },
+      {
+        title: "Salidas auditables",
         items: [
-          "Conversión consistente entre energía y potencia media para calcular el déficit de cada intervalo.",
-          "Arquitectura modular que separa dominio, E/S, cliente ESIOS y CLI.",
-          "Suite de pruebas unitarias e integración sin dependencia de red.",
+          "deficit_cinco_minutos.csv conserva el resultado calculado por intervalo.",
+          "deficit_horario.csv y deficit_diario.csv suman energía en UTC; el primer día puede ser parcial.",
+          "deficit_minutal.csv reparte cada bloque de cinco minutos en cinco partes iguales: es una desagregación convencional, no una medición nueva.",
+          "Los CSV de déficit exponen utc_datetime y additional_energy_mwh, con redondeo a dos decimales solo al escribir.",
         ],
+      },
+      {
+        title: "Arquitectura",
+        content:
+          "El dominio concentra el cálculo, la validación de series regulares y las agregaciones. io.py lee la demanda, reconstruye huecos y escribe CSV; esios.py encapsula la autenticación y descarga del indicador eólico 551; cli.py coordina argumentos, ejecución y mensajes. La separación evita mezclar la integración externa con las reglas de cálculo.",
+      },
+      {
+        title: "Calidad y pruebas",
+        content:
+          "La suite unittest cubre conversiones de unidades, déficit no negativo, preservación de energía al reagrupar, decimales españoles, huecos, cambios horarios y rechazo de series desalineadas o discontinuas. La prueba de integración ejecuta el CLI completo con una respuesta de ESIOS simulada y comprueba las cuatro salidas y demanda_preparada.csv, sin llamadas de red ni token real.",
       },
     ],
   },
@@ -200,17 +344,72 @@ const projectsData: Project[] = [
     id: 3,
     title: "Finanzas Personales",
     description:
-      "Aplicación Android diseñada para facilitar la gestión de finanzas personales. Implementa arquitectura MVVM junto con el patrón Repository para garantizar un diseño modular, escalable y fácilmente mantenible. Fue mi práctica final de Plataformas de Software Móviles.",
-    technologies: ["Kotlin", "Jetpack Compose", "Material Design 3", "Gradle KTS", "Android Studio"],
-    githubUrl: "https://github.com/asobrados03/Finanzas_Personales",
+      "Aplicación Android para registrar ingresos y gastos, organizar presupuestos y consultar estadísticas financieras. Es el proyecto final de la asignatura Plataformas de Software Móviles.",
+    impact:
+      "Aplicación Android de gestión financiera personal con Room, Jetpack Compose y una estructura MVVM con Repository.",
+    highlights: [
+      "Registro y gestión de transacciones de ingresos y gastos.",
+      "Presupuestos organizados por categoría, mes y año.",
+      "Resumen financiero con saldo, totales y estadísticas.",
+    ],
+    technologies: [
+      "Kotlin",
+      "Jetpack Compose",
+      "Material Design 3",
+      "Room",
+      "Gradle KTS",
+      "Android Studio",
+      "MVVM",
+      "Repository",
+    ],
+    technologyGroups: [
+      {
+        title: "Android",
+        technologies: ["Kotlin", "Jetpack Compose", "Material Design 3"],
+      },
+      {
+        title: "Datos y arquitectura",
+        technologies: ["Room", "MVVM", "Repository"],
+      },
+      {
+        title: "Herramientas",
+        technologies: ["Gradle KTS", "Android Studio"],
+      },
+    ],
+    links: [
+      {
+        label: "Ver código en GitHub",
+        url: "https://github.com/asobrados03/Finanzas_Personales",
+        type: "github",
+      },
+    ],
+    showHighlightsInDialog: false,
     details: [
       {
-        title: "Puntos clave",
+        title: "Funcionalidades principales",
         items: [
-          "Gestión de transacciones de gasto e ingreso.",
-          "Creación, edición y eliminación de presupuestos por mes, año y categoría.",
-          "Estadísticas para visualizar el estado financiero.",
-          "Página principal con saldo, ingresos y gastos totales.",
+          "Las transacciones registran tipo, importe, categoría, fecha y descripción, y pueden gestionarse desde la aplicación.",
+          "Los presupuestos se crean, editan y eliminan por categoría, mes y año para relacionar el límite con el gasto acumulado.",
+          "La pantalla principal resume el saldo y los ingresos y gastos totales.",
+          "Las estadísticas y gráficos permiten consultar el estado de las finanzas a partir de los datos registrados.",
+        ],
+      },
+      {
+        title: "Decisiones técnicas",
+        content:
+          "La arquitectura MVVM separa el estado y la lógica de presentación de las pantallas Compose. Los ViewModel coordinan las operaciones y los Repository encapsulan el acceso a los datos, evitando acoplar la interfaz directamente con la persistencia.",
+      },
+      {
+        title: "Persistencia local",
+        content:
+          "Room organiza la base de datos local mediante entidades y DAO para transacciones, categorías y presupuestos. Las consultas exponen datos reactivos con Flow, que los ViewModel pueden observar y trasladar al estado de la interfaz.",
+      },
+      {
+        title: "Qué demuestra este proyecto",
+        items: [
+          "Construcción de una interfaz Android nativa con Jetpack Compose y Material Design 3.",
+          "Modelado de relaciones entre transacciones, categorías y presupuestos.",
+          "Aplicación práctica de MVVM y Repository en una aplicación académica completa.",
         ],
       },
     ],
@@ -219,13 +418,13 @@ const projectsData: Project[] = [
     id: 4,
     title: "HotelManagementAPI",
     description:
-      "API RESTful para gestionar un hotel, permitiendo administrar clientes, habitaciones, reservas, pagos y administradores. Implementa autenticación con JWT y sigue una arquitectura limpia para separar lógica de negocio, infraestructura y adaptadores.",
+      "API REST para gestionar la operativa de un hotel, construida con Java y Spring Boot sobre una arquitectura hexagonal y persistencia JDBC directa.",
     impact:
-      "API de gestión hotelera construida con Java y Spring Boot, con seguridad y pruebas automatizadas.",
+      "API hotelera con arquitectura hexagonal, JDBC sin ORM, seguridad JWT y pruebas automatizadas.",
     highlights: [
-      "Autenticación y autorización con JWT.",
-      "Arquitectura hexagonal y JDBC sin ORM.",
-      "Pruebas con JUnit, Mockito y Testcontainers.",
+      "Arquitectura hexagonal que separa dominio, aplicación y adaptadores.",
+      "JDBC sin ORM para mantener el control explícito de las consultas SQL.",
+      "Seguridad por roles y pruebas de integración con Testcontainers.",
     ],
     technologies: [
       "Java 21+",
@@ -241,32 +440,129 @@ const projectsData: Project[] = [
       "Testcontainers",
       "Gradle",
     ],
+    technologyGroups: [
+      {
+        title: "Backend",
+        technologies: ["Java 21+", "Spring Boot", "Arquitectura hexagonal"],
+      },
+      {
+        title: "Datos y seguridad",
+        technologies: ["JDBC", "MariaDB", "Spring Security", "JWT"],
+      },
+      {
+        title: "Pruebas",
+        technologies: ["JUnit 5", "Mockito", "Testcontainers"],
+      },
+      {
+        title: "Herramientas e integración",
+        technologies: ["Gradle", "Docker", "Swagger/OpenAPI", "Redis", "RabbitMQ"],
+      },
+    ],
     githubUrl: "https://github.com/asobrados03/HotelManagementAPI",
     details: [
       {
         title: "Motivación",
         content:
-          "El proyecto nació como ejercicio de la comunidad de Skool DeHaroHub. Tras la desaparición de la comunidad, lo desarrollé y publiqué por mi cuenta para reforzar diseño de APIs RESTful, manejo de bases de datos con JDBC y buenas prácticas de arquitectura.",
+          "Nació como un ejercicio de la comunidad Skool DeHaroHub. Cuando la comunidad dejó de estar activa, decidí continuarlo y publicarlo por mi cuenta para profundizar en APIs REST, JDBC y arquitectura mantenible.",
       },
       {
-        title: "Características destacadas",
+        title: "Funcionalidades",
         items: [
-          "CRUD completo para clientes, habitaciones, reservas, pagos y administradores.",
-          "Autenticación y autorización con JWT.",
-          "Uso de JDBC en lugar de ORM para mayor control sobre las consultas SQL.",
-          "Arquitectura limpia y modular basada en principios hexagonales.",
-          "Configuración con Docker para facilitar instalación y ejecución.",
-          "Documentación interactiva con Swagger/OpenAPI.",
-          "Pruebas unitarias y de integración para garantizar estabilidad.",
+          "CRUD de clientes, habitaciones, reservas, pagos y administradores.",
+          "Consulta de disponibilidad de habitaciones con caché e invalidación al cambiar reservas o estados.",
+          "Publicación de eventos de reserva para desacoplar el envío de notificaciones.",
+          "Documentación interactiva de endpoints mediante Swagger/OpenAPI.",
         ],
       },
       {
-        title: "Qué aprendí",
+        title: "Arquitectura y persistencia",
         items: [
-          "Profundización en arquitectura hexagonal aplicada a APIs REST.",
-          "Manejo de bases de datos sin ORM utilizando JDBC.",
-          "Implementación de autenticación segura con JWT en Spring Boot.",
-          "Optimización de estructura de código para mantenibilidad y escalabilidad.",
+          "Los controladores y DTOs actúan como adaptadores de entrada; los casos de uso coordinan la lógica de aplicación.",
+          "El dominio define entidades y puertos de repositorio sin depender de la infraestructura.",
+          "Los adaptadores de persistencia implementan esos puertos con JDBC y consultas SQL explícitas sobre MariaDB.",
+        ],
+      },
+      {
+        title: "Seguridad y fiabilidad",
+        content:
+          "Spring Security protege los endpoints mediante JWT y autorización basada en roles. La suite de pruebas combina pruebas unitarias y de integración con JUnit 5, Mockito y Testcontainers para validar lógica, seguridad y acceso a MariaDB en escenarios reproducibles.",
+      },
+      {
+        title: "Evolución del sistema",
+        content:
+          "Redis se utiliza para cachear la disponibilidad de habitaciones. RabbitMQ y el módulo independiente notification-worker desacoplan el envío de confirmaciones de reserva y permiten gestionar reintentos mediante colas de recuperación.",
+      },
+      {
+        title: "Qué demuestra este proyecto",
+        items: [
+          "Diseño de APIs REST con reglas de negocio, persistencia y control de acceso por roles.",
+          "Capacidad para aplicar arquitectura hexagonal sin ocultar las decisiones de infraestructura.",
+          "Uso de pruebas automatizadas para validar componentes aislados e integraciones con servicios externos.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 12,
+    title: "PetAdopt",
+    description:
+      "Aplicación web empresarial desarrollada en equipo para facilitar la adopción de mascotas y la comunicación entre refugios y clientes.",
+    impact:
+      "Proyecto académico en equipo con Java EE empaquetado como WAR, persistencia JPA, interfaz PrimeFaces y configuración de autenticación mediante realm JDBC.",
+    highlights: [
+      "Flujo de adopción orientado a la comunicación entre refugios y clientes.",
+      "Persistencia de entidades mediante JPA con EclipseLink.",
+      "Generación de códigos QR y códigos de barras para la aplicación web.",
+    ],
+    technologies: ["Java", "Java EE 7", "JPA", "EclipseLink", "PrimeFaces", "Maven", "QRGen", "Barcode4j"],
+    technologyGroups: [
+      {
+        title: "Aplicación web",
+        technologies: ["Java", "Java EE 7", "PrimeFaces"],
+      },
+      {
+        title: "Datos y acceso",
+        technologies: ["JPA", "EclipseLink", "Realm JDBC"],
+      },
+      {
+        title: "Construcción y utilidades",
+        technologies: ["Maven", "QRGen", "Barcode4j"],
+      },
+    ],
+    links: [
+      {
+        label: "Ver código en GitHub",
+        url: "https://github.com/asobrados03/PetAdopt",
+        type: "github",
+      },
+    ],
+    showHighlightsInDialog: false,
+    details: [
+      {
+        title: "Objetivo y alcance",
+        content:
+          "PetAdopt plantea, como trabajo académico realizado en equipo, una aplicación empresarial para conectar las necesidades de los refugios con las personas interesadas en adoptar. El repositorio incluye la configuración del entorno, el esquema y los datos iniciales necesarios para ejecutar el proyecto.",
+      },
+      {
+        title: "Implementación",
+        items: [
+          "El proyecto se construye como un archivo WAR mediante Maven sobre Java EE 7.",
+          "La persistencia se configura con JPA y EclipseLink, con las entidades almacenadas en una base de datos relacional.",
+          "PrimeFaces proporciona los componentes de la interfaz web.",
+          "QRGen y Barcode4j cubren la generación de códigos QR y de barras contemplada por el proyecto.",
+        ],
+      },
+      {
+        title: "Acceso y configuración",
+        content:
+          "El README documenta un realm JDBC para integrar la autenticación con las tablas de usuarios y grupos mediante JNDI. La configuración requiere preparar el realm y cargar el script SQL incluido; no se presenta como una aplicación desplegada en producción.",
+      },
+      {
+        title: "Qué demuestra este proyecto",
+        items: [
+          "Desarrollo colaborativo de una aplicación web Java EE con persistencia y componentes de interfaz.",
+          "Integración de servicios del contenedor, JPA y configuración de acceso basada en roles.",
+          "Organización de un proyecto Maven orientado a un despliegue web en formato WAR.",
         ],
       },
     ],
@@ -275,14 +571,69 @@ const projectsData: Project[] = [
     id: 5,
     title: "Centro de Convenciones",
     description:
-      "Sistema de gestión para un Centro de Convenciones utilizando los principios de la Programación Orientada a Objetos y varios patrones de diseño. Permite gestionar espacios, reservas, productos y aspectos económicos del centro.",
+      "Sistema académico en Java realizado en equipo para coordinar espacios, reservas, consumiciones y la carta de productos de un centro de convenciones, junto con el cálculo de sus ingresos.",
+    impact:
+      "Práctica académica colaborativa en Java que aplica POO y patrones de diseño a espacios, reservas, productos y cálculos económicos.",
+    highlights: [
+      "Gestión de espacios disponibles y no disponibles con equipamientos opcionales.",
+      "Reservas con consumiciones y consulta de la información asociada.",
+      "Carta jerárquica de secciones y productos con cálculos de ingresos.",
+    ],
     technologies: ["Java", "NetBeans", "POO", "Patrones de diseño"],
-    githubUrl: "https://github.com/asobrados03/Practica_FINAL_CentroDeConvenciones",
+    technologyGroups: [
+      {
+        title: "Lenguaje y entorno",
+        technologies: ["Java", "NetBeans"],
+      },
+      {
+        title: "Diseño",
+        technologies: ["Programación orientada a objetos", "Patrones de diseño"],
+      },
+    ],
+    links: [
+      {
+        label: "Ver código en GitHub",
+        url: "https://github.com/asobrados03/Practica_FINAL_CentroDeConvenciones",
+        type: "github",
+      },
+    ],
+    showHighlightsInDialog: false,
     details: [
       {
-        title: "Objetivo",
+        title: "Funcionalidades principales",
+        items: [
+          "Los espacios pueden darse de alta, consultarse por disponibilidad y actualizar su estado o sus precios.",
+          "Las reservas asocian un espacio, una fecha y un cliente; también permiten añadir, consultar y eliminar consumiciones.",
+          "La carta organiza secciones y productos, con operaciones para añadir elementos, cambiar su disponibilidad y consultar su información.",
+          "El sistema calcula los ingresos de un espacio y los ingresos totales del centro para un intervalo de fechas.",
+        ],
+      },
+      {
+        title: "Diseño orientado a objetos",
         content:
-          "Aprender los pilares de la programación orientada a objetos, incluyendo herencia, polimorfismo y encapsulación, e implementar varios patrones de diseño.",
+          "El estado de espacios, reservas, costes y productos se mantiene encapsulado en sus clases. La herencia aparece en los equipamientos decoradores, que conservan la interfaz de Espacio y amplían su comportamiento; esto permite calcular ingresos y consultar propiedades de forma polimórfica.",
+      },
+      {
+        title: "Patrones identificados",
+        items: [
+          "Singleton en Centro_Convenciones para centralizar la instancia que gestiona espacios, reservas y carta.",
+          "Decorator en Espacio y sus decoradores para añadir música, ornamentos o escenarios sin modificar la clase base.",
+          "Composite en Carta, Sección y Producto para tratar secciones compuestas y productos dentro de una estructura común.",
+          "Strategy en los menús y submenús para separar las alternativas de interacción de la gestión del dominio.",
+        ],
+      },
+      {
+        title: "Persistencia y alcance",
+        content:
+          "El programa serializa los objetos en un fichero binario .dat para conservar espacios, reservas y productos entre sesiones. Es una práctica académica de POO; no se presenta como un sistema comercial ni como una solución con base de datos externa.",
+      },
+      {
+        title: "Qué demuestra este proyecto",
+        items: [
+          "Modelado colaborativo de relaciones entre recursos, reservas y consumiciones.",
+          "Uso de composición, herencia y polimorfismo para extender el comportamiento del dominio.",
+          "Selección de patrones según la responsabilidad que debe resolver cada parte del sistema.",
+        ],
       },
     ],
   },
@@ -290,14 +641,73 @@ const projectsData: Project[] = [
     id: 6,
     title: "Notificador de Avisos",
     description:
-      "Aplicación web que permite a los profesores de Tecnologías Web notificar avisos a sus alumnos mediante una solución básica construida sobre un entorno LAMP virtualizado.",
+      "Aplicación web académica para que el profesorado publique avisos dirigidos a todo el alumnado o a estudiantes concretos, y para que cada perfil consulte la información que le corresponde.",
+    impact:
+      "Aplicación PHP en un entorno LAMP virtualizado para publicar, importar y filtrar avisos según el perfil de usuario.",
+    highlights: [
+      "Publicación de avisos individuales o colectivos por parte del profesorado.",
+      "Consulta y filtrado de avisos para estudiantes y profesores.",
+      "Importación de avisos mediante archivos CSV con comprobación de estructura.",
+    ],
     technologies: ["HTML", "CSS", "PHP", "JavaScript", "jQuery", "LAMP"],
-    githubUrl: "https://github.com/asobrados03/TWEB-Notificador-Avisos",
+    technologyGroups: [
+      {
+        title: "Interfaz",
+        technologies: ["HTML", "CSS"],
+      },
+      {
+        title: "Servidor",
+        technologies: ["PHP", "MySQL"],
+      },
+      {
+        title: "Interacción",
+        technologies: ["JavaScript", "jQuery"],
+      },
+      {
+        title: "Entorno",
+        technologies: ["LAMP virtualizado"],
+      },
+    ],
+    links: [
+      {
+        label: "Ver código en GitHub",
+        url: "https://github.com/asobrados03/TWEB-Notificador-Avisos",
+        type: "github",
+      },
+    ],
+    showHighlightsInDialog: false,
     details: [
       {
-        title: "Objetivo",
+        title: "Flujo de uso",
         content:
-          "Aprender a desarrollar una aplicación web básica y preparar el entorno virtual de desarrollo.",
+          "El profesorado inicia sesión, registra estudiantes y publica un aviso con asunto, contenido breve y destinatario. Puede dirigirlo a todo el alumnado o a una persona concreta; el sistema registra la relación entre el aviso y sus destinatarios para que después cada perfil consulte su propio índice.",
+      },
+      {
+        title: "Consulta y gestión de avisos",
+        items: [
+          "Los estudiantes consultan los avisos recibidos y pueden filtrarlos por estado leído o no leído.",
+          "El profesorado consulta los avisos publicados y puede distinguir entre comunicaciones grupales e individuales.",
+          "El contenido se muestra primero resumido y se abre una vista específica para leer el aviso completo.",
+          "La aplicación contempla el registro de estudiantes y el restablecimiento de contraseñas.",
+        ],
+      },
+      {
+        title: "Importación y validación de CSV",
+        content:
+          "El profesorado puede cargar avisos desde un archivo CSV separado por punto y coma. PHP comprueba el tipo de archivo, el tamaño y las cabeceras esperadas antes de guardarlo; después, la aplicación permite leer las filas importadas para preparar su procesamiento.",
+      },
+      {
+        title: "Implementación y entorno",
+        content:
+          "HTML y CSS estructuran y presentan las pantallas; PHP coordina sesiones, formularios y consultas a MySQL; JavaScript valida entradas y límites de los formularios en el navegador. jQuery añade el filtrado AJAX del índice de avisos y la lectura del archivo seleccionado. El proyecto se preparó para ejecutarse en una máquina Ubuntu con Apache, MySQL y PHP dentro de un entorno LAMP virtualizado.",
+      },
+      {
+        title: "Qué demuestra este proyecto",
+        items: [
+          "Construcción de un flujo web tradicional con perfiles y operaciones diferenciadas.",
+          "Integración entre formularios, sesiones PHP, consultas MySQL y actualización parcial con AJAX.",
+          "Preparación de un entorno de ejecución y de una importación de datos con formato definido.",
+        ],
       },
     ],
   },
@@ -305,17 +715,61 @@ const projectsData: Project[] = [
     id: 7,
     title: "Estructuras de Datos",
     description:
-      "Ejercicios y ejemplos prácticos de estructuras de datos en Java enfocados en reforzar lógica, resolución de problemas y fundamentos de programación.",
+      "Colección de prácticas académicas de Java realizadas en equipo para la asignatura Programación y Estructuras de Datos, con implementaciones propias de listas, TAD lineales y árboles binarios de búsqueda.",
+    impact:
+      "Trabajo académico colaborativo en Java para organizar datos con listas, pilas, colas y árboles, y resolver operaciones mediante algoritmos sobre estructuras propias.",
+    highlights: [
+      "Multilista para gestionar viajes de una empresa de autobuses.",
+      "Implementaciones de pilas y colas con arrays y listas enlazadas.",
+      "Árbol binario de búsqueda genérico con inserción, búsqueda, eliminación y recorridos.",
+    ],
     technologies: ["Java", "Estructuras de datos", "Algoritmos"],
-    githubUrl: "https://github.com/asobrados03/Practicas-Programacion-y-Estructuras-de-Datos",
-    details: [
+    technologyGroups: [
       {
-        title: "Objetivo",
-        content: "Fortalecer habilidades de lógica y resolución de problemas.",
+        title: "Lenguaje",
+        technologies: ["Java"],
       },
       {
-        title: "Temas cubiertos",
-        items: ["Listas enlazadas, pilas, colas, árboles binarios y otras estructuras básicas."],
+        title: "Conceptos",
+        technologies: ["Estructuras de datos", "Algoritmos"],
+      },
+    ],
+    links: [
+      {
+        label: "Explorar ejercicios en GitHub",
+        url: "https://github.com/asobrados03/Practicas-Programacion-y-Estructuras-de-Datos",
+        type: "github",
+      },
+    ],
+    showHighlightsInDialog: false,
+    details: [
+      {
+        title: "Descripción",
+        content:
+          "Repositorio de prácticas de laboratorio realizadas en equipo con Java para la asignatura de Programación y Estructuras de Datos. Cada ejercicio parte de un problema concreto y requiere modelar la información, definir las operaciones de la estructura y conectarlas con un programa de prueba.",
+      },
+      {
+        title: "Prácticas y estructuras implementadas",
+        items: [
+          "Gestión de viajes de una empresa de autobuses mediante una multilista: una lista doblemente enlazada genérica ordenada y una lista enlazada genérica para relacionar la información.",
+          "TAD Pila y TAD Cola con dos enfoques de implementación: arrays redimensionables y nodos enlazados.",
+          "TAD Árbol Binario de Búsqueda genérico, con inserción con o sin duplicados, recuperación, eliminación y recorridos del árbol.",
+          "La práctica del ABB incluye también una variante para enteros con una operación de inserción equilibrada a partir de un array.",
+        ],
+      },
+      {
+        title: "Operaciones y razonamiento algorítmico",
+        content:
+          "Las prácticas trabajan operaciones como insertar, buscar, eliminar, recuperar extremos y recorrer estructuras. En la multilista se mantiene el orden al insertar elementos; en el ABB se aprovecha la relación entre valores menores y mayores para localizar elementos y construir recorridos en preorden, inorden y postorden.",
+      },
+      {
+        title: "Enfoque técnico",
+        items: [
+          "Diseño de tipos abstractos mediante interfaces para separar las operaciones de una pila, una cola o un árbol de sus implementaciones.",
+          "Uso de genéricos y de Comparable para reutilizar estructuras con distintos tipos de datos ordenables.",
+          "Práctica de referencias, nodos, enlaces y casos de inserción o eliminación en estructuras dinámicas.",
+          "Aplicación de las estructuras a dominios concretos, en lugar de limitar el trabajo a ejemplos aislados.",
+        ],
       },
     ],
   },
@@ -323,21 +777,75 @@ const projectsData: Project[] = [
     id: 8,
     title: "Sistemas Distribuidos",
     description:
-      "Ejercicios prácticos para entender conceptos fundamentales de los sistemas distribuidos, desde concurrencia en Java hasta comunicación bidireccional cliente-servidor.",
-    technologies: ["Java", "Threads", "Runnable", "WebSockets", "Sistemas Distribuidos"],
-    githubUrl: "https://github.com/asobrados03/Practicas_Sistemas_Distribuidos",
-    details: [
+      "Colección de prácticas en Java sobre concurrencia y comunicación bidireccional entre procesos mediante tareas concurrentes y sockets TCP.",
+    impact:
+      "Prácticas de Java sobre concurrencia, coordinación de tareas y comunicación cliente-servidor con un protocolo de comandos.",
+    highlights: [
+      "Procesamiento concurrente de palabras mediante hilos consumidores y BlockingQueue.",
+      "Asignación asíncrona de llamadas con prioridades, cola de espera y ExecutorService.",
+      "Juego cliente-servidor con ServerSocket, comandos de movimiento y difusión del estado.",
+    ],
+    technologies: ["Java", "Thread", "Runnable", "Sockets TCP", "Sistemas Distribuidos"],
+    technologyGroups: [
       {
-        title: "Objetivo",
-        content:
-          "Aprender fundamentos prácticos básicos como ejecución concurrente de hilos y paso de mensajes bidireccional entre cliente y servidor.",
+        title: "Lenguaje",
+        technologies: ["Java"],
       },
       {
-        title: "Temas cubiertos",
+        title: "Concurrencia",
+        technologies: ["Thread", "Runnable", "ExecutorService", "BlockingQueue"],
+      },
+      {
+        title: "Comunicación",
+        technologies: ["Sockets TCP", "Protocolo de comandos"],
+      },
+      {
+        title: "Área",
+        technologies: ["Sistemas distribuidos"],
+      },
+    ],
+    links: [
+      {
+        label: "Explorar prácticas en GitHub",
+        url: "https://github.com/asobrados03/Practicas_Sistemas_Distribuidos",
+        type: "github",
+      },
+    ],
+    showHighlightsInDialog: false,
+    details: [
+      {
+        title: "Descripción",
+        content:
+          "Repositorio de prácticas académicas de Java para trabajar dos formas de ejecutar tareas concurrentes y una comunicación cliente-servidor. El alcance es el de ejercicios independientes: muestra cómo se reparten tareas, cómo se coordinan y cómo se intercambian mensajes entre procesos.",
+      },
+      {
+        title: "Prácticas de concurrencia",
         items: [
-          "Implementación de tareas concurrentes utilizando la clase Thread de Java.",
-          "Uso de la interfaz Runnable para manejar tareas concurrentes.",
-          "Implementación de servidor y cliente de WebSockets en Java.",
+          "En el contador de vocales, varias instancias de WordVowelCounter implementan Runnable, consumen palabras de una BlockingQueue y devuelven resultados mediante otra cola. TextVowelCounter crea los hilos, inserta marcadores de finalización y espera con join.",
+          "En la centralita telefónica, las llamadas se asignan de forma asíncrona a empleados según su prioridad. El código usa ExecutorService con un grupo fijo de hilos, un Lock para proteger el estado y una cola para las llamadas que esperan disponibilidad.",
+          "La diferencia práctica queda visible en el código: Runnable encapsula el trabajo que ejecuta cada tarea, mientras Thread también aparece como la unidad que se inicia para ejecutar ese trabajo; en la centralita, la ejecución se delega al executor.",
+        ],
+      },
+      {
+        title: "Comunicación cliente-servidor",
+        content:
+          "La tercera práctica implementa un juego de búsqueda del tesoro mediante ServerSocket y Socket de Java. El servidor acepta conexiones, crea un ManagerCliente por jugador y procesa cada conexión en un hilo separado. El cliente envía comandos MOVE y DIG; el servidor actualiza el estado y difunde mensajes como PLAYER JOIN, MOVE y DIG al conjunto de clientes.",
+      },
+      {
+        title: "Protocolo y ciclo de ejecución",
+        items: [
+          "Los mensajes se intercambian como líneas de texto, con comandos sencillos para mover al jugador o excavar en su posición.",
+          "El servidor conserva el estado compartido del tablero y de los jugadores; ManagerCliente traduce los mensajes recibidos en operaciones sobre ese estado.",
+          "La práctica documenta pruebas de conexión, movimiento, excavación y finalización cuando se encuentra el tesoro.",
+          "Aunque el README denomina la práctica WebSockets, la implementación revisada utiliza sockets TCP directamente; no se presenta como una implementación del protocolo WebSocket.",
+        ],
+      },
+      {
+        title: "Qué demuestra este proyecto",
+        items: [
+          "Descomposición de un problema en productores, consumidores y tareas ejecutables de forma concurrente.",
+          "Uso de colas, prioridades, bloqueo explícito y un executor para coordinar trabajo asíncrono.",
+          "Separación entre cliente, servidor, gestor de conexión y estado compartido en una comunicación basada en mensajes.",
         ],
       },
     ],
@@ -346,14 +854,68 @@ const projectsData: Project[] = [
     id: 9,
     title: "Arkanoid",
     description:
-      "Réplica del mítico juego Arkanoid desarrollada en Java como práctica final, con interfaz gráfica de escritorio y mecánicas básicas del juego clásico.",
+      "Práctica final realizada en equipo sobre una base de Arkanoid para escritorio, a la que añadimos internacionalización, nuevos niveles, controles y pantallas de estado.",
+    impact:
+      "Trabajo de ampliación realizado junto a un compañero sobre una aplicación Java/Swing existente: diez idiomas, niveles adicionales, eventos y nuevas pantallas.",
+    highlights: [
+      "Internacionalización del juego y pantalla de selección entre diez idiomas.",
+      "Niveles 6 a 10 con fondos y música propios, además de pantallas de inicio, pausa, muerte y victoria.",
+      "Controles de teclado, reinicio del nivel y mejoras de representación de las vidas.",
+    ],
     technologies: ["Java", "Swing", "AWT GUI"],
-    githubUrl: "https://github.com/asobrados03/PracticaFinalArkanoid",
+    technologyGroups: [
+      {
+        title: "Lenguaje",
+        technologies: ["Java"],
+      },
+      {
+        title: "Interfaz gráfica",
+        technologies: ["Swing", "AWT GUI"],
+      },
+    ],
+    links: [
+      {
+        label: "Ver código en GitHub",
+        url: "https://github.com/asobrados03/PracticaFinalArkanoid",
+        type: "github",
+      },
+    ],
+    showHighlightsInDialog: false,
     details: [
       {
-        title: "Objetivo",
+        title: "Descripción",
         content:
-          "Aprender a desarrollar una aplicación de escritorio visual en Java y aplicar el diseño de interfaces de usuario de manera práctica.",
+          "Práctica final realizada junto a un compañero a partir de una base de Arkanoid para escritorio que ya proporcionaba la aplicación y sus mecánicas principales. Nuestro trabajo se centró en ampliar esa base con funcionalidades de interacción, internacionalización, niveles y pantallas de juego.",
+      },
+      {
+        title: "Funcionalidades añadidas por el equipo",
+        items: [
+          "Internacionalización de los textos y pantalla de selección entre diez idiomas, con la bandera correspondiente durante los niveles.",
+          "Captura de eventos de teclado para mover la pala con A, D, W y las teclas de dirección, además del control existente con ratón.",
+          "Incorporación de los niveles 6, 7, 8, 9 y 10, cada uno con su fondo y música de nivel.",
+          "Pantalla inicial para comenzar la partida, pantalla de pausa con Esc o al salir con el cursor, y reinicio del nivel con R.",
+          "Pantallas de muerte y victoria con sus recursos de audio, además de la sustitución de la representación de las vidas por corazones rojos pixelados.",
+        ],
+      },
+      {
+        title: "Base recibida y alcance",
+        items: [
+          "La base proporcionada ya incluía la aplicación de escritorio, la representación gráfica y las mecánicas principales de Arkanoid.",
+          "Las ampliaciones se desarrollaron en colaboración con un compañero; el modal no atribuye en solitario la aplicación completa ni separa contribuciones individuales que no están documentadas.",
+        ],
+      },
+      {
+        title: "Implementación gráfica",
+        content:
+          "La ampliación reutiliza la interfaz Swing/AWT y las clases de la base recibida. Las modificaciones incorporan captura de eventos con KeyListener, textos y banderas para los idiomas, nuevos fondos y recursos de audio, junto con estados de inicio, pausa, derrota y victoria. No se presenta la arquitectura gráfica ni las mecánicas base como trabajo desarrollado desde cero por el equipo.",
+      },
+      {
+        title: "Qué demuestra este proyecto",
+        items: [
+          "Coordinación entre entrada de usuario, actualización del estado y representación gráfica en una aplicación Swing.",
+          "Modelado de elementos del juego con clases específicas para la pelota, la pala, los bloques y los efectos.",
+          "Implementación de reglas de colisión, progresión y estados de partida sin presentarlo como un motor de físicas general.",
+        ],
       },
     ],
   },
@@ -366,7 +928,7 @@ interface ProjectsProps {
   variant: "featured" | "more";
 }
 
-const featuredProjectIds = [1, 4, 2];
+const featuredProjectIds = [1, 2, 4];
 
 const Projects = ({ id, title, description, variant }: ProjectsProps) => {
   const projects =

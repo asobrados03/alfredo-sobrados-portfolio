@@ -15,6 +15,16 @@ export interface ProjectDetail {
     items?: string[];
 }
 
+export interface ProjectTechnologyGroup {
+    title: string;
+    technologies: string[];
+}
+
+export interface ProjectFeaturedMetric {
+    value: string;
+    label: string;
+}
+
 export interface Project {
     id: number;
     title: string;
@@ -27,6 +37,9 @@ export interface Project {
     objectives?: string;
     keyPoints?: string[];
     details?: ProjectDetail[];
+    technologyGroups?: ProjectTechnologyGroup[];
+    featuredMetric?: ProjectFeaturedMetric;
+    showHighlightsInDialog?: boolean;
 }
 
 /** Límites de lo que se muestra en la tarjeta; el resto vive en el diálogo. */

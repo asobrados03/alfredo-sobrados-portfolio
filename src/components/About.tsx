@@ -1,4 +1,4 @@
-import {ArrowRight, Bot, Code, ShieldCheck, Smartphone} from "lucide-react";
+import {ArrowRight, Code, ShieldCheck, Smartphone} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const About = () => {
@@ -7,18 +7,24 @@ const About = () => {
         <div className="max-w-5xl mx-auto">
           <p className="mb-3 text-center font-mono text-xs font-semibold uppercase tracking-[0.24em] text-violet-400">&lt; profile /&gt;</p>
           <h2 className="mb-8 text-center text-3xl font-bold tracking-tight text-slate-100 md:text-4xl">
-            Perfil &amp; Trayectoria
+            Perfil profesional
           </h2>
           <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-500/50 hover:shadow-[0_0_25px_rgba(139,92,246,0.15)] md:p-10">
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="flex-1">
                 <p className="mb-6 text-lg leading-relaxed text-slate-300">
-                  Ingeniero Informático especializado en backend y diseño de APIs. Construyo servicios con Java, Kotlin
-                  y Spring Boot, con arquitectura hexagonal, autenticación JWT y pruebas automatizadas. Tengo
-                  experiencia full-stack: he llevado un producto de extremo a extremo, con app móvil multiplataforma
-                  (más del 70 % de código compartido entre Android e iOS) y su API REST, en un proyecto real. Trabajo
-                  con herramientas de IA como apoyo en código, pruebas y documentación, pero las decisiones de diseño
-                  y la revisión del resultado son siempre mías.
+                  Soy ingeniero informático orientado al backend y al diseño de APIs. Me interesa construir servicios
+                  con una arquitectura clara, seguridad bien planteada y pruebas que faciliten su evolución.
+                </p>
+                <p className="mb-6 text-lg leading-relaxed text-slate-300">
+                  He trabajado con Java, Spring Boot y Node.js, aplicando autenticación JWT, separación de
+                  responsabilidades y pruebas automatizadas. También he desarrollado una aplicación multiplataforma
+                  para Android e iOS junto con su API REST, iniciada durante mis prácticas y ampliada como Trabajo Fin
+                  de Grado, con más del 70 % de código compartido entre ambas plataformas.
+                </p>
+                <p className="mb-6 text-lg leading-relaxed text-slate-300">
+                  Busco seguir creciendo como ingeniero backend, participar en decisiones técnicas y contribuir a
+                  desarrollar software fácil de mantener y mejorar.
                 </p>
                 <h3 className="mb-4 text-lg font-mono uppercase tracking-wider text-violet-400">&gt; Áreas de enfoque</h3>
                 <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -32,11 +38,11 @@ const About = () => {
                   </div>
                   <div className="flex items-center gap-2.5 rounded-xl border border-slate-800/60 bg-slate-950/40 p-3.5">
                     <ShieldCheck className="h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
-                    <span className="text-sm font-medium text-slate-200">Arquitectura limpia y testing</span>
+                    <span className="text-sm font-medium text-slate-200">Arquitectura y testing</span>
                   </div>
                   <div className="flex items-center gap-2.5 rounded-xl border border-slate-800/60 bg-slate-950/40 p-3.5">
-                    <Bot className="h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
-                    <span className="text-sm font-medium text-slate-200">Ingeniería asistida por IA</span>
+                    <Code className="h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true" />
+                    <span className="text-sm font-medium text-slate-200">Desarrollo web y full-stack</span>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 mt-6">
@@ -47,7 +53,7 @@ const About = () => {
                   </Button>
                   <Button asChild variant="outline" className="w-full sm:w-auto border-slate-700 bg-slate-900/50 text-slate-200 hover:bg-slate-800 hover:text-white">
                     <a href="mailto:alfredo.sobrados.gonzalez@gmail.com">
-                      Contactar por Email <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                      Contactar por correo <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                     </a>
                   </Button>
                 </div>

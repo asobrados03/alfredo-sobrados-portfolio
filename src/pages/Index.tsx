@@ -28,7 +28,7 @@ const Index = () => {
         <Projects
           id="projects"
           title="Proyectos destacados"
-          description="Tres proyectos que condensan mi experiencia en producto real, backend y desarrollo full-stack."
+          description="Tres casos para evaluar mi trabajo en backend, seguridad, arquitectura y desarrollo de producto."
           variant="featured"
         />
         <Capabilities />
@@ -36,7 +36,7 @@ const Index = () => {
         <Projects
           id="more-projects"
           title="Más proyectos y prácticas"
-          description="Otros proyectos académicos y personales que muestran mi base en Java, desarrollo web y fundamentos de ingeniería del software."
+          description="Proyectos académicos y personales que completan mi experiencia en Java, desarrollo web, móvil y fundamentos de ingeniería del software."
           variant="more"
         />
         <Contact />

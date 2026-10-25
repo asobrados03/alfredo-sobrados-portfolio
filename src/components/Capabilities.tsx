@@ -3,20 +3,20 @@ import { Blocks, ShieldCheck, Smartphone } from "lucide-react";
 const capabilities = [
   {
     title: "Backend",
-    description: "APIs REST seguras, modelado de datos y lógica de negocio mantenible.",
+    description: "Desarrollo APIs REST con lógica de negocio estructurada, acceso a datos y autenticación, buscando servicios seguros y fáciles de evolucionar.",
     technologies: "Java · Spring Boot · Node.js · Express.js",
     icon: Blocks,
   },
   {
-    title: "Mobile",
-    description: "Experiencias multiplataforma con lógica compartida y UI nativa.",
+    title: "Desarrollo multiplataforma",
+    description: "Construyo aplicaciones para Android e iOS compartiendo lógica cuando tiene sentido y adaptando las interfaces a cada plataforma.",
     technologies: "KMM · Jetpack Compose · SwiftUI",
     icon: Smartphone,
   },
   {
     title: "Calidad",
-    description: "Software preparado para evolucionar, probar y desplegar con confianza.",
-    technologies: "Arquitectura Software · Tests · CI/CD · DevOps ",
+    description: "Aplico principios de diseño, pruebas automatizadas y herramientas de desarrollo para facilitar los cambios y detectar errores antes de llegar a producción.",
+    technologies: "Arquitectura de software · Testing · Docker · CI/CD",
     icon: ShieldCheck,
   },
 ];
@@ -29,7 +29,7 @@ const Capabilities = () => (
         Qué aporto
       </h2>
       <p className="mx-auto mb-12 max-w-2xl text-center text-slate-400">
-        Capacidades técnicas orientadas a construir producto fiable, mantenible y centrado en las personas.
+        Combino desarrollo backend, arquitectura y pruebas para construir servicios fiables y fáciles de mantener. Mi experiencia multiplataforma me permite entender cómo se integra el backend con la aplicación que utiliza el usuario.
       </p>
       <div className="grid gap-6 md:grid-cols-3">
         {capabilities.map(({ title, description, technologies, icon: Icon }) => (

@@ -10,10 +10,13 @@ const Contact = () => (
       <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -right-16 h-64 w-64 rounded-full bg-violet-500/25 blur-3xl" />
       <div className="relative z-10">
       <h2 id="contact-title" className="text-3xl font-bold text-white md:text-4xl">
-        Hablemos
+        ¿Hablamos?
       </h2>
       <p className="mx-auto mt-4 max-w-2xl text-slate-200">
-        ¿Buscas un perfil backend, mobile o full-stack? Estoy disponible para conversar sobre nuevas oportunidades.
+        Si buscas un perfil backend con experiencia en APIs, seguridad y arquitectura de software, puedes explorar mis proyectos para conocer cómo trabajo.
+      </p>
+      <p className="mx-auto mt-3 max-w-2xl text-slate-200">
+        Si crees que mi perfil encaja con tu equipo, estaré encantado de hablar contigo.
       </p>
       <a
         href="mailto:alfredo.sobrados.gonzalez@gmail.com"
@@ -24,12 +27,12 @@ const Contact = () => (
       <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
         <Button asChild variant="secondary">
           <a href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez/" target="_blank" rel="noopener noreferrer">
-            LinkedIn <LinkedInIcon className="ml-2 h-4 w-4" aria-hidden="true" />
+            Ver LinkedIn <LinkedInIcon className="ml-2 h-4 w-4" aria-hidden="true" />
           </a>
         </Button>
         <Button asChild variant="secondary">
           <a href="https://github.com/asobrados03" target="_blank" rel="noopener noreferrer">
-            GitHub <GitHubIcon className="ml-2 h-4 w-4" aria-hidden="true" />
+            Ver GitHub <GitHubIcon className="ml-2 h-4 w-4" aria-hidden="true" />
           </a>
         </Button>
         <Button asChild variant="outline" className="border-slate-300 bg-transparent text-white hover:bg-white hover:text-slate-900">

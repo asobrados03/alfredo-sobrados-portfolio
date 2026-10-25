@@ -1,4 +1,4 @@
-import { Blocks, ShieldCheck, Smartphone } from "lucide-react";
+import { Blocks, BrainCircuit, ShieldCheck, Smartphone } from "lucide-react";
 
 const capabilities = [
   {
@@ -19,6 +19,12 @@ const capabilities = [
     technologies: "Arquitectura de software · Testing · Docker · CI/CD",
     icon: ShieldCheck,
   },
+  {
+    title: "IA aplicada al desarrollo",
+    description: "Utilizo asistentes de IA y agentes de programación para investigar soluciones, desarrollar funcionalidades, depurar errores y revisar código, manteniendo el criterio técnico y la responsabilidad sobre el resultado.",
+    technologies: "ChatGPT · OpenAI Codex · Claude · Gemini · GitHub Copilot Agent · Grok",
+    icon: BrainCircuit,
+  },
 ];
 
 const Capabilities = () => (
@@ -31,7 +37,7 @@ const Capabilities = () => (
       <p className="mx-auto mb-12 max-w-2xl text-center text-slate-400">
         Combino desarrollo backend, arquitectura y pruebas para construir servicios fiables y fáciles de mantener. Mi experiencia multiplataforma me permite entender cómo se integra el backend con la aplicación que utiliza el usuario.
       </p>
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {capabilities.map(({ title, description, technologies, icon: Icon }) => (
           <article key={title} className="rounded-xl border border-slate-800/80 bg-slate-900/60 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-500/50 hover:shadow-[0_0_25px_rgba(6,182,212,0.15)]">
             <Icon className="mb-5 h-8 w-8 text-cyan-400" aria-hidden="true" />

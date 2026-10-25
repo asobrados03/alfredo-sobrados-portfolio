@@ -49,8 +49,7 @@ const Hero = () => {
           </h1>
 
           <p className="mx-auto mb-5 max-w-3xl text-lg font-semibold leading-relaxed text-slate-200 sm:text-xl">
-            Desarrollo APIs y servicios backend con Java, Spring Boot y Node.js, cuidando la seguridad, la arquitectura
-            y las pruebas. También creo aplicaciones multiplataforma con Kotlin Multiplatform para Android e iOS.
+            Desarrollo soluciones robustas, con atención al diseño, la seguridad y la calidad del código.
           </p>
 
           <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">

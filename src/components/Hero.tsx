@@ -45,14 +45,12 @@ const Hero = () => {
               id="hero-title"
               className="mb-6 text-3xl font-bold leading-tight text-slate-100 sm:text-4xl md:text-6xl"
           >
-            Backend Engineer especializado en APIs seguras y software mantenible.
+            Backend Engineer enfocado en APIs seguras y software bien diseñado.
           </h1>
 
           <p className="mx-auto mb-5 max-w-3xl text-lg font-semibold leading-relaxed text-slate-200 sm:text-xl">
-            Desarrollo APIs y servicios backend con Java, Spring Boot y Node.js,
-            prestando atención a la seguridad, la arquitectura y las pruebas.
-            También construyo aplicaciones multiplataforma con Kotlin Multiplatform,
-            desde la lógica compartida hasta las interfaces de Android e iOS.
+            Desarrollo APIs y servicios backend con Java, Spring Boot y Node.js, cuidando la seguridad, la arquitectura
+            y las pruebas. También creo aplicaciones multiplataforma con Kotlin Multiplatform para Android e iOS.
           </p>
 
           <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">

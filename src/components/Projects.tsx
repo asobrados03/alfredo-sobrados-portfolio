@@ -508,7 +508,7 @@ const projectsData: Project[] = [
     description:
       "Aplicación web empresarial desarrollada en equipo para facilitar la adopción de mascotas y la comunicación entre refugios y clientes.",
     impact:
-      "Proyecto académico en equipo con Java EE empaquetado como WAR, persistencia JPA, interfaz PrimeFaces y configuración de autenticación mediante realm JDBC.",
+      "Proyecto académico en equipo con Java EE empaquetado como WAR, persistencia JPA sobre PostgreSQL, interfaz PrimeFaces y configuración de autenticación mediante realm JDBC.",
     highlights: [
       "Flujo de adopción orientado a la comunicación entre refugios y clientes.",
       "Persistencia de entidades mediante JPA con EclipseLink.",
@@ -522,7 +522,7 @@ const projectsData: Project[] = [
       },
       {
         title: "Datos y acceso",
-        technologies: ["JPA", "EclipseLink", "Realm JDBC"],
+        technologies: ["JPA", "EclipseLink", "PostgreSQL", "Realm JDBC"],
       },
       {
         title: "Construcción y utilidades",
@@ -547,7 +547,7 @@ const projectsData: Project[] = [
         title: "Implementación",
         items: [
           "El proyecto se construye como un archivo WAR mediante Maven sobre Java EE 7.",
-          "La persistencia se configura con JPA y EclipseLink, con las entidades almacenadas en una base de datos relacional.",
+          "La persistencia se configura con JPA y EclipseLink sobre PostgreSQL, con las entidades almacenadas en una base de datos relacional.",
           "PrimeFaces proporciona los componentes de la interfaz web.",
           "QRGen y Barcode4j cubren la generación de códigos QR y de barras contemplada por el proyecto.",
         ],

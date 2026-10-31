@@ -108,17 +108,18 @@ const projectsData: Project[] = [
       },
     ],
   },
+
   {
     id: 13,
     title: "AI Incident Triage",
     description:
-        "API para registrar incidencias técnicas, generar una propuesta de triaje estructurada y permitir que una persona la acepte o la corrija. MVP con separación entre entrada, análisis, persistencia y revisión humana.",
+        "API backend para registrar incidencias técnicas, generar propuestas de triaje estructuradas mediante análisis automatizado y permitir su revisión, aceptación o corrección por una persona. MVP en desarrollo con una arquitectura modular que separa la entrada de datos, el análisis, la persistencia y la supervisión humana.",
     impact:
-        "API FastAPI con analizador intercambiable (baseline determinista u Ollama local), revisión humana auditable y evaluación offline sobre un dataset etiquetado.",
+        "API desarrollada con FastAPI que integra analizadores intercambiables (baseline determinista u Ollama local), revisión humana auditable y evaluación offline sobre un conjunto de incidencias etiquetadas.",
     highlights: [
-      "Propuesta del sistema y revisión humana guardadas por separado para poder auditar qué cambió la persona.",
-      "Analizador intercambiable mediante el protocolo IncidentAnalyzer: FakeAnalyzer reproducible u OllamaAnalyzer con salida validada por Pydantic.",
-      "Evaluación offline con métricas de exactitud, errores y latencia, más CI con GitHub Actions y Docker.",
+      "Separación entre las propuestas generadas por el sistema y las decisiones humanas, permitiendo mantener la trazabilidad y auditar las correcciones.",
+      "Arquitectura de análisis intercambiable mediante el protocolo IncidentAnalyzer: FakeAnalyzer para ejecuciones deterministas y reproducibles, u OllamaAnalyzer para integrar modelos locales con respuestas estructuradas y validadas mediante Pydantic.",
+      "Evaluación offline mediante métricas de exactitud, análisis de errores y latencia, junto con automatización de pruebas y validaciones mediante GitHub Actions y Docker.",
     ],
     technologies: [
       "Python 3.11+",
@@ -141,11 +142,11 @@ const projectsData: Project[] = [
         technologies: ["SQLAlchemy", "SQLite"],
       },
       {
-        title: "IA",
+        title: "Inteligencia artificial",
         technologies: ["Ollama"],
       },
       {
-        title: "Calidad y entrega",
+        title: "Calidad y despliegue",
         technologies: ["pytest", "Docker", "GitHub Actions"],
       },
     ],
@@ -161,43 +162,44 @@ const projectsData: Project[] = [
       {
         title: "Flujo de triaje",
         items: [
-          "POST /incidents registra la incidencia en SQLite con estado created.",
-          "POST /incidents/{id}/analysis ejecuta el analizador y guarda categoría, severidad, prioridad, información faltante y confianza.",
-          "PATCH /incidents/{id}/triage acepta o corrige la propuesta; el estado pasa a reviewed.",
-          "Estados: created → analyzing → analyzed → reviewed, o analysis_failed si el análisis falla.",
+          "POST /incidents registra una nueva incidencia en SQLite y la inicializa con el estado created.",
+          "POST /incidents/{id}/analysis ejecuta el analizador y almacena la propuesta de triaje: categoría, severidad, prioridad, información faltante y nivel de confianza.",
+          "PATCH /incidents/{id}/triage permite aceptar o corregir la propuesta generada, registrando la revisión humana y actualizando el estado a reviewed.",
+          "Gestión explícita de estados: created → analyzing → analyzed → reviewed, con el estado analysis_failed para los casos en los que el análisis no puede completarse.",
         ],
       },
       {
-        title: "Arquitectura",
+        title: "Arquitectura backend",
         content:
-            "Los routers de FastAPI traducen HTTP y errores; IncidentService contiene las transiciones de estado y los casos de uso; IncidentRepository aísla la persistencia con SQLAlchemy. El analizador se define como protocolo, de modo que el caso de uso no depende del proveedor.",
+            "La aplicación sigue una arquitectura por capas con responsabilidades diferenciadas. Los routers de FastAPI gestionan las peticiones HTTP y la traducción de errores; IncidentService centraliza los casos de uso y las transiciones de estado; e IncidentRepository encapsula el acceso a datos mediante SQLAlchemy. El análisis se abstrae mediante un protocolo, evitando que la lógica de negocio dependa de un proveedor concreto.",
       },
       {
-        title: "Analizador y modelo local",
+        title: "Integración de IA y modelos locales",
         content:
-            "FakeAnalyzer es el backend por defecto: determinista y útil para probar transiciones, no para medir la calidad de un LLM. OllamaAnalyzer es opcional, pide JSON estructurado con temperatura cero y valida la respuesta contra el esquema. Un proveedor no disponible o una respuesta inválida devuelven 502 y un timeout devuelve 504, sin fallback silencioso.",
+            "El sistema permite utilizar distintos analizadores a través de una interfaz común. FakeAnalyzer es el analizador predeterminado: ofrece resultados deterministas y reproducibles para probar el flujo de la aplicación, pero no sirve para medir la calidad de un LLM. De forma opcional, OllamaAnalyzer integra modelos locales, solicita respuestas en formato JSON estructurado con temperatura cero y valida los resultados mediante esquemas Pydantic. Los errores de disponibilidad del proveedor y las respuestas inválidas se traducen en errores 502, mientras que los tiempos de espera agotados generan un 504, sin recurrir a mecanismos de fallback silenciosos.",
       },
       {
-        title: "Revisión humana",
+        title: "Supervisión humana y trazabilidad",
         content:
-            "La propuesta original se conserva en triage_results y la decisión de la persona en triage_reviews. Así se puede auditar qué sugirió el sistema y qué se corrigió, y medir correcciones en el futuro.",
+            "El sistema conserva por separado la propuesta original del analizador en triage_results y la decisión de la persona en triage_reviews. Esta separación permite identificar qué recomendó el sistema, qué cambios introdujo la persona y cuál fue el resultado de la revisión. Además de facilitar la auditoría, establece una base para analizar futuras correcciones y evaluar el comportamiento del sistema.",
       },
       {
         title: "Evaluación y calidad",
         content:
-            "Un dataset de 8 incidencias etiquetadas a mano permite ejecutar una evaluación offline independiente de FastAPI. Los resultados del baseline fake se documentan como referencia de plumbing, no como calidad de un LLM. La CI instala el proyecto, ejecuta pytest y valida el Dockerfile; los tests nunca llaman a Ollama.",
+            "Incluye un dataset de 8 incidencias etiquetadas manualmente para ejecutar evaluaciones offline independientes de la API. Los resultados del baseline determinista se utilizan como referencia para comprobar el funcionamiento del pipeline, no como indicador de calidad de un modelo de lenguaje. El flujo de integración continua instala el proyecto, ejecuta las pruebas con pytest y valida el Dockerfile. Las pruebas automatizadas no requieren conexión con Ollama.",
       },
       {
         title: "Alcance y limitaciones",
         content:
-            "Es un MVP para portfolio: no incluye interfaz, autenticación, RAG ni agentes, y usa SQLite sin migraciones. El propio README lista como mejoras ampliar el dataset, añadir PostgreSQL y autenticación antes de producción.",
+            "Proyecto en desarrollo con alcance de MVP para portfolio, centrado en la arquitectura backend, la integración de IA y la revisión humana. La versión actual no incluye interfaz de usuario, autenticación, RAG ni agentes, y utiliza SQLite sin sistema de migraciones. Entre las posibles evoluciones documentadas se encuentran ampliar el dataset de evaluación e incorporar PostgreSQL y autenticación antes de plantear un despliegue en producción.",
       },
       {
         title: "Qué demuestra este proyecto",
         items: [
-          "Diseño de una API con estados explícitos, errores diferenciados y contratos validados.",
-          "Integración de un LLM local detrás de una abstracción, con evaluación y límites conocidos.",
-          "Revisión humana auditable en un flujo asistido por IA.",
+          "Diseño y desarrollo de APIs backend con separación de responsabilidades, gestión explícita de estados, tratamiento de errores y validación de contratos de datos.",
+          "Integración de modelos de lenguaje locales mediante abstracciones desacopladas, validación de respuestas y evaluación de resultados.",
+          "Implementación de flujos human-in-the-loop con trazabilidad entre las propuestas generadas por IA y las decisiones humanas.",
+          "Aplicación de prácticas de calidad de software mediante pruebas automatizadas, evaluación reproducible y CI.",
         ],
       },
     ],

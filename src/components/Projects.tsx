@@ -109,6 +109,100 @@ const projectsData: Project[] = [
     ],
   },
   {
+    id: 13,
+    title: "AI Incident Triage",
+    description:
+        "API para registrar incidencias técnicas, generar una propuesta de triaje estructurada y permitir que una persona la acepte o la corrija. MVP con separación entre entrada, análisis, persistencia y revisión humana.",
+    impact:
+        "API FastAPI con analizador intercambiable (baseline determinista u Ollama local), revisión humana auditable y evaluación offline sobre un dataset etiquetado.",
+    highlights: [
+      "Propuesta del sistema y revisión humana guardadas por separado para poder auditar qué cambió la persona.",
+      "Analizador intercambiable mediante el protocolo IncidentAnalyzer: FakeAnalyzer reproducible u OllamaAnalyzer con salida validada por Pydantic.",
+      "Evaluación offline con métricas de exactitud, errores y latencia, más CI con GitHub Actions y Docker.",
+    ],
+    technologies: [
+      "Python 3.11+",
+      "FastAPI",
+      "SQLAlchemy",
+      "SQLite",
+      "Pydantic",
+      "Ollama",
+      "Docker",
+      "GitHub Actions",
+      "pytest",
+    ],
+    technologyGroups: [
+      {
+        title: "Backend",
+        technologies: ["Python 3.11+", "FastAPI", "Pydantic"],
+      },
+      {
+        title: "Datos",
+        technologies: ["SQLAlchemy", "SQLite"],
+      },
+      {
+        title: "IA",
+        technologies: ["Ollama"],
+      },
+      {
+        title: "Calidad y entrega",
+        technologies: ["pytest", "Docker", "GitHub Actions"],
+      },
+    ],
+    links: [
+      {
+        label: "Ver código en GitHub",
+        url: "https://github.com/asobrados03/ai-incident-triage",
+        type: "github",
+      },
+    ],
+    showHighlightsInDialog: false,
+    details: [
+      {
+        title: "Flujo de triaje",
+        items: [
+          "POST /incidents registra la incidencia en SQLite con estado created.",
+          "POST /incidents/{id}/analysis ejecuta el analizador y guarda categoría, severidad, prioridad, información faltante y confianza.",
+          "PATCH /incidents/{id}/triage acepta o corrige la propuesta; el estado pasa a reviewed.",
+          "Estados: created → analyzing → analyzed → reviewed, o analysis_failed si el análisis falla.",
+        ],
+      },
+      {
+        title: "Arquitectura",
+        content:
+            "Los routers de FastAPI traducen HTTP y errores; IncidentService contiene las transiciones de estado y los casos de uso; IncidentRepository aísla la persistencia con SQLAlchemy. El analizador se define como protocolo, de modo que el caso de uso no depende del proveedor.",
+      },
+      {
+        title: "Analizador y modelo local",
+        content:
+            "FakeAnalyzer es el backend por defecto: determinista y útil para probar transiciones, no para medir la calidad de un LLM. OllamaAnalyzer es opcional, pide JSON estructurado con temperatura cero y valida la respuesta contra el esquema. Un proveedor no disponible o una respuesta inválida devuelven 502 y un timeout devuelve 504, sin fallback silencioso.",
+      },
+      {
+        title: "Revisión humana",
+        content:
+            "La propuesta original se conserva en triage_results y la decisión de la persona en triage_reviews. Así se puede auditar qué sugirió el sistema y qué se corrigió, y medir correcciones en el futuro.",
+      },
+      {
+        title: "Evaluación y calidad",
+        content:
+            "Un dataset de 8 incidencias etiquetadas a mano permite ejecutar una evaluación offline independiente de FastAPI. Los resultados del baseline fake se documentan como referencia de plumbing, no como calidad de un LLM. La CI instala el proyecto, ejecuta pytest y valida el Dockerfile; los tests nunca llaman a Ollama.",
+      },
+      {
+        title: "Alcance y limitaciones",
+        content:
+            "Es un MVP para portfolio: no incluye interfaz, autenticación, RAG ni agentes, y usa SQLite sin migraciones. El propio README lista como mejoras ampliar el dataset, añadir PostgreSQL y autenticación antes de producción.",
+      },
+      {
+        title: "Qué demuestra este proyecto",
+        items: [
+          "Diseño de una API con estados explícitos, errores diferenciados y contratos validados.",
+          "Integración de un LLM local detrás de una abstracción, con evaluación y límites conocidos.",
+          "Revisión humana auditable en un flujo asistido por IA.",
+        ],
+      },
+    ],
+  },
+  {
     id: 2,
     title: "Landing Page: Geotecnia y Servicios",
     description:
@@ -928,7 +1022,7 @@ interface ProjectsProps {
   variant: "featured" | "more";
 }
 
-const featuredProjectIds = [1, 2, 4];
+const featuredProjectIds = [1, 13, 2, 4];
 
 const Projects = ({ id, title, description, variant }: ProjectsProps) => {
   const projects =
@@ -989,11 +1083,17 @@ const Projects = ({ id, title, description, variant }: ProjectsProps) => {
             })}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {projects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
-            ))}
-          </div>
+            <div
+                className={
+                  projects.length === 4
+                      ? "grid grid-cols-1 gap-8 md:grid-cols-2"
+                      : "grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3"
+                }
+            >
+              {projects.map((project, index) => (
+                  <ProjectCard key={project.id} project={project} index={index} />
+              ))}
+            </div>
         )}
       </div>
     </section>

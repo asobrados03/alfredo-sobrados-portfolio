@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "title": "Alfredo Sobrados González | Backend Engineer · Java y Spring Boot",
+    "description": "Portfolio de Alfredo Sobrados González, ingeniero informático orientado al backend, las APIs REST, Java, Spring Boot, Node.js y la arquitectura de software. Explora sus proyectos y experiencia técnica.",
+    "ogTitle": "Alfredo Sobrados González | Backend Engineer",
+    "ogDescription": "APIs REST con Java, Spring Boot y Node.js, con foco en seguridad, arquitectura y mantenibilidad.",
+    "ogImageAlt": "Alfredo Sobrados González, Backend Engineer especializado en APIs REST",
+    "twitterTitle": "Alfredo Sobrados González | Backend Engineer",
+    "twitterDescription": "APIs REST con Java, Spring Boot y Node.js, con foco en seguridad, arquitectura y mantenibilidad.",
+    "twitterImageAlt": "Alfredo Sobrados González, Backend Engineer especializado en APIs REST"
+  },
+  "language": {
+    "label": "Cambiar idioma",
+    "menuLabel": "Idioma",
+    "es": "Español",
+    "en": "English",
+    "esShort": "ES",
+    "enShort": "EN"
+  },
+  "accessibility": {
+    "skipToContent": "Saltar al contenido principal",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "closeDialog": "Cerrar",
+    "mainSections": "Secciones principales",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "Enviar correo electrónico a Alfredo Sobrados",
+    "footerNavigation": "Navegación del pie de página",
+    "technologies": "Tecnologías",
+    "mainTechnologies": "Tecnologías principales",
+    "moreTechnologies_one": "{{formattedCount}} tecnología más",
+    "moreTechnologies_other": "{{formattedCount}} tecnologías más",
+    "technicalAchievements": "Logros técnicos de {{title}}",
+    "viewProjectDetails": "Ver detalles de {{title}}",
+    "projectLink": "{{label}}: {{title}}",
+    "technologiesByResponsibility": "Tecnologías por responsabilidad",
+    "projectLinks": "Enlaces del proyecto",
+    "viewProjectOnGithub": "Ver {{title}} en GitHub",
+    "heroProjects": "Ver proyectos destacados",
+    "heroContact": "Contactar con Alfredo Sobrados por correo electrónico"
+  },
+  "nav": {
+    "featuredProjects": "Proyectos destacados",
+    "capabilities": "Especialidades",
+    "about": "Sobre mí",
+    "moreProjects": "Otros proyectos y prácticas",
+    "contact": "Contacto",
+    "footerProjects": "Proyectos",
+    "footerMoreProjects": "Proyectos y prácticas",
+    "explore": "Explorar"
+  },
+  "hero": {
+    "eyebrow": "< software engineer />",
+    "title": "Backend Engineer enfocado en APIs seguras y software bien diseñado.",
+    "subtitle": "Desarrollo soluciones robustas, con atención al diseño, la seguridad y la calidad del código.",
+    "intro": "Me interesa crear software fácil de entender, probar y evolucionar, con decisiones técnicas que faciliten su mantenimiento a largo plazo.",
+    "viewProjects": "Ver proyectos destacados",
+    "contact": "Contactar"
+  },
+  "index": {
+    "featuredTitle": "Proyectos destacados",
+    "featuredDescription": "Tres casos para evaluar mi trabajo en backend, seguridad, arquitectura y desarrollo de producto.",
+    "moreTitle": "Más proyectos y prácticas",
+    "moreDescription": "Proyectos académicos y personales que completan mi experiencia en Java, desarrollo web, móvil y fundamentos de ingeniería del software."
+  },
+  "projects": {
+    "eyebrow": "< portfolio />",
+    "cardLabel": "<project />",
+    "technicalAchievements": "Logros técnicos",
+    "viewDetails": "Ver detalles",
+    "viewRepository": "Ver repositorio",
+    "viewCode": "Ver código",
+    "dialog": {
+      "technicalAchievements": "Logros técnicos",
+      "objective": "Objetivo",
+      "keyPoints": "Puntos clave",
+      "technologies": "Tecnologías",
+      "links": "Enlaces"
+    }
+  },
+  "about": {
+    "eyebrow": "< profile />",
+    "title": "Perfil profesional",
+    "paragraphs": [
+      "Soy ingeniero informático orientado al backend y al diseño de APIs. Me interesa construir servicios con una arquitectura clara, seguridad bien planteada y pruebas que faciliten su evolución.",
+      "He trabajado con Java, Spring Boot y Node.js, aplicando autenticación JWT, separación de responsabilidades y pruebas automatizadas. También he desarrollado una aplicación multiplataforma para Android e iOS junto con su API REST, iniciada durante mis prácticas y ampliada como Trabajo Fin de Grado, con más del 70 % de código compartido entre ambas plataformas.",
+      "Busco seguir creciendo como ingeniero backend, participar en decisiones técnicas y contribuir a desarrollar software fácil de mantener y mejorar."
+    ],
+    "focusTitle": "> Áreas de enfoque",
+    "focus": {
+      "backend": "Backend y APIs REST",
+      "mobile": "Móvil multiplataforma (KMP)",
+      "architecture": "Arquitectura y testing",
+      "web": "Desarrollo web y full-stack"
+    },
+    "linkedin": "Ver LinkedIn",
+    "email": "Contactar por correo"
+  },
+  "capabilities": {
+    "eyebrow": "< expertise />",
+    "title": "Qué aporto",
+    "description": "Combino desarrollo backend, arquitectura y pruebas para construir servicios fiables y fáciles de mantener. Mi experiencia multiplataforma me permite entender cómo se integra el backend con la aplicación que utiliza el usuario.",
+    "items": {
+      "backend": {
+        "title": "Backend",
+        "description": "Desarrollo APIs REST con lógica de negocio estructurada, acceso a datos y autenticación, buscando servicios seguros y fáciles de evolucionar.",
+        "technologies": "Java · Spring Boot · Node.js · Express.js"
+      },
+      "crossPlatform": {
+        "title": "Desarrollo multiplataforma",
+        "description": "Construyo aplicaciones para Android e iOS compartiendo lógica cuando tiene sentido y adaptando las interfaces a cada plataforma.",
+        "technologies": "KMM · Jetpack Compose · SwiftUI"
+      },
+      "quality": {
+        "title": "Calidad",
+        "description": "Aplico principios de diseño, pruebas automatizadas y herramientas de desarrollo para facilitar los cambios y detectar errores antes de llegar a producción.",
+        "technologies": "Arquitectura de software · Testing · Docker · CI/CD"
+      },
+      "ai": {
+        "title": "IA aplicada al desarrollo",
+        "description": "Utilizo asistentes de IA y agentes de programación para investigar soluciones, desarrollar funcionalidades, depurar errores y revisar código, manteniendo el criterio técnico y la responsabilidad sobre el resultado.",
+        "technologies": "ChatGPT · OpenAI Codex · Claude · Gemini · GitHub Copilot Agent · Grok"
+      }
+    }
+  },
+  "contact": {
+    "title": "¿Hablamos?",
+    "paragraphs": [
+      "Si buscas un perfil backend con experiencia en APIs, seguridad y arquitectura de software, puedes explorar mis proyectos para conocer cómo trabajo.",
+      "Si crees que mi perfil encaja con tu equipo, estaré encantado de hablar contigo."
+    ],
+    "linkedin": "Ver LinkedIn",
+    "github": "Ver GitHub",
+    "downloadCv": "Descargar CV"
+  },
+  "footer": {
+    "tagline": "Backend Engineer centrado en APIs seguras, arquitectura de software y código mantenible.",
+    "downloadCv": "Descargar CV",
+    "explore": "Explorar",
+    "contact": "Contacto",
+    "email": "Email",
+    "copyright": "© {{year}} Alfredo Sobrados González. Todos los derechos reservados.",
+    "builtWith": "Diseñado y desarrollado con React, TypeScript y Tailwind CSS."
+  }
+}

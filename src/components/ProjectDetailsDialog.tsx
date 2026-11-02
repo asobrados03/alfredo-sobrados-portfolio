@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,7 +37,8 @@ const BulletList = ({ items }: { items: string[] }) => (
 );
 
 const Links = ({ project, stacked = false }: { project: Project; stacked?: boolean }) => {
-    const links = getProjectLinks(project);
+    const { t } = useTranslation();
+    const links = getProjectLinks(project, t("projects.viewCode"));
 
     if (links.length === 0) {
         return null;
@@ -57,7 +59,7 @@ const Links = ({ project, stacked = false }: { project: Project; stacked?: boole
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label={`${link.label}: ${project.title}`}
+                            aria-label={t("accessibility.projectLink", { label: link.label, title: project.title })}
                         >
                             <LinkIcon className="h-4 w-4" aria-hidden="true" />
                             <span>{link.label}</span>
@@ -70,7 +72,8 @@ const Links = ({ project, stacked = false }: { project: Project; stacked?: boole
 };
 
 const ProjectDetailsDialog = ({ project, children }: ProjectDetailsDialogProps) => {
-    const links = getProjectLinks(project);
+    const { t } = useTranslation();
+    const links = getProjectLinks(project, t("projects.viewCode"));
     const hasStructuredLayout = Boolean(project.technologyGroups?.length || project.featuredMetric);
     const showHighlights = project.showHighlightsInDialog !== false;
 
@@ -104,19 +107,19 @@ const ProjectDetailsDialog = ({ project, children }: ProjectDetailsDialogProps) 
                         <div className="grid gap-7 lg:grid-cols-[minmax(0,1fr)_15rem] lg:items-start">
                             <div className="space-y-7">
                                 {showHighlights && project.highlights && project.highlights.length > 0 && (
-                                    <Section title="Logros técnicos">
+                                    <Section title={t("projects.dialog.technicalAchievements")}>
                                         <BulletList items={project.highlights} />
                                     </Section>
                                 )}
 
                                 {project.objectives && (
-                                    <Section title="Objetivo">
+                                    <Section title={t("projects.dialog.objective")}>
                                         <p className="text-sm leading-relaxed text-slate-400">{project.objectives}</p>
                                     </Section>
                                 )}
 
                                 {project.keyPoints && project.keyPoints.length > 0 && (
-                                    <Section title="Puntos clave">
+                                    <Section title={t("projects.dialog.keyPoints")}>
                                         <BulletList items={project.keyPoints} />
                                     </Section>
                                 )}
@@ -133,8 +136,8 @@ const ProjectDetailsDialog = ({ project, children }: ProjectDetailsDialogProps) 
 
                             <aside className="space-y-6 border-t border-slate-800 pt-5 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
                                 {project.technologyGroups && project.technologyGroups.length > 0 && (
-                                    <section aria-label="Tecnologías por responsabilidad" className="space-y-5">
-                                        <h3 className="text-sm font-semibold text-slate-200">Tecnologías</h3>
+                                    <section aria-label={t("accessibility.technologiesByResponsibility")} className="space-y-5">
+                                        <h3 className="text-sm font-semibold text-slate-200">{t("projects.dialog.technologies")}</h3>
                                         {project.technologyGroups.map((group) => (
                                             <div key={group.title} className="space-y-2">
                                                 <h4 className="text-xs font-medium uppercase tracking-wide text-slate-500">
@@ -151,15 +154,15 @@ const ProjectDetailsDialog = ({ project, children }: ProjectDetailsDialogProps) 
                                         ))}
                                     </section>
                                 )}
-                                <section aria-label="Enlaces del proyecto" className="space-y-3">
-                                    <h3 className="text-sm font-semibold text-slate-200">Enlaces</h3>
+                                <section aria-label={t("accessibility.projectLinks")} className="space-y-3">
+                                    <h3 className="text-sm font-semibold text-slate-200">{t("projects.dialog.links")}</h3>
                                     <Links project={project} stacked />
                                 </section>
                             </aside>
                         </div>
                     ) : (
                         <>
-                            <div className="flex flex-wrap gap-2" aria-label="Tecnologías">
+                            <div className="flex flex-wrap gap-2" aria-label={t("accessibility.technologies")}>
                                 {project.technologies.map((tech) => (
                                     <Badge key={tech} variant="secondary">
                                         {tech}
@@ -168,19 +171,19 @@ const ProjectDetailsDialog = ({ project, children }: ProjectDetailsDialogProps) 
                             </div>
 
                             {showHighlights && project.highlights && project.highlights.length > 0 && (
-                                <Section title="Logros técnicos">
+                                <Section title={t("projects.dialog.technicalAchievements")}>
                                     <BulletList items={project.highlights} />
                                 </Section>
                             )}
 
                             {project.objectives && (
-                                <Section title="Objetivo">
+                                <Section title={t("projects.dialog.objective")}>
                                     <p className="text-sm leading-relaxed text-slate-400">{project.objectives}</p>
                                 </Section>
                             )}
 
                             {project.keyPoints && project.keyPoints.length > 0 && (
-                                <Section title="Puntos clave">
+                                <Section title={t("projects.dialog.keyPoints")}>
                                     <BulletList items={project.keyPoints} />
                                 </Section>
                             )}

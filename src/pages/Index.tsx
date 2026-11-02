@@ -1,4 +1,4 @@
-
+import { useTranslation } from "react-i18next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
@@ -8,6 +8,8 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="relative min-h-screen bg-[#0B0F17] text-slate-100 selection:bg-cyan-400 selection:text-slate-950">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -20,23 +22,23 @@ const Index = () => {
         href="#main-content"
         className="sr-only absolute left-4 top-4 z-50 rounded-md bg-primary px-4 py-2 text-primary-foreground focus:not-sr-only focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
       >
-        Saltar al contenido principal
+        {t("accessibility.skipToContent")}
       </a>
       <Header />
       <main id="main-content" className="flex-grow" tabIndex={-1}>
         <Hero />
         <Projects
           id="projects"
-          title="Proyectos destacados"
-          description="Tres casos para evaluar mi trabajo en backend, seguridad, arquitectura y desarrollo de producto."
+          title={t("index.featuredTitle")}
+          description={t("index.featuredDescription")}
           variant="featured"
         />
         <Capabilities />
         <About />
         <Projects
           id="more-projects"
-          title="Más proyectos y prácticas"
-          description="Proyectos académicos y personales que completan mi experiencia en Java, desarrollo web, móvil y fundamentos de ingeniería del software."
+          title={t("index.moreTitle")}
+          description={t("index.moreDescription")}
           variant="more"
         />
         <Contact />

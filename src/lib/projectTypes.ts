@@ -46,7 +46,7 @@ export interface Project {
 export const CARD_MAX_TECHNOLOGIES = 5;
 export const CARD_MAX_HIGHLIGHTS = 3;
 
-export const getProjectLinks = (project: Project): ProjectLink[] => {
+export const getProjectLinks = (project: Project, fallbackLabel: string): ProjectLink[] => {
     if (project.links?.length) {
         return project.links;
     }
@@ -55,7 +55,7 @@ export const getProjectLinks = (project: Project): ProjectLink[] => {
         return [];
     }
 
-    return [{ label: "Ver código", url: project.githubUrl, type: "github" }];
+    return [{ label: fallbackLabel, url: project.githubUrl, type: "github" }];
 };
 
 export const getLinkIcon = (link: ProjectLink) => {

@@ -1,8 +1,10 @@
-
 import { ArrowDown, Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   const scrollToProjects = () => {
     const projectsSection = document.getElementById("projects");
 
@@ -38,23 +40,22 @@ const Hero = () => {
             style={{ animationDelay: "0.2s" }}
         >
           <p className="mb-4 font-mono text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">
-            &lt; software engineer /&gt;
+            {t("hero.eyebrow")}
           </p>
 
           <h1
               id="hero-title"
               className="mb-6 text-3xl font-bold leading-tight text-slate-100 sm:text-4xl md:text-6xl"
           >
-            Backend Engineer enfocado en APIs seguras y software bien diseñado.
+            {t("hero.title")}
           </h1>
 
           <p className="mx-auto mb-5 max-w-3xl text-lg font-semibold leading-relaxed text-slate-200 sm:text-xl">
-            Desarrollo soluciones robustas, con atención al diseño, la seguridad y la calidad del código.
+            {t("hero.subtitle")}
           </p>
 
           <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
-            Me interesa crear software fácil de entender, probar y evolucionar,
-            con decisiones técnicas que faciliten su mantenimiento a largo plazo.
+            {t("hero.intro")}
           </p>
 
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
@@ -62,9 +63,9 @@ const Hero = () => {
                 onClick={scrollToProjects}
                 className="group bg-gradient-to-r from-cyan-500 to-blue-600 font-semibold text-slate-950 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]"
                 size="lg"
-                aria-label="Ver proyectos destacados"
+                aria-label={t("accessibility.heroProjects")}
             >
-              Ver proyectos destacados
+              {t("hero.viewProjects")}
               <ArrowDown
                   className="ml-2 h-4 w-4 motion-safe:group-hover:animate-bounce"
                   aria-hidden="true"
@@ -74,9 +75,9 @@ const Hero = () => {
             <Button asChild variant="outline" size="lg">
               <a
                   href="mailto:alfredo.sobrados.gonzalez@gmail.com"
-                  aria-label="Contactar con Alfredo Sobrados por correo electrónico"
+                  aria-label={t("accessibility.heroContact")}
               >
-                Contactar
+                {t("hero.contact")}
                 <Mail className="ml-2 h-4 w-4" aria-hidden="true" />
               </a>
             </Button>

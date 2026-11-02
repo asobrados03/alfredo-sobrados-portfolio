@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,10 +21,12 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
+  const { t, i18n } = useTranslation();
   const animationDelay = `${0.1 + index * 0.08}s`;
-  const projectLinks = getProjectLinks(project);
+  const projectLinks = getProjectLinks(project, t("projects.viewCode"));
   const visibleTechnologies = project.technologies.slice(0, CARD_MAX_TECHNOLOGIES);
   const hiddenTechnologies = project.technologies.length - visibleTechnologies.length;
+  const formattedCount = new Intl.NumberFormat(i18n.resolvedLanguage).format(hiddenTechnologies);
   const highlights = project.highlights?.slice(0, CARD_MAX_HIGHLIGHTS);
   const showDetails = hasMoreInfo(project);
 
@@ -46,28 +49,31 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           style={{ animationDelay }}
       >
         <CardHeader className="space-y-3">
-          <p className="font-mono text-xs uppercase tracking-widest text-cyan-400/80">&lt;project /&gt;</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-cyan-400/80">{t("projects.cardLabel")}</p>
           <CardTitle className="text-xl leading-tight text-slate-100 transition-colors group-hover:text-cyan-300">{project.title}</CardTitle>
           <p className="text-sm leading-relaxed text-slate-400">
             {project.impact ?? project.description}
           </p>
-          <div className="flex flex-wrap gap-2" aria-label="Tecnologías principales">
+          <div className="flex flex-wrap gap-2" aria-label={t("accessibility.mainTechnologies")}>
             {visibleTechnologies.map((tech) => (
                 <Badge key={tech} variant="secondary">
                   {tech}
                 </Badge>
             ))}
             {hiddenTechnologies > 0 && (
-                <Badge variant="outline" aria-label={`${hiddenTechnologies} tecnologías más`}>
-                  +{hiddenTechnologies}
+                <Badge
+                    variant="outline"
+                    aria-label={t("accessibility.moreTechnologies", { count: hiddenTechnologies, formattedCount })}
+                >
+                  +{formattedCount}
                 </Badge>
             )}
           </div>
         </CardHeader>
         <CardContent className="flex-grow">
           {highlights && highlights.length > 0 && (
-              <section aria-label={`Logros técnicos de ${project.title}`}>
-                <h4 className="mb-2 text-sm font-semibold text-slate-200">Logros técnicos</h4>
+              <section aria-label={t("accessibility.technicalAchievements", { title: project.title })}>
+                <h4 className="mb-2 text-sm font-semibold text-slate-200">{t("projects.technicalAchievements")}</h4>
                 <ul className="space-y-2 text-sm leading-relaxed text-slate-400">
                   {highlights.map((highlight) => (
                       <li key={highlight} className="flex gap-2">
@@ -86,9 +92,9 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                     variant="ghost"
                     size="sm"
                     className="-ml-3 min-h-11 text-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-300"
-                    aria-label={`Ver detalles de ${project.title}`}
+                    aria-label={t("accessibility.viewProjectDetails", { title: project.title })}
                 >
-                  Ver detalles
+                  {t("projects.viewDetails")}
                 </Button>
               </ProjectDetailsDialog>
             </div>
@@ -104,7 +110,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-label={`${link.label}: ${project.title}`}
+                          aria-label={t("accessibility.projectLink", { label: link.label, title: project.title })}
                       >
                         <LinkIcon className="h-4 w-4" aria-hidden="true" />
                         <span className="whitespace-nowrap">{link.label}</span>

@@ -1,0 +1,676 @@
+{
+  "items": {
+    "1": {
+      "title": "Human Perform Platform",
+      "description": "Cross-platform application for a sports centre, developed during my internship and extended as my final degree project. It includes Android and iOS apps and its own REST API.",
+      "impact": "Cross-platform application for a sports centre, with its own REST API and over 70% of the code shared between Android and iOS.",
+      "featuredMetric": {
+        "value": "+70%",
+        "label": "of the code shared between Android and iOS"
+      },
+      "highlights": [
+        "Over 70% of the code shared between Android and iOS.",
+        "Authenticated session with JWT and encrypted credential storage.",
+        "Independent REST API with responsibilities separated by layer."
+      ],
+      "technologyGroups": {
+        "mobile": "Mobile app",
+        "backend": "Backend",
+        "dataSecurity": "Data and security",
+        "architecture": "Architecture"
+      },
+      "links": {
+        "appCode": "App code",
+        "apiCode": "API code",
+        "thesis": "Read thesis"
+      },
+      "details": [
+        {
+          "title": "The challenge",
+          "content": "Share the necessary logic between Android and iOS without giving up platform-specific interfaces, while maintaining an independent REST API for data and server-side logic."
+        },
+        {
+          "title": "Implementation: mobile app",
+          "items": [
+            "Business logic and networking are shared in the KMP module.",
+            "Interfaces are adapted to each platform with Jetpack Compose and SwiftUI.",
+            "Profiles with editing and image upload, bookings, favourites and account operations.",
+            "Material Design 3 on Android and dark mode."
+          ]
+        },
+        {
+          "title": "Implementation: backend and security",
+          "items": [
+            "Independent REST API organised into routes, controllers, services and repositories.",
+            "Authentication with access token, refresh token and authorisation middleware.",
+            "MariaDB persistence and file management for photos and documents.",
+            "Tokens and user data persisted in encrypted form on the client."
+          ]
+        },
+        {
+          "title": "Architecture decisions",
+          "content": "Kotlin Multiplatform concentrates shared logic while leaving presentation to each platform. In the API, routes and controllers handle HTTP, services encapsulate business rules and repositories isolate persistence and integrations. This separation reduces coupling and allows each layer to evolve more independently."
+        },
+        {
+          "title": "What this project demonstrates",
+          "items": [
+            "REST API design with authentication and non-trivial business rules.",
+            "Practical application of layered architecture and code sharing across platforms.",
+            "The ability to connect client, backend, persistence and security in a maintainable solution."
+          ]
+        }
+      ]
+    },
+    "13": {
+      "title": "AI Incident Triage",
+      "description": "Backend API for recording technical incidents, generating structured triage proposals through automated analysis and allowing a person to review, accept or correct them. MVP in development with a modular architecture that separates data ingestion, analysis, persistence and human oversight.",
+      "impact": "API built with FastAPI that integrates interchangeable analysers (a deterministic baseline or a local Ollama model), auditable human review and offline evaluation on a labelled incident dataset.",
+      "highlights": [
+        "Separation between system-generated proposals and human decisions, preserving traceability and making corrections auditable.",
+        "Interchangeable analysis architecture through the IncidentAnalyzer protocol: FakeAnalyzer for deterministic, reproducible runs, or OllamaAnalyzer to integrate local models with structured responses validated through Pydantic.",
+        "Offline evaluation using accuracy metrics, error analysis and latency, together with test automation and validation through GitHub Actions and Docker."
+      ],
+      "technologyGroups": {
+        "backend": "Backend",
+        "data": "Data",
+        "ai": "Artificial intelligence",
+        "quality": "Quality and deployment"
+      },
+      "links": {
+        "code": "View code on GitHub"
+      },
+      "details": [
+        {
+          "title": "Triage flow",
+          "items": [
+            "POST /incidents records a new incident in SQLite and initialises it with the created status.",
+            "POST /incidents/{id}/analysis runs the analyser and stores the triage proposal: category, severity, priority, missing information and confidence level.",
+            "PATCH /incidents/{id}/triage allows the generated proposal to be accepted or corrected, recording the human review and updating the status to reviewed.",
+            "Explicit state management: created → analyzing → analyzed → reviewed, with the analysis_failed status for cases where analysis cannot be completed."
+          ]
+        },
+        {
+          "title": "Backend architecture",
+          "content": "The application follows a layered architecture with distinct responsibilities. FastAPI routers handle HTTP requests and error translation; IncidentService centralises use cases and state transitions; and IncidentRepository encapsulates data access through SQLAlchemy. Analysis is abstracted behind a protocol, preventing business logic from depending on a specific provider."
+        },
+        {
+          "title": "AI integration and local models",
+          "content": "The system can use different analysers through a common interface. FakeAnalyzer is the default analyser: it provides deterministic, reproducible results for testing the application flow, but it is not suitable for measuring LLM quality. Optionally, OllamaAnalyzer integrates local models, requests responses in structured JSON format with zero temperature and validates the results with Pydantic schemas. Provider availability errors and invalid responses are translated into 502 errors, while timeouts produce a 504, without silent fallback mechanisms."
+        },
+        {
+          "title": "Human oversight and traceability",
+          "content": "The system stores the analyser's original proposal in triage_results separately from the person's decision in triage_reviews. This separation makes it possible to identify what the system recommended, what changes the person made and what the outcome of the review was. As well as supporting auditing, it provides a basis for analysing future corrections and evaluating system behaviour."
+        },
+        {
+          "title": "Evaluation and quality",
+          "content": "It includes a dataset of 8 manually labelled incidents for running offline evaluations independently of the API. The deterministic baseline results are used as a reference to verify that the pipeline works, not as an indicator of language model quality. The continuous integration workflow installs the project, runs the tests with pytest and validates the Dockerfile. Automated tests do not require a connection to Ollama."
+        },
+        {
+          "title": "Scope and limitations",
+          "content": "A project in development with an MVP scope for a portfolio, focused on backend architecture, AI integration and human review. The current version does not include a user interface, authentication, RAG or agents, and uses SQLite without a migration system. Documented possible evolutions include expanding the evaluation dataset and adding PostgreSQL and authentication before considering a production deployment."
+        },
+        {
+          "title": "What this project demonstrates",
+          "items": [
+            "Design and development of backend APIs with separation of concerns, explicit state management, error handling and data contract validation.",
+            "Integration of local language models through decoupled abstractions, response validation and result evaluation.",
+            "Implementation of human-in-the-loop workflows with traceability between AI-generated proposals and human decisions.",
+            "Application of software quality practices through automated testing, reproducible evaluation and CI."
+          ]
+        }
+      ]
+    },
+    "2": {
+      "title": "Landing Page: Geotechnics and Services",
+      "description": "Professional landing page to present geotechnical services, with a contact form connected to validation, anti-spam protection, email notifications and request archiving.",
+      "impact": "Services website with a contact form, data validation, anti-spam protection and automated notification delivery.",
+      "highlights": [
+        "Shared validation: the same Zod schema runs on both client and server.",
+        "Two-layer anti-spam: a honeypot in the form and reCAPTCHA v3 in the serverless function.",
+        "Reliable notifications: Resend sends an internal alert and an automatic reply to the contact.",
+        "Secondary archive: Supabase stores the request without blocking the response if the database fails."
+      ],
+      "technologyGroups": {
+        "frontend": "Frontend",
+        "forms": "Forms and validation",
+        "backend": "Backend and services",
+        "testing": "Testing"
+      },
+      "links": {
+        "code": "View code",
+        "website": "Visit website"
+      },
+      "details": [
+        {
+          "title": "Contact flow",
+          "items": [
+            "1. The user enters their name, email, optional company and message.",
+            "2. The client discards submissions that fill in the honeypot and validates the data with Zod.",
+            "3. The POST /api/contact function validates the input again and verifies the reCAPTCHA v3 token.",
+            "4. Resend sends the internal alert and the automatic confirmation to the contact.",
+            "5. After the emails are sent, the request is archived in Supabase in a non-blocking way.",
+            "6. The form displays a success message or the error returned by the server."
+          ]
+        },
+        {
+          "title": "Implementation and technical decisions",
+          "content": "The landing page separates the interface from the Vercel serverless endpoint. Zod keeps the same format and length rules on client and server; the honeypot filters out simple automation before the request is made, and reCAPTCHA adds a second check on the backend."
+        },
+        {
+          "title": "Services and error handling",
+          "content": "The endpoint returns distinct errors for disallowed methods, invalid data, unconfigured or failed reCAPTCHA and Resend issues. If Supabase is not configured, times out or the insert fails, it logs the problem and preserves the correct response when the emails have already been sent."
+        },
+        {
+          "title": "Testing and frontend",
+          "content": "Vitest covers disallowed methods, validation, reCAPTCHA, Resend errors and best-effort archiving in Supabase. On the frontend, lazy image loading and code splitting remain as presentation optimisations documented by the project."
+        }
+      ]
+    },
+    "10": {
+      "title": "Banana Bank — hackathon experience",
+      "description": "Personal case study on a fictional banking application with an AI assistant. It designs sensitive transfers with explicit confirmation, controlled retries and visible evidence.",
+      "impact": "AI banking case study focused on confirmable transfers, idempotency and traceability.",
+      "highlights": [
+        "A proposal that can be reviewed before executing a transfer.",
+        "A reusable reference for handling retries and ambiguous responses.",
+        "Policies compared against sources with visible dates."
+      ],
+      "technologyGroups": {
+        "frontend": "Frontend",
+        "backend": "Backend and persistence",
+        "ai": "AI",
+        "quality": "Quality"
+      },
+      "links": {
+        "repository": "View repository"
+      },
+      "details": [
+        {
+          "title": "Context",
+          "content": "Personal project developed during a T·dots technical challenge on a fictional banking application with an AI assistant, test data and a banking simulator. It is a case study: it does not represent a production banking system and does not redistribute the source code of the base application."
+        },
+        {
+          "title": "Sensitive transfers",
+          "items": [
+            "The first action creates a proposal with the source, recipient, amount and reference for review.",
+            "The transfer is only executed after that proposal is explicitly confirmed.",
+            "Each proposal expires after 15 minutes and cannot be used twice."
+          ]
+        },
+        {
+          "title": "Idempotency and recovery",
+          "content": "Retries reuse the same banking reference so that an ambiguous or lost response is not treated as a new operation. The interface blocks repeated clicks during processing, and the case study validates the behaviour with simulator failure scenarios; the guarantee described applies only to that flow and simulated environment."
+        },
+        {
+          "title": "Policies with evidence",
+          "content": "For questions about changes to terms, the flow identifies the product, deterministically selects the current and historical versions and preserves their sources and dates. This allows the assistant's answer to distinguish which information is current and where it comes from."
+        },
+        {
+          "title": "Interface reliability",
+          "content": "When returning from the history to a new conversation, the state resets correctly and only valid message collections are accepted, avoiding treating an empty conversation as a restored history."
+        },
+        {
+          "title": "What this project demonstrates",
+          "items": [
+            "Design of approval flows for sensitive operations.",
+            "Handling of retries, expiration and ambiguous states in a simulator.",
+            "AI integration with visible sources and dates instead of answers without provenance.",
+            "Validation of business invariants and failure scenarios through automated testing."
+          ]
+        }
+      ]
+    },
+    "11": {
+      "title": "Energy Deficit",
+      "description": "Python CLI tool that calculates the additional energy needed to cover Spanish electricity demand when wind generation is the only available source.",
+      "impact": "CLI tool that calculates, in MWh, the additional energy for each interval when wind is the only available generation.",
+      "highlights": [
+        "Traceable reconstruction of gaps through linear interpolation.",
+        "Explicit handling of the CET/CEST daylight-saving change in UTC.",
+        "Export of auditable results by interval, hour and day."
+      ],
+      "technologyGroups": {
+        "language": "Language",
+        "data": "Data",
+        "cli": "CLI and time",
+        "testing": "Testing"
+      },
+      "links": {
+        "code": "View code on GitHub"
+      },
+      "details": [
+        {
+          "title": "Calculation model",
+          "content": "Input demand represents energy consumed in kWh during each five-minute interval. The ESIOS/REE API provides average wind power in MW for those same intervals; it is converted to MWh with MW × 5 / 60 and demand with kWh / 1000. The result is max(demand - wind, 0): additional energy under the assumption that only wind generation exists, not a complete assessment of the electricity system."
+        },
+        {
+          "title": "Missing data and traceability",
+          "content": "The tool fills empty cells or missing five-minute marks between valid data using linear interpolation. It saves the resulting series to demanda_preparada.csv and marks each estimated value with is_interpolated=true; it does not present those reconstructions as original measurements."
+        },
+        {
+          "title": "Time and daylight-saving changes",
+          "content": "Demand timestamps are read in Europe/Madrid, validated and normalised to UTC before aligning and aggregating the series. The local grid explicitly excludes the non-existent hours of the CET/CEST change through a round-trip conversion; UTC then provides a continuous timeline for validating five-minute intervals. Hourly outputs therefore reflect the real hours in the range."
+        },
+        {
+          "title": "Auditable outputs",
+          "items": [
+            "deficit_cinco_minutos.csv preserves the result calculated for each interval.",
+            "deficit_horario.csv and deficit_diario.csv aggregate energy in UTC; the first day may be partial.",
+            "deficit_minutal.csv splits each five-minute block into five equal parts: this is a conventional disaggregation, not a new measurement.",
+            "The deficit CSV files expose utc_datetime and additional_energy_mwh, with rounding to two decimal places only when writing."
+          ]
+        },
+        {
+          "title": "Architecture",
+          "content": "The domain concentrates the calculation, validation of regular series and aggregations. io.py reads demand, reconstructs gaps and writes CSV; esios.py encapsulates authentication and downloading of wind indicator 551; cli.py coordinates arguments, execution and messages. The separation avoids mixing external integration with calculation rules."
+        },
+        {
+          "title": "Quality and testing",
+          "content": "The unittest suite covers unit conversions, non-negative deficit, energy preservation when regrouping, Spanish decimal formatting, gaps, daylight-saving changes and rejection of misaligned or discontinuous series. The integration test runs the full CLI with a simulated ESIOS response and checks the four outputs and demanda_preparada.csv, without network calls or a real token."
+        }
+      ]
+    },
+    "3": {
+      "title": "Personal Finance",
+      "description": "Android application for recording income and expenses, organising budgets and viewing financial statistics. It is the final project for the Mobile Software Platforms course.",
+      "impact": "Android personal finance management application with Room, Jetpack Compose and an MVVM structure with Repository.",
+      "highlights": [
+        "Recording and management of income and expense transactions.",
+        "Budgets organised by category, month and year.",
+        "Financial summary with balance, totals and statistics."
+      ],
+      "technologyGroups": {
+        "android": "Android",
+        "dataArchitecture": "Data and architecture",
+        "tools": "Tools"
+      },
+      "links": {
+        "code": "View code on GitHub"
+      },
+      "details": [
+        {
+          "title": "Main features",
+          "items": [
+            "Transactions record type, amount, category, date and description, and can be managed from the application.",
+            "Budgets are created, edited and deleted by category, month and year to relate the limit to accumulated spending.",
+            "The main screen summarises the balance and total income and expenses.",
+            "Statistics and charts let users review their financial situation based on the recorded data."
+          ]
+        },
+        {
+          "title": "Technical decisions",
+          "content": "The MVVM architecture separates state and presentation logic from the Compose screens. ViewModels coordinate operations and Repositories encapsulate data access, avoiding direct coupling between the interface and persistence."
+        },
+        {
+          "title": "Local persistence",
+          "content": "Room organises the local database through entities and DAOs for transactions, categories and budgets. Queries expose reactive data with Flow, which ViewModels can observe and translate into UI state."
+        },
+        {
+          "title": "What this project demonstrates",
+          "items": [
+            "Building a native Android interface with Jetpack Compose and Material Design 3.",
+            "Modelling relationships between transactions, categories and budgets.",
+            "Practical application of MVVM and Repository in a complete academic application."
+          ]
+        }
+      ]
+    },
+    "4": {
+      "title": "HotelManagementAPI",
+      "description": "REST API for managing hotel operations, built with Java and Spring Boot on a hexagonal architecture with direct JDBC persistence.",
+      "impact": "Hotel API with hexagonal architecture, JDBC without an ORM, JWT security and automated testing.",
+      "highlights": [
+        "Hexagonal architecture separating domain, application and adapters.",
+        "JDBC without an ORM to keep explicit control over SQL queries.",
+        "Role-based security and integration tests with Testcontainers."
+      ],
+      "technologyGroups": {
+        "backend": "Backend",
+        "dataSecurity": "Data and security",
+        "testing": "Testing",
+        "tooling": "Tooling and integration"
+      },
+      "links": {
+        "code": "View code on GitHub"
+      },
+      "details": [
+        {
+          "title": "Motivation",
+          "content": "It began as an exercise from the Skool DeHaroHub community. When the community became inactive, I decided to continue and publish it on my own to deepen my knowledge of REST APIs, JDBC and maintainable architecture."
+        },
+        {
+          "title": "Features",
+          "items": [
+            "CRUD for customers, rooms, bookings, payments and administrators.",
+            "Room availability queries with caching and invalidation when bookings or statuses change.",
+            "Publishing of booking events to decouple notification delivery.",
+            "Interactive endpoint documentation through Swagger/OpenAPI."
+          ]
+        },
+        {
+          "title": "Architecture and persistence",
+          "items": [
+            "Controllers and DTOs act as inbound adapters; use cases coordinate application logic.",
+            "The domain defines entities and repository ports without depending on infrastructure.",
+            "Persistence adapters implement those ports with JDBC and explicit SQL queries on MariaDB."
+          ]
+        },
+        {
+          "title": "Security and reliability",
+          "content": "Spring Security protects the endpoints through JWT and role-based authorisation. The test suite combines unit and integration tests with JUnit 5, Mockito and Testcontainers to validate logic, security and MariaDB access in reproducible scenarios."
+        },
+        {
+          "title": "System evolution",
+          "content": "Redis is used to cache room availability. RabbitMQ and the independent notification-worker module decouple the delivery of booking confirmations and allow retries to be managed through recovery queues."
+        },
+        {
+          "title": "What this project demonstrates",
+          "items": [
+            "REST API design with business rules, persistence and role-based access control.",
+            "The ability to apply hexagonal architecture without hiding infrastructure decisions.",
+            "Use of automated testing to validate isolated components and integrations with external services."
+          ]
+        }
+      ]
+    },
+    "12": {
+      "title": "PetAdopt",
+      "description": "Enterprise web application developed as a team to make pet adoption easier and support communication between shelters and customers.",
+      "impact": "Academic team project using Java EE packaged as a WAR, JPA persistence on PostgreSQL, a PrimeFaces interface and JDBC realm authentication configuration.",
+      "highlights": [
+        "Adoption flow focused on communication between shelters and customers.",
+        "Entity persistence through JPA with EclipseLink.",
+        "QR code and barcode generation for the web application."
+      ],
+      "technologyGroups": {
+        "web": "Web application",
+        "dataAccess": "Data and access",
+        "build": "Build and utilities"
+      },
+      "links": {
+        "code": "View code on GitHub"
+      },
+      "details": [
+        {
+          "title": "Objective and scope",
+          "content": "PetAdopt is an academic team project that proposes an enterprise application to connect shelter needs with people interested in adopting. The repository includes environment configuration, the schema and the initial data required to run the project."
+        },
+        {
+          "title": "Implementation",
+          "items": [
+            "The project is built as a WAR file with Maven on Java EE 7.",
+            "Persistence is configured with JPA and EclipseLink on PostgreSQL, with entities stored in a relational database.",
+            "PrimeFaces provides the web interface components.",
+            "QRGen and Barcode4j cover the QR code and barcode generation included in the project."
+          ]
+        },
+        {
+          "title": "Access and configuration",
+          "content": "The README documents a JDBC realm to integrate authentication with the user and group tables through JNDI. Configuration requires setting up the realm and loading the included SQL script; it is not presented as an application deployed in production."
+        },
+        {
+          "title": "What this project demonstrates",
+          "items": [
+            "Collaborative development of a Java EE web application with persistence and interface components.",
+            "Integration of container services, JPA and role-based access configuration.",
+            "Organisation of a Maven project aimed at web deployment in WAR format."
+          ]
+        }
+      ]
+    },
+    "5": {
+      "title": "Convention Center",
+      "description": "Academic Java system built as a team to coordinate spaces, bookings, orders and the product menu of a convention centre, along with revenue calculations.",
+      "impact": "Collaborative academic Java project applying OOP and design patterns to spaces, bookings, products and financial calculations.",
+      "highlights": [
+        "Management of available and unavailable spaces with optional equipment.",
+        "Bookings with orders and access to the associated information.",
+        "Hierarchical menu of sections and products with revenue calculations."
+      ],
+      "technologyGroups": {
+        "language": "Language and environment",
+        "design": "Design"
+      },
+      "links": {
+        "code": "View code on GitHub"
+      },
+      "details": [
+        {
+          "title": "Main features",
+          "items": [
+            "Spaces can be created, checked for availability and have their status or prices updated.",
+            "Bookings associate a space, a date and a customer; they also allow orders to be added, viewed and removed.",
+            "The menu organises sections and products, with operations to add items, change their availability and view their information.",
+            "The system calculates the revenue of a space and the centre's total revenue for a date range."
+          ]
+        },
+        {
+          "title": "Object-oriented design",
+          "content": "The state of spaces, bookings, costs and products is encapsulated in their classes. Inheritance appears in the decorator equipment, which keeps the Space interface and extends its behaviour; this allows revenue to be calculated and properties to be queried polymorphically."
+        },
+        {
+          "title": "Patterns identified",
+          "items": [
+            "Singleton in Centro_Convenciones to centralise the instance that manages spaces, bookings and the menu.",
+            "Decorator in Espacio and its decorators to add music, ornaments or stages without modifying the base class.",
+            "Composite in Carta, Seccion and Producto to treat composite sections and products within a common structure.",
+            "Strategy in menus and submenus to separate interaction alternatives from domain management."
+          ]
+        },
+        {
+          "title": "Persistence and scope",
+          "content": "The program serialises objects to a binary .dat file to preserve spaces, bookings and products between sessions. It is an academic OOP project; it is not presented as a commercial system or as a solution with an external database."
+        },
+        {
+          "title": "What this project demonstrates",
+          "items": [
+            "Collaborative modelling of relationships between resources, bookings and orders.",
+            "Use of composition, inheritance and polymorphism to extend domain behaviour.",
+            "Selection of patterns according to the responsibility each part of the system must address."
+          ]
+        }
+      ]
+    },
+    "6": {
+      "title": "Notice Notifier",
+      "description": "Academic web application that lets teaching staff publish notices for all students or specific students, and lets each profile view the information relevant to them.",
+      "impact": "PHP application in a virtualised LAMP environment for publishing, importing and filtering notices according to user profile.",
+      "highlights": [
+        "Publication of individual or group notices by teaching staff.",
+        "Viewing and filtering of notices for students and teachers.",
+        "Importing notices from CSV files with structure validation."
+      ],
+      "technologyGroups": {
+        "interface": "Interface",
+        "server": "Server",
+        "interaction": "Interaction",
+        "environment": "Environment"
+      },
+      "links": {
+        "code": "View code on GitHub"
+      },
+      "details": [
+        {
+          "title": "Usage flow",
+          "content": "Teaching staff sign in, register students and publish a notice with a subject, brief content and recipient. They can direct it to all students or to a specific person; the system records the relationship between the notice and its recipients so that each profile can later view its own index."
+        },
+        {
+          "title": "Viewing and managing notices",
+          "items": [
+            "Students view received notices and can filter them by read or unread status.",
+            "Teaching staff view published notices and can distinguish between group and individual communications.",
+            "Content is first shown as a summary, and a dedicated view opens to read the full notice.",
+            "The application includes student registration and password reset."
+          ]
+        },
+        {
+          "title": "CSV import and validation",
+          "content": "Teaching staff can load notices from a semicolon-separated CSV file. PHP checks the file type, size and expected headers before saving it; the application then reads the imported rows to prepare them for processing."
+        },
+        {
+          "title": "Implementation and environment",
+          "content": "HTML and CSS structure and present the screens; PHP coordinates sessions, forms and MySQL queries; JavaScript validates form input and limits in the browser. jQuery adds AJAX filtering to the notice index and reads the selected file. The project was prepared to run on an Ubuntu machine with Apache, MySQL and PHP in a virtualised LAMP environment."
+        },
+        {
+          "title": "What this project demonstrates",
+          "items": [
+            "Building a traditional web flow with profiles and differentiated operations.",
+            "Integration between forms, PHP sessions, MySQL queries and partial updates with AJAX.",
+            "Preparation of a runtime environment and a data import with a defined format."
+          ]
+        }
+      ]
+    },
+    "7": {
+      "title": "Data Structures",
+      "description": "Collection of academic Java assignments completed as a team for the Programming and Data Structures course, with custom implementations of lists, linear ADTs and binary search trees.",
+      "impact": "Collaborative academic Java work to organise data with lists, stacks, queues and trees, and solve operations using algorithms on custom structures.",
+      "highlights": [
+        "Multi-list to manage trips for a bus company.",
+        "Stack and queue implementations using arrays and linked lists.",
+        "Generic binary search tree with insertion, search, deletion and traversals."
+      ],
+      "technologyGroups": {
+        "language": "Language",
+        "concepts": "Concepts"
+      },
+      "links": {
+        "code": "Explore exercises on GitHub"
+      },
+      "details": [
+        {
+          "title": "Description",
+          "content": "Repository of laboratory assignments completed as a team in Java for the Programming and Data Structures course. Each exercise starts from a specific problem and requires modelling the information, defining the structure's operations and connecting them to a test program."
+        },
+        {
+          "title": "Assignments and implemented structures",
+          "items": [
+            "Managing trips for a bus company through a multi-list: an ordered generic doubly linked list and a generic linked list to relate the information.",
+            "Stack ADT and Queue ADT with two implementation approaches: resizable arrays and linked nodes.",
+            "Generic Binary Search Tree ADT, with insertion with or without duplicates, retrieval, deletion and tree traversals.",
+            "The BST assignment also includes a variant for integers with a balanced insertion operation from an array."
+          ]
+        },
+        {
+          "title": "Operations and algorithmic reasoning",
+          "content": "The assignments work with operations such as inserting, searching, deleting, retrieving extremes and traversing structures. The multi-list preserves order when inserting elements; the BST uses the relationship between lower and higher values to locate elements and build pre-order, in-order and post-order traversals."
+        },
+        {
+          "title": "Technical approach",
+          "items": [
+            "Design of abstract types through interfaces to separate the operations of a stack, queue or tree from their implementations.",
+            "Use of generics and Comparable to reuse structures with different orderable data types.",
+            "Practice with references, nodes, links and insertion or deletion cases in dynamic structures.",
+            "Applying structures to concrete domains instead of limiting the work to isolated examples."
+          ]
+        }
+      ]
+    },
+    "8": {
+      "title": "Distributed Systems",
+      "description": "Collection of Java assignments on concurrency and bidirectional communication between processes using concurrent tasks and TCP sockets.",
+      "impact": "Java assignments on concurrency, task coordination and client-server communication with a command protocol.",
+      "highlights": [
+        "Concurrent word processing using consumer threads and BlockingQueue.",
+        "Asynchronous call assignment with priorities, a waiting queue and ExecutorService.",
+        "Client-server game with ServerSocket, movement commands and state broadcasting."
+      ],
+      "technologyGroups": {
+        "language": "Language",
+        "concurrency": "Concurrency",
+        "communication": "Communication",
+        "area": "Area"
+      },
+      "links": {
+        "code": "Explore assignments on GitHub"
+      },
+      "details": [
+        {
+          "title": "Description",
+          "content": "Repository of academic Java assignments covering two ways of running concurrent tasks and client-server communication. The scope is that of independent exercises: it shows how tasks are distributed, coordinated and how messages are exchanged between processes."
+        },
+        {
+          "title": "Concurrency assignments",
+          "items": [
+            "In the vowel counter, several WordVowelCounter instances implement Runnable, consume words from a BlockingQueue and return results through another queue. TextVowelCounter creates the threads, inserts completion markers and waits with join.",
+            "In the telephone switchboard, calls are assigned asynchronously to employees according to their priority. The code uses ExecutorService with a fixed thread pool, a Lock to protect state and a queue for calls waiting for availability.",
+            "The practical difference is visible in the code: Runnable encapsulates the work each task executes, while Thread also appears as the unit that is started to run that work; in the switchboard, execution is delegated to the executor."
+          ]
+        },
+        {
+          "title": "Client-server communication",
+          "content": "The third assignment implements a treasure hunt game using Java ServerSocket and Socket. The server accepts connections, creates a ManagerCliente per player and processes each connection in a separate thread. The client sends MOVE and DIG commands; the server updates the state and broadcasts messages such as PLAYER JOIN, MOVE and DIG to all clients."
+        },
+        {
+          "title": "Protocol and execution cycle",
+          "items": [
+            "Messages are exchanged as text lines, with simple commands to move the player or dig at their position.",
+            "The server keeps the shared state of the board and players; ManagerCliente translates received messages into operations on that state.",
+            "The assignment documents tests for connection, movement, digging and completion when the treasure is found.",
+            "Although the README calls the assignment WebSockets, the implementation reviewed uses TCP sockets directly; it is not presented as an implementation of the WebSocket protocol."
+          ]
+        },
+        {
+          "title": "What this project demonstrates",
+          "items": [
+            "Breaking a problem down into producers, consumers and concurrently executable tasks.",
+            "Use of queues, priorities, explicit locking and an executor to coordinate asynchronous work.",
+            "Separation between client, server, connection manager and shared state in message-based communication."
+          ]
+        }
+      ]
+    },
+    "9": {
+      "title": "Arkanoid",
+      "description": "Final assignment completed as a team on a desktop Arkanoid base, to which we added internationalisation, new levels, controls and state screens.",
+      "impact": "Extension work carried out with a teammate on an existing Java/Swing application: ten languages, additional levels, events and new screens.",
+      "highlights": [
+        "Game internationalisation and a ten-language selection screen.",
+        "Levels 6 to 10 with their own backgrounds and music, plus start, pause, death and victory screens.",
+        "Keyboard controls, level restart and improvements to the lives display."
+      ],
+      "technologyGroups": {
+        "language": "Language",
+        "gui": "Graphical interface"
+      },
+      "links": {
+        "code": "View code on GitHub"
+      },
+      "details": [
+        {
+          "title": "Description",
+          "content": "Final assignment completed with a teammate based on a desktop Arkanoid base that already provided the application and its main mechanics. Our work focused on extending that base with interaction features, internationalisation, levels and game screens."
+        },
+        {
+          "title": "Features added by the team",
+          "items": [
+            "Internationalisation of the texts and a ten-language selection screen, with the corresponding flag during levels.",
+            "Keyboard event handling to move the paddle with A, D, W and the arrow keys, in addition to the existing mouse control.",
+            "Addition of levels 6, 7, 8, 9 and 10, each with its own background and level music.",
+            "A start screen to begin the game, a pause screen with Esc or when moving the cursor away, and level restart with R.",
+            "Death and victory screens with their audio resources, plus replacement of the lives display with pixelated red hearts."
+          ]
+        },
+        {
+          "title": "Received base and scope",
+          "items": [
+            "The provided base already included the desktop application, graphical rendering and the main Arkanoid mechanics.",
+            "The extensions were developed in collaboration with a teammate; the modal does not claim sole authorship of the complete application or separate individual contributions that are not documented."
+          ]
+        },
+        {
+          "title": "Graphical implementation",
+          "content": "The extension reuses the Swing/AWT interface and classes from the received base. The changes add event handling with KeyListener, texts and flags for the languages, new backgrounds and audio resources, along with start, pause, defeat and victory states. The graphical architecture and base mechanics are not presented as work developed from scratch by the team."
+        },
+        {
+          "title": "What this project demonstrates",
+          "items": [
+            "Coordination between user input, state updates and graphical rendering in a Swing application.",
+            "Modelling game elements with specific classes for the ball, paddle, blocks and effects.",
+            "Implementing collision, progression and game state rules without presenting it as a general physics engine."
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -63,12 +63,12 @@
     },
     "13": {
       "title": "AI Incident Triage",
-      "description": "API backend para registrar incidencias técnicas, generar propuestas de triaje estructuradas mediante análisis automatizado y permitir su revisión, aceptación o corrección por una persona. MVP en desarrollo con una arquitectura modular que separa la entrada de datos, el análisis, la persistencia y la supervisión humana.",
-      "impact": "API desarrollada con FastAPI que integra analizadores intercambiables (baseline determinista u Ollama local), revisión humana auditable y evaluación offline sobre un conjunto de incidencias etiquetadas.",
+      "description": "Aplicación con API backend y frontend para registrar incidencias técnicas, generar propuestas de triaje estructuradas mediante análisis automatizado y permitir su revisión, aceptación o corrección por una persona. El MVP separa la entrada, el análisis, la persistencia y la supervisión humana mediante una arquitectura modular.",
+      "impact": "Sistema desarrollado con FastAPI y React que integra autenticación con JWT, analizadores intercambiables (baseline determinista u Ollama local), revisión humana auditable y evaluación offline sobre conjuntos de incidencias etiquetadas.",
       "highlights": [
-        "Separación entre las propuestas generadas por el sistema y las decisiones humanas, permitiendo mantener la trazabilidad y auditar las correcciones.",
-        "Arquitectura de análisis intercambiable mediante el protocolo IncidentAnalyzer: FakeAnalyzer para ejecuciones deterministas y reproducibles, u OllamaAnalyzer para integrar modelos locales con respuestas estructuradas y validadas mediante Pydantic.",
-        "Evaluación offline mediante métricas de exactitud, análisis de errores y latencia, junto con automatización de pruebas y validaciones mediante GitHub Actions y Docker."
+        "Separación entre las propuestas generadas por el sistema y las decisiones humanas, con trazabilidad de las correcciones y auditoría de las acciones relevantes.",
+        "Autenticación mediante usuario y contraseña con JWT, autorización por roles y protección de las operaciones sensibles de la API.",
+        "Evaluación offline reproducible con accuracy, macro-F1, matrices de confusión, calibración de confianza, latencia y análisis de errores."
       ],
       "technologyGroups": {
         "backend": "Backend",
@@ -83,19 +83,21 @@
         {
           "title": "Flujo de triaje",
           "items": [
+            "El frontend permite iniciar sesión, consultar incidencias y registrar nuevos casos mediante la API.",
             "POST /incidents registra una nueva incidencia en SQLite y la inicializa con el estado created.",
             "POST /incidents/{id}/analysis ejecuta el analizador y almacena la propuesta de triaje: categoría, severidad, prioridad, información faltante y nivel de confianza.",
             "PATCH /incidents/{id}/triage permite aceptar o corregir la propuesta generada, registrando la revisión humana y actualizando el estado a reviewed.",
-            "Gestión explícita de estados: created → analyzing → analyzed → reviewed, con el estado analysis_failed para los casos en los que el análisis no puede completarse."
+            "Gestión explícita de estados: created → analyzing → analyzed → reviewed, con el estado analysis_failed para los casos en los que el análisis no puede completarse.",
+            "Las operaciones administrativas incluyen auditoría consultable y retención de datos con modo dry-run."
           ]
         },
         {
           "title": "Arquitectura backend",
-          "content": "La aplicación sigue una arquitectura por capas con responsabilidades diferenciadas. Los routers de FastAPI gestionan las peticiones HTTP y la traducción de errores; IncidentService centraliza los casos de uso y las transiciones de estado; e IncidentRepository encapsula el acceso a datos mediante SQLAlchemy. El análisis se abstrae mediante un protocolo, evitando que la lógica de negocio dependa de un proveedor concreto."
+          "content": "La aplicación combina un frontend React con una API FastAPI organizada por capas. Los routers gestionan las peticiones HTTP y la traducción de errores; IncidentService centraliza los casos de uso y las transiciones de estado; los repositorios encapsulan el acceso a SQLite mediante SQLAlchemy; y el módulo de autenticación aplica JWT y roles. El análisis se abstrae mediante el protocolo IncidentAnalyzer, evitando que la lógica de negocio dependa de un proveedor concreto."
         },
         {
           "title": "Integración de IA y modelos locales",
-          "content": "El sistema permite utilizar distintos analizadores a través de una interfaz común. FakeAnalyzer es el analizador predeterminado: ofrece resultados deterministas y reproducibles para probar el flujo de la aplicación, pero no sirve para medir la calidad de un LLM. De forma opcional, OllamaAnalyzer integra modelos locales, solicita respuestas en formato JSON estructurado con temperatura cero y valida los resultados mediante esquemas Pydantic. Los errores de disponibilidad del proveedor y las respuestas inválidas se traducen en errores 502, mientras que los tiempos de espera agotados generan un 504, sin recurrir a mecanismos de fallback silenciosos."
+          "content": "El sistema permite utilizar distintos analizadores a través de una interfaz común. FakeAnalyzer es el analizador predeterminado: ofrece resultados deterministas y reproducibles para probar el flujo de la aplicación, pero no sirve para medir la calidad semántica de un LLM. De forma opcional, OllamaAnalyzer integra modelos locales, solicita respuestas en JSON estructurado con temperatura cero y valida los resultados mediante esquemas Pydantic. Los errores de disponibilidad del proveedor y las respuestas inválidas se traducen en errores 502, mientras que los tiempos de espera agotados generan un 504, sin fallback silencioso."
         },
         {
           "title": "Supervisión humana y trazabilidad",
@@ -103,11 +105,11 @@
         },
         {
           "title": "Evaluación y calidad",
-          "content": "Incluye un dataset de 8 incidencias etiquetadas manualmente para ejecutar evaluaciones offline independientes de la API. Los resultados del baseline determinista se utilizan como referencia para comprobar el funcionamiento del pipeline, no como indicador de calidad de un modelo de lenguaje. El flujo de integración continua instala el proyecto, ejecuta las pruebas con pytest y valida el Dockerfile. Las pruebas automatizadas no requieren conexión con Ollama."
+          "content": "Incluye varios conjuntos de evaluación offline: casos de desarrollo, un holdout original, un conjunto de regresión y un holdout v2 de 12 incidencias escrito después de los cambios. El baseline determinista alcanza en el holdout v2 accuracy 1.000 en categoría e información faltante, y 0.917 en severidad, prioridad y confianza. La evaluación también calcula macro-F1, matrices de confusión, calibración de confianza, latencia y errores por categoría. El flujo de integración continua ejecuta las pruebas con pytest y valida el Dockerfile; las pruebas automatizadas no requieren conexión con Ollama."
         },
         {
           "title": "Alcance y limitaciones",
-          "content": "Proyecto en desarrollo con alcance de MVP para portfolio, centrado en la arquitectura backend, la integración de IA y la revisión humana. La versión actual no incluye interfaz de usuario, autenticación, RAG ni agentes, y utiliza SQLite sin sistema de migraciones. Entre las posibles evoluciones documentadas se encuentran ampliar el dataset de evaluación e incorporar PostgreSQL y autenticación antes de plantear un despliegue en producción."
+          "content": "Proyecto en desarrollo con alcance de MVP para portfolio, centrado en la arquitectura backend, el frontend, la integración de IA y la revisión humana. La versión actual no incluye RAG ni agentes, utiliza SQLite sin sistema de migraciones y mantiene Ollama como proveedor opcional local. La comparación disponible muestra que el adaptador de Ollama todavía no supera al baseline determinista en el holdout v2, por lo que cualquier evolución hacia producción requeriría una rúbrica más explícita y nuevas validaciones."
         },
         {
           "title": "Qué demuestra este proyecto",

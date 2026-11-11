@@ -34,7 +34,7 @@ const Header = () => {
               </a>
             </Button>
             <Button asChild variant="ghost" size="icon">
-              <a href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez/" target="_blank" rel="noopener noreferrer" aria-label={t("accessibility.linkedin")}>
+              <a href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez-desarrollador-software/" target="_blank" rel="noopener noreferrer" aria-label={t("accessibility.linkedin")}>
                 <LinkedInIcon className="h-5 w-5" aria-hidden="true" />
               </a>
             </Button>
@@ -83,7 +83,7 @@ const Header = () => {
               </a>
             </Button>
             <Button asChild variant="ghost" size="icon">
-              <a href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez/" target="_blank" rel="noopener noreferrer" aria-label={t("accessibility.linkedin")}>
+              <a href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez-desarrollador-software/" target="_blank" rel="noopener noreferrer" aria-label={t("accessibility.linkedin")}>
                 <LinkedInIcon className="h-5 w-5" aria-hidden="true" />
               </a>
             </Button>

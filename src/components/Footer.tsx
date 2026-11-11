@@ -18,7 +18,7 @@ const Footer = () => {
   const socialLinks = [
     { href: "https://github.com/asobrados03", label: t("accessibility.github"), icon: GitHubIcon },
     {
-      href: "https://www.linkedin.com/in/alfredo-sobrados-gonzalez/",
+      href: "https://www.linkedin.com/in/alfredo-sobrados-gonzalez-desarrollador-software/",
       label: t("accessibility.linkedin"),
       icon: LinkedInIcon,
     },

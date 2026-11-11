@@ -63,5 +63,5 @@ public/            # iconos, manifiesto web y CV descargable
 ## Contacto
 
 - Email: [alfredo.sobrados.gonzalez@gmail.com](mailto:alfredo.sobrados.gonzalez@gmail.com)
-- LinkedIn: [alfredo-sobrados-gonzalez](https://www.linkedin.com/in/alfredo-sobrados-gonzalez/)
+- LinkedIn: [alfredo-sobrados-gonzalez](https://www.linkedin.com/in/alfredo-sobrados-gonzalez-desarrollador-software/)
 - GitHub: [@asobrados03](https://github.com/asobrados03)

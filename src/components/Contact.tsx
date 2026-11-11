@@ -30,7 +30,7 @@ const Contact = () => {
         </a>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Button asChild variant="secondary">
-            <a href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez-desarrollador-software/" target="_blank" rel="noopener noreferrer">
               {t("contact.linkedin")} <LinkedInIcon className="ml-2 h-4 w-4" aria-hidden="true" />
             </a>
           </Button>

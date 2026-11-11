@@ -42,7 +42,7 @@ const About = () => {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 mt-6">
                   <Button asChild className="w-full sm:w-auto bg-violet-600 hover:bg-violet-700 text-white font-medium">
-                    <a href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez-desarrollador-software/" target="_blank" rel="noopener noreferrer">
                       {t("about.linkedin")} <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                     </a>
                   </Button>

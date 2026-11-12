@@ -28,7 +28,7 @@ const Contact = () => {
         >
           alfredo.sobrados.gonzalez@gmail.com
         </a>
-        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
           <Button asChild variant="secondary">
             <a href="https://www.linkedin.com/in/alfredo-sobrados-gonzalez-desarrollador-software/" target="_blank" rel="noopener noreferrer">
               {t("contact.linkedin")} <LinkedInIcon className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -42,6 +42,11 @@ const Contact = () => {
           <Button asChild variant="outline" className="border-slate-300 bg-transparent text-white hover:bg-white hover:text-slate-900">
             <a href="/cv-alfredo-sobrados-gonzalez.pdf" download="CV-Alfredo-Sobrados-Gonzalez.pdf">
               {t("contact.downloadCv")} <Download className="ml-2 h-4 w-4" aria-hidden="true" />
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="border-slate-300 bg-transparent text-white hover:bg-white hover:text-slate-900">
+            <a href="/cv-alfredo-sobrados-gonzalez-ia.pdf" download="CV-Alfredo-Sobrados-Gonzalez-IA.pdf">
+              {t("contact.downloadCvAi")} <Download className="ml-2 h-4 w-4" aria-hidden="true" />
             </a>
           </Button>
         </div>

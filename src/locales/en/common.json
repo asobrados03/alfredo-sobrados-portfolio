@@ -132,11 +132,13 @@
     ],
     "linkedin": "View LinkedIn",
     "github": "View GitHub",
-    "downloadCv": "Download CV"
+    "downloadCv": "Download CV",
+    "downloadCvAi": "Download AI & Backend CV"
   },
   "footer": {
     "tagline": "Backend Engineer focused on secure APIs, software architecture and maintainable code.",
     "downloadCv": "Download CV",
+    "downloadCvAi": "Download AI & Backend CV",
     "explore": "Explore",
     "contact": "Contact",
     "email": "Email",

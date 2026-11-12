@@ -132,11 +132,13 @@
     ],
     "linkedin": "Ver LinkedIn",
     "github": "Ver GitHub",
-    "downloadCv": "Descargar CV"
+    "downloadCv": "Descargar CV",
+    "downloadCvAi": "Descargar CV IA & Backend"
   },
   "footer": {
     "tagline": "Backend Engineer centrado en APIs seguras, arquitectura de software y código mantenible.",
     "downloadCv": "Descargar CV",
+    "downloadCvAi": "Descargar CV IA & Backend",
     "explore": "Explorar",
     "contact": "Contacto",
     "email": "Email",

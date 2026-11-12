@@ -7,7 +7,7 @@ Portfolio personal de **Alfredo Sobrados González**, ingeniero informático ori
 - Una presentación profesional con foco en diseño de APIs, calidad de software y arquitectura.
 - Proyectos destacados con su contexto, decisiones técnicas, tecnologías y enlaces al código o documentación.
 - Experiencia en desarrollo móvil multiplataforma, backend y aplicaciones web.
-- Enlaces de contacto, LinkedIn, GitHub y currículum descargable.
+- Enlaces de contacto, LinkedIn, GitHub y currículums descargables (general y orientado a IA & backend).
 
 Entre los proyectos incluidos destacan:
 
@@ -57,7 +57,7 @@ src/
 ├── lib/           # utilidades compartidas
 ├── App.tsx        # punto de entrada de la aplicación
 └── index.css      # estilos globales
-public/            # iconos, manifiesto web y CV descargable
+public/            # iconos, manifiesto web y CVs descargables
 ```
 
 ## Contacto

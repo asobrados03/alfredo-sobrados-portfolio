@@ -38,13 +38,22 @@ const Footer = () => {
             <p className="mt-3 max-w-sm leading-relaxed text-slate-400">
               {t("footer.tagline")}
             </p>
-            <a
-              href="/cv-alfredo-sobrados-gonzalez.pdf"
-              download="CV-Alfredo-Sobrados-Gonzalez.pdf"
-              className="mt-5 inline-flex items-center gap-2 rounded-md border border-slate-700 px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:border-cyan-400/60 hover:bg-cyan-400/10 hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-            >
-              {t("footer.downloadCv")} <Download className="h-4 w-4" aria-hidden="true" />
-            </a>
+            <div className="mt-5 flex flex-wrap gap-2">
+              <a
+                href="/cv-alfredo-sobrados-gonzalez.pdf"
+                download="CV-Alfredo-Sobrados-Gonzalez.pdf"
+                className="inline-flex items-center gap-2 rounded-md border border-slate-700 px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:border-cyan-400/60 hover:bg-cyan-400/10 hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              >
+                {t("footer.downloadCv")} <Download className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <a
+                href="/cv-alfredo-sobrados-gonzalez-ia.pdf"
+                download="CV-Alfredo-Sobrados-Gonzalez-IA.pdf"
+                className="inline-flex items-center gap-2 rounded-md border border-slate-700 px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:border-cyan-400/60 hover:bg-cyan-400/10 hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+              >
+                {t("footer.downloadCvAi")} <Download className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
           </div>
 
           <nav aria-label={t("accessibility.footerNavigation")}>

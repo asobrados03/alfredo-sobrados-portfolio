@@ -90,6 +90,8 @@ const projectDefinitions: ProjectDefinition[] = [
     technologies: [
       "Python 3.11+",
       "FastAPI",
+      "React 19",
+      "TypeScript",
       "SQLAlchemy",
       "SQLite",
       "Pydantic",
@@ -97,11 +99,18 @@ const projectDefinitions: ProjectDefinition[] = [
       "Docker",
       "GitHub Actions",
       "pytest",
+      "Vite",
+      "Tailwind CSS",
+      "Vitest",
     ],
     technologyGroups: [
       {
         key: "backend",
         technologies: ["Python 3.11+", "FastAPI", "Pydantic"],
+      },
+      {
+        key: "frontend",
+        technologies: ["React 19", "TypeScript", "Vite", "Tailwind CSS", "Vitest"],
       },
       {
         key: "data",

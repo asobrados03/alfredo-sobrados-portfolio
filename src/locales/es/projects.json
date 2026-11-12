@@ -63,15 +63,15 @@
     },
     "13": {
       "title": "AI Incident Triage",
-      "description": "Aplicación con API backend y frontend para registrar incidencias técnicas, generar propuestas de triaje estructuradas mediante análisis automatizado y permitir su revisión, aceptación o corrección por una persona. El MVP separa la entrada, el análisis, la persistencia y la supervisión humana mediante una arquitectura modular.",
-      "impact": "Sistema desarrollado con FastAPI y React que integra autenticación con JWT, analizadores intercambiables (baseline determinista u Ollama local), revisión humana auditable y evaluación offline sobre conjuntos de incidencias etiquetadas.",
+      "description": "Sistema de triaje de incidencias con frontend React, API FastAPI y SQLite. Registra casos, genera una propuesta con un analizador intercambiable y exige que una persona la acepte o la corrija.",
       "highlights": [
-        "Separación entre las propuestas generadas por el sistema y las decisiones humanas, con trazabilidad de las correcciones y auditoría de las acciones relevantes.",
-        "Autenticación mediante usuario y contraseña con JWT, autorización por roles y protección de las operaciones sensibles de la API.",
-        "Evaluación offline reproducible con accuracy, macro-F1, matrices de confusión, calibración de confianza, latencia y análisis de errores."
+        "Revisión humana con trazabilidad: la propuesta de la IA y la decisión humana se guardan por separado, y se miden aceptación, accuracy por campo y correcciones por confianza.",
+        "Dos analizadores intercambiables: modelo local de Ollama para el análisis y baseline determinista como grupo de control en la evaluación.",
+        "151 pruebas backend y 37 de frontend, 92% de cobertura (umbral 90% en CI) y despliegue reproducible en Docker."
       ],
       "technologyGroups": {
         "backend": "Backend",
+        "frontend": "Frontend",
         "data": "Datos",
         "ai": "Inteligencia artificial",
         "quality": "Calidad y despliegue"
@@ -81,44 +81,20 @@
       },
       "details": [
         {
-          "title": "Flujo de triaje",
-          "items": [
-            "El frontend permite iniciar sesión, consultar incidencias y registrar nuevos casos mediante la API.",
-            "POST /incidents registra una nueva incidencia en SQLite y la inicializa con el estado created.",
-            "POST /incidents/{id}/analysis ejecuta el analizador y almacena la propuesta de triaje: categoría, severidad, prioridad, información faltante y nivel de confianza.",
-            "PATCH /incidents/{id}/triage permite aceptar o corregir la propuesta generada, registrando la revisión humana y actualizando el estado a reviewed.",
-            "Gestión explícita de estados: created → analyzing → analyzed → reviewed, con el estado analysis_failed para los casos en los que el análisis no puede completarse.",
-            "Las operaciones administrativas incluyen auditoría consultable y retención de datos con modo dry-run."
-          ]
+          "title": "Supervisión humana",
+          "content": "Analizador y persona escriben en tablas distintas, así que se reconstruye qué recomendó el sistema y qué cambió la persona. GET /review-metrics agrega aceptación y accuracy por campo; GET /audit expone el registro de acciones."
         },
         {
-          "title": "Arquitectura backend",
-          "content": "La aplicación combina un frontend React con una API FastAPI organizada por capas. Los routers gestionan las peticiones HTTP y la traducción de errores; IncidentService centraliza los casos de uso y las transiciones de estado; los repositorios encapsulan el acceso a SQLite mediante SQLAlchemy; y el módulo de autenticación aplica JWT y roles. El análisis se abstrae mediante el protocolo IncidentAnalyzer, evitando que la lógica de negocio dependa de un proveedor concreto."
+          "title": "Flujo y arquitectura",
+          "content": "React consume una API FastAPI por capas: routers, IncidentService, repositorios SQLAlchemy y SQLite. POST /incidents crea el caso, POST /incidents/{id}/analysis genera la propuesta y PATCH /incidents/{id}/triage registra la revisión."
         },
         {
-          "title": "Integración de IA y modelos locales",
-          "content": "El sistema permite utilizar distintos analizadores a través de una interfaz común. FakeAnalyzer es el analizador predeterminado: ofrece resultados deterministas y reproducibles para probar el flujo de la aplicación, pero no sirve para medir la calidad semántica de un LLM. De forma opcional, OllamaAnalyzer integra modelos locales, solicita respuestas en JSON estructurado con temperatura cero y valida los resultados mediante esquemas Pydantic. Los errores de disponibilidad del proveedor y las respuestas inválidas se traducen en errores 502, mientras que los tiempos de espera agotados generan un 504, sin fallback silencioso."
+          "title": "Seguridad",
+          "content": "Argon2id para contraseñas, JWT versionados que revocan sesiones al cerrar sesión o cambiar la contraseña, y roles reader/writer/admin por ruta. Sin usuarios configurados, la API responde 401."
         },
         {
-          "title": "Supervisión humana y trazabilidad",
-          "content": "El sistema conserva por separado la propuesta original del analizador en triage_results y la decisión de la persona en triage_reviews. Esta separación permite identificar qué recomendó el sistema, qué cambios introdujo la persona y cuál fue el resultado de la revisión. Además de facilitar la auditoría, establece una base para analizar futuras correcciones y evaluar el comportamiento del sistema."
-        },
-        {
-          "title": "Evaluación y calidad",
-          "content": "Incluye varios conjuntos de evaluación offline: casos de desarrollo, un holdout original, un conjunto de regresión y un holdout v2 de 12 incidencias escrito después de los cambios. El baseline determinista alcanza en el holdout v2 accuracy 1.000 en categoría e información faltante, y 0.917 en severidad, prioridad y confianza. La evaluación también calcula macro-F1, matrices de confusión, calibración de confianza, latencia y errores por categoría. El flujo de integración continua ejecuta las pruebas con pytest y valida el Dockerfile; las pruebas automatizadas no requieren conexión con Ollama."
-        },
-        {
-          "title": "Alcance y limitaciones",
-          "content": "Proyecto en desarrollo con alcance de MVP para portfolio, centrado en la arquitectura backend, el frontend, la integración de IA y la revisión humana. La versión actual no incluye RAG ni agentes, utiliza SQLite sin sistema de migraciones y mantiene Ollama como proveedor opcional local. La comparación disponible muestra que el adaptador de Ollama todavía no supera al baseline determinista en el holdout v2, por lo que cualquier evolución hacia producción requeriría una rúbrica más explícita y nuevas validaciones."
-        },
-        {
-          "title": "Qué demuestra este proyecto",
-          "items": [
-            "Diseño y desarrollo de APIs backend con separación de responsabilidades, gestión explícita de estados, tratamiento de errores y validación de contratos de datos.",
-            "Integración de modelos de lenguaje locales mediante abstracciones desacopladas, validación de respuestas y evaluación de resultados.",
-            "Implementación de flujos human-in-the-loop con trazabilidad entre las propuestas generadas por IA y las decisiones humanas.",
-            "Aplicación de prácticas de calidad de software mediante pruebas automatizadas, evaluación reproducible y CI."
-          ]
+          "title": "Evaluación y alcance",
+          "content": "El arnés compara cada analizador con el baseline en tres holdouts de 12 casos: 0 mejoras, 10 empeoramientos y 2 cambios. Accuracy en categoría: 1.00 del baseline frente a 0.83 de Ollama; Ollama tarda 19 s de mediana por caso frente a 0.14 ms. El MVP no incluye RAG ni agentes."
         }
       ]
     },

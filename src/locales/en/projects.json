@@ -63,15 +63,15 @@
     },
     "13": {
       "title": "AI Incident Triage",
-      "description": "Application with a backend API and frontend for recording technical incidents, generating structured triage proposals through automated analysis and allowing a person to review, accept or correct them. The MVP separates data ingestion, analysis, persistence and human oversight through a modular architecture.",
-      "impact": "System built with FastAPI and React that integrates JWT authentication, interchangeable analysers (a deterministic baseline or a local Ollama model), auditable human review and offline evaluation on labelled incident datasets.",
+      "description": "Incident triage system with a React frontend, FastAPI API and SQLite. It records cases, generates a proposal with a pluggable analyzer and requires a person to accept or correct it.",
       "highlights": [
-        "Separation between system-generated proposals and human decisions, with correction traceability and auditing of relevant actions.",
-        "Username-and-password authentication with JWT, role-based authorisation and protection for sensitive API operations.",
-        "Reproducible offline evaluation with accuracy, macro-F1, confusion matrices, confidence calibration, latency and error analysis."
+        "Human review with traceability: AI proposals and human decisions are stored separately, and acceptance, per-field accuracy and corrections by confidence are measured.",
+        "Two interchangeable analyzers: a local Ollama model for analysis and a deterministic baseline as the control group in evaluation.",
+        "151 backend and 37 frontend tests, 92% coverage (90% CI floor) and reproducible Docker deployment."
       ],
       "technologyGroups": {
         "backend": "Backend",
+        "frontend": "Frontend",
         "data": "Data",
         "ai": "Artificial intelligence",
         "quality": "Quality and deployment"
@@ -81,44 +81,20 @@
       },
       "details": [
         {
-          "title": "Triage flow",
-          "items": [
-            "The frontend lets users sign in, browse incidents and register new cases through the API.",
-            "POST /incidents records a new incident in SQLite and initialises it with the created status.",
-            "POST /incidents/{id}/analysis runs the analyser and stores the triage proposal: category, severity, priority, missing information and confidence level.",
-            "PATCH /incidents/{id}/triage allows the generated proposal to be accepted or corrected, recording the human review and updating the status to reviewed.",
-            "Explicit state management: created → analyzing → analyzed → reviewed, with the analysis_failed status for cases where analysis cannot be completed.",
-            "Administrative operations include queryable audit logs and data retention with dry-run mode."
-          ]
+          "title": "Human oversight",
+          "content": "The analyzer and the person write to separate tables, so what the system recommended and what the person changed can be reconstructed. GET /review-metrics aggregates acceptance and per-field accuracy; GET /audit exposes the audit log."
         },
         {
-          "title": "Backend architecture",
-          "content": "The application combines a React frontend with a layered FastAPI API. Routers handle HTTP requests and error translation; IncidentService centralises use cases and state transitions; repositories encapsulate SQLite access through SQLAlchemy; and the authentication module applies JWT and roles. Analysis is abstracted behind the IncidentAnalyzer protocol, preventing business logic from depending on a specific provider."
+          "title": "Flow and architecture",
+          "content": "React consumes a layered FastAPI API: routers, IncidentService, SQLAlchemy repositories and SQLite. POST /incidents creates the case, POST /incidents/{id}/analysis generates the proposal and PATCH /incidents/{id}/triage records the review."
         },
         {
-          "title": "AI integration and local models",
-          "content": "The system can use different analysers through a common interface. FakeAnalyzer is the default analyser: it provides deterministic, reproducible results for testing the application flow, but it is not suitable for measuring an LLM's semantic quality. Optionally, OllamaAnalyzer integrates local models, requests structured JSON responses with zero temperature and validates them with Pydantic schemas. Provider availability errors and invalid responses are translated into 502 errors, while timeouts produce a 504, without silent fallback."
+          "title": "Security",
+          "content": "Argon2id for passwords, versioned JWTs that revoke sessions on logout or password change, and reader/writer/admin roles per route. With no configured users, the API returns 401."
         },
         {
-          "title": "Human oversight and traceability",
-          "content": "The system stores the analyser's original proposal in triage_results separately from the person's decision in triage_reviews. This separation makes it possible to identify what the system recommended, what changes the person made and what the outcome of the review was. As well as supporting auditing, it provides a basis for analysing future corrections and evaluating system behaviour."
-        },
-        {
-          "title": "Evaluation and quality",
-          "content": "It includes several offline evaluation sets: development cases, an original holdout, a regression set and a 12-incident v2 holdout written after the changes. On holdout v2, the deterministic baseline reaches 1.000 accuracy for category and missing information, and 0.917 for severity, priority and confidence. The evaluation also calculates macro-F1, confusion matrices, confidence calibration, latency and errors by category. Continuous integration runs the pytest suite and validates the Dockerfile; automated tests do not require a connection to Ollama."
-        },
-        {
-          "title": "Scope and limitations",
-          "content": "A project in development with an MVP scope for a portfolio, focused on backend architecture, frontend integration, AI integration and human review. The current version does not include RAG or agents, uses SQLite without a migration system and keeps Ollama as an optional local provider. The available comparison shows that the Ollama adapter does not yet outperform the deterministic baseline on holdout v2, so any move towards production would require a more explicit rubric and further validation."
-        },
-        {
-          "title": "What this project demonstrates",
-          "items": [
-            "Design and development of backend APIs with separation of concerns, explicit state management, error handling and data contract validation.",
-            "Integration of local language models through decoupled abstractions, response validation and result evaluation.",
-            "Implementation of human-in-the-loop workflows with traceability between AI-generated proposals and human decisions.",
-            "Application of software quality practices through automated testing, reproducible evaluation and CI."
-          ]
+          "title": "Evaluation and scope",
+          "content": "The harness compares each analyzer against the baseline on three 12-case holdouts: 0 improvements, 10 regressions and 2 changes. Category accuracy: 1.00 for the baseline versus 0.83 for Ollama; Ollama takes a median of 19 s per case versus 0.14 ms. The MVP excludes RAG."
         }
       ]
     },

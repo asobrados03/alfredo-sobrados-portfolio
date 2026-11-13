@@ -67,7 +67,7 @@
       "highlights": [
         "Human review with traceability: AI proposals and human decisions are stored separately, and acceptance, per-field accuracy and corrections by confidence are measured.",
         "Two interchangeable analyzers: a local Ollama model for analysis and a deterministic baseline as the control group in evaluation.",
-        "192 backend and 37 frontend tests, 92% coverage (90% CI floor) and reproducible Docker deployment."
+        "193 backend and 37 frontend tests, 92% coverage (90% CI floor) and reproducible Docker deployment."
       ],
       "technologyGroups": {
         "backend": "Backend",

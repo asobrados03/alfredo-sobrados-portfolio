@@ -67,7 +67,7 @@
       "highlights": [
         "Revisión humana con trazabilidad: la propuesta de la IA y la decisión humana se guardan por separado, y se miden aceptación, accuracy por campo y correcciones por confianza.",
         "Dos analizadores intercambiables: modelo local de Ollama para el análisis y baseline determinista como grupo de control en la evaluación.",
-        "192 pruebas backend y 37 de frontend, 92% de cobertura (umbral 90% en CI) y despliegue reproducible en Docker."
+        "193 pruebas backend y 37 de frontend, 92% de cobertura (umbral 90% en CI) y despliegue reproducible en Docker."
       ],
       "technologyGroups": {
         "backend": "Backend",

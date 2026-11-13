@@ -1,6 +1,6 @@
-import { Download } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
+import CvDownloadMenu from "@/components/CvDownloadMenu";
 import { GitHubIcon } from "@/components/icons/GitHubIcon";
 import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 
@@ -39,16 +39,7 @@ const Contact = () => {
               {t("contact.github")} <GitHubIcon className="ml-2 h-4 w-4" aria-hidden="true" />
             </a>
           </Button>
-          <Button asChild variant="outline" className="border-slate-300 bg-transparent text-white hover:bg-white hover:text-slate-900">
-            <a href="/cv-alfredo-sobrados-gonzalez.pdf" download="CV-Alfredo-Sobrados-Gonzalez.pdf">
-              {t("contact.downloadCv")} <Download className="ml-2 h-4 w-4" aria-hidden="true" />
-            </a>
-          </Button>
-          <Button asChild variant="outline" className="border-slate-300 bg-transparent text-white hover:bg-white hover:text-slate-900">
-            <a href="/cv-alfredo-sobrados-gonzalez-ia.pdf" download="CV-Alfredo-Sobrados-Gonzalez-IA.pdf">
-              {t("contact.downloadCvAi")} <Download className="ml-2 h-4 w-4" aria-hidden="true" />
-            </a>
-          </Button>
+          <CvDownloadMenu />
         </div>
         </div>
       </div>

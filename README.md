@@ -57,7 +57,7 @@ src/
 ├── lib/           # utilidades compartidas
 ├── App.tsx        # punto de entrada de la aplicación
 └── index.css      # estilos globales
-public/            # iconos, manifiesto web y CVs descargables
+public/            # iconos, manifiesto web y CVs descargables (backend, IA & backend, full-stack & IA)
 ```
 
 ## Contacto

@@ -124,6 +124,24 @@
       }
     }
   },
+  "cv": {
+    "trigger": "Download CV",
+    "menuLabel": "Choose a version",
+    "options": {
+      "backend": {
+        "label": "Backend",
+        "description": "APIs, architecture and software quality"
+      },
+      "aiBackend": {
+        "label": "AI & Backend",
+        "description": "LLM integration and human-in-the-loop systems"
+      },
+      "fullStackAi": {
+        "label": "Full-Stack & AI",
+        "description": "End-to-end profile: frontend, backend and AI"
+      }
+    }
+  },
   "contact": {
     "title": "Let's talk",
     "paragraphs": [
@@ -131,14 +149,10 @@
       "If you think my profile is a good fit for your team, I would be glad to hear from you."
     ],
     "linkedin": "View LinkedIn",
-    "github": "View GitHub",
-    "downloadCv": "Download CV",
-    "downloadCvAi": "Download AI & Backend CV"
+    "github": "View GitHub"
   },
   "footer": {
     "tagline": "Backend Engineer focused on secure APIs, software architecture and maintainable code.",
-    "downloadCv": "Download CV",
-    "downloadCvAi": "Download AI & Backend CV",
     "explore": "Explore",
     "contact": "Contact",
     "email": "Email",
